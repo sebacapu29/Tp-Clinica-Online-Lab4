@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto contenidoPrincipal">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Registro</h5>
+            <form class="form-signin">
+              <div class="form-label-group">
+                <input type="email" [(ngModel)]="usuario.mail"  class="form-control" placeholder="Email" name="usuario" required autofocus>              
+              </div>
+              <div class="form-label-group">
+                <input type="nombre" [(ngModel)]="usuario.nombre"  class="form-control" placeholder="Nombre" name="usuario" required autofocus>              
+              </div>
+              <div class="form-label-group">
+                <input type="apellido" [(ngModel)]="usuario.apellido" class="form-control" placeholder="Apellido" name="usuario" required autofocus>              
+              </div>
+              <div class="form-group">
+                <label for="">Fecha Nacimiento</label>
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd"
+                         name="dp" 
+                         [(ngModel)]="usuario.fecha_nacimiento" 
+                         ngbDatepicker #d="ngbDatepicker"
+                         name="fecha">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                  </div>
+                </div>
+              </div>
+              <label for="">Sexo</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioSexo" [(ngModel)]="usuario.sexo" value="M" checked>
+                <label class="form-check-label" >
+                  Masculino
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioSexo"   [(ngModel)]="usuario.sexo"  value="F">
+                <label class="form-check-label" >
+                  Femenino
+                </label>
+              </div>
+              <div class="form-label-group">
+                <input type="password" [(ngModel)]="usuario.clave"  class="form-control" name="clave" placeholder="Clave" required>
+              </div>
+              <div class="form-label-group">
+                <input type="password" [(ngModel)]="confimarcionClave"  class="form-control" name="confirmClave" placeholder="Confirmar Clave" required>
+              </div>     
+              <div class="form-group">
+                <label for="">Adjuntar una foto</label>
+                <input type="file" (change)="loadFoto($event)">
+                <p class="help-block"></p>
+              </div>       
+              <button class="btn btn-lg btn-secondary btn-block text-uppercase" (click)="Registrarme()">Registrarme</button>
+
+              <div>{{uploadPercent | async }}</div>
+              <hr class="my-4">
+              <!-- <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fa fa-google mr-2"></i>Ingresar con Google</button> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
