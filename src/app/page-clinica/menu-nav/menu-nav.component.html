@@ -1,6 +1,9 @@
 
 
-<ul ngbNav #nav="ngbNav" class="tabpanel bg-primary">    
+<ul ngbNav #nav="ngbNav" class="tabpanel bg-primary">  
+  <li ngbNavItem>
+    <a ngbNavLink><i class="fa fa-home"></i></a>      
+  </li>  
     <li ngbNavItem>
       <a ngbNavLink (click)="solicitarTurno()">Solicitar Turno</a>      
     </li>
@@ -13,5 +16,9 @@
       <li ngbNavItem>
         <a ngbNavLink (click)="altaUsuario()">Alta Usuario</a>      
       </li>
+      <li ngbNavItem>
+        <a ngbNavLink (click)="salir()">Log Out</a>      
+      </li>
   </ul>
   <div [ngbNavOutlet]="nav"></div>
+

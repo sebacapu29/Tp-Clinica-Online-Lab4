@@ -25,12 +25,7 @@ export class UsuarioService {
    }
    login(usuario:Usuario){
      const { mail , clave } = usuario;//destructuring
-     this.authServ.signInWithEmailAndPassword(mail,clave)
-     .then(res=>{
-       console.log(res);
-     })
-     .catch(error=> console.log(error)
-     );
+     return this.authServ.signInWithEmailAndPassword(mail,clave);
    }
    logOut(){
      this.authServ.signOut();

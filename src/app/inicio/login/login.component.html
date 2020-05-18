@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!ingresando">
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto contenidoPrincipal">
         <div class="card card-signin my-5">
@@ -26,5 +26,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="spinner-border text-primary" role="status" *ngIf="ingresando">
+    <span class="sr-only">Loading...</span>
   </div>
   

@@ -1,4 +1,4 @@
 <div class="principal">
-    <app-menu-nav></app-menu-nav>
+    <app-menu-nav *ngIf="usuarioLogueado"></app-menu-nav>
     <router-outlet></router-outlet>
 </div>

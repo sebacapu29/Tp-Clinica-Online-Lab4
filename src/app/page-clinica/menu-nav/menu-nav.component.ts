@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-nav',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuNavComponent implements OnInit {
 
-  constructor() { }
+  constructor( private usuarioServ:UsuarioService,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -24,5 +26,9 @@ export class MenuNavComponent implements OnInit {
   }
   solicitarTurno(){
     
+  }
+  salir(){
+    this.usuarioServ.logOut();
+    this.router.navigate(['Login']);
   }
 }

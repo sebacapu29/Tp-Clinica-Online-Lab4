@@ -9,13 +9,11 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 })
 export class PrincipalComponent implements OnInit {
 
-  constructor(private data:DataService, public usuarioServ:UsuarioService) {
+  constructor(private data:DataService) {
    
    }
 
   ngOnInit(): void {
   }
-  LogOut(){
-    this.usuarioServ.logOut();  
-  }
+
 }

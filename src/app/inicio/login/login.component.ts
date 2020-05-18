@@ -11,8 +11,9 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 export class LoginComponent implements OnInit {
 
   usuario:Usuario;
+  ingresando:boolean=false;
 
-  constructor(private router:Router,
+  constructor(private router:Router,private usuarioServicio:UsuarioService
    ) {
     this.inicializarUsuario();
    }
@@ -25,8 +26,17 @@ export class LoginComponent implements OnInit {
       alert("ingresar datos");
       return;
     }
-    this.router.navigate(['']);
-    // this.usuarioServicio.login(this.usuario);
+    this.ingresando=true;
+    this.usuarioServicio.login(this.usuario).then(res=>{
+      //  console.log(res);
+      this.router.navigate(['']);   
+     })
+     .catch(error=> {
+       alert("usuario - contraseña incorrecta");
+      this.ingresando=false;
+      return false;  
+    }
+     ); 
   }
   Registrarme(){
     this.router.navigate(['Registro']);
