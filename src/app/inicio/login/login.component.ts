@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/clases/usuario';
 import { Router } from '@angular/router';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +12,21 @@ export class LoginComponent implements OnInit {
 
   usuario:Usuario;
 
-  constructor(private router:Router) {
+  constructor(private router:Router,
+   ) {
     this.inicializarUsuario();
    }
 
   ngOnInit(): void {
   }
-  MoverBarraDeProgreso(){
-    this.router.navigate(['Principal']);
+  LoginUsuario(){
+
+    if(this.usuario.mail == "" || this.usuario.clave ==""){
+      alert("ingresar datos");
+      return;
+    }
+    this.router.navigate(['']);
+    // this.usuarioServicio.login(this.usuario);
   }
   Registrarme(){
     this.router.navigate(['Registro']);

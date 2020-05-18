@@ -35,4 +35,7 @@ export class UsuarioService {
    logOut(){
      this.authServ.signOut();
    }
+   IsLogIn(){
+     return this.authServ.authState;
+   }
 }

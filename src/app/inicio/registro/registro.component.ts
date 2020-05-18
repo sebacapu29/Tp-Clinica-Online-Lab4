@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/clases/usuario';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
 
 @Component({
   selector: 'app-registro',
@@ -14,7 +15,7 @@ export class RegistroComponent implements OnInit {
   confimarcionClave:string;
   uploadPercent:Observable<number>;
 
-  constructor(private storage:AngularFireStorage) {
+  constructor(private storage:AngularFireStorage, usuarioServ:UsuarioService) {
     this.usuario = new Usuario();
    }
 
@@ -23,6 +24,8 @@ export class RegistroComponent implements OnInit {
 Registrarme(){
 
 }
+loginUsuarioNuevo(){}
+
 loadFoto(e){
   const id = Math.random().toString(36).substring(2);
   const file = e.target.files[0] //para obtener la imagen del archivo.

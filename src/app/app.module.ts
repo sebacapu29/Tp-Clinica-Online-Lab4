@@ -14,14 +14,16 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
-
+import { HttpClientModule} from '@angular/common/http';
+import { MenuNavComponent } from './page-clinica/menu-nav/menu-nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     PrincipalComponent,
-    RegistroComponent
+    RegistroComponent,
+    MenuNavComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebaseConfig),// Initialize Firebase
     AngularFirestoreModule,
     AngularFireStorageModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

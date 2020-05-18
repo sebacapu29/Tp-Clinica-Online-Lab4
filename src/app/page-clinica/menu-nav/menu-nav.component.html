@@ -1,0 +1,17 @@
+
+
+<ul ngbNav #nav="ngbNav" class="tabpanel bg-primary">    
+    <li ngbNavItem>
+      <a ngbNavLink (click)="solicitarTurno()">Solicitar Turno</a>      
+    </li>
+    <li ngbNavItem>
+        <a ngbNavLink (click)="listadoPacientes()">Listado Pacientes</a>      
+      </li>
+      <li ngbNavItem>
+        <a ngbNavLink (click)="listadoProfesionales()" >Listado Profesionales</a>      
+      </li>
+      <li ngbNavItem>
+        <a ngbNavLink (click)="altaUsuario()">Alta Usuario</a>      
+      </li>
+  </ul>
+  <div [ngbNavOutlet]="nav"></div>
