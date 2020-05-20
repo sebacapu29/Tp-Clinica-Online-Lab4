@@ -16,6 +16,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule} from '@angular/common/http';
 import { MenuNavComponent } from './page-clinica/menu-nav/menu-nav.component';
+import { PageErrorComponent } from './inicio/page-error/page-error.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MenuNavComponent } from './page-clinica/menu-nav/menu-nav.component';
     LoginComponent,
     PrincipalComponent,
     RegistroComponent,
-    MenuNavComponent
+    MenuNavComponent,
+    PageErrorComponent
   ],
   imports: [
     BrowserModule,
