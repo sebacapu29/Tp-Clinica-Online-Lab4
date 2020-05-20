@@ -17,6 +17,11 @@ import { environment } from 'src/environments/environment';
 import { HttpClientModule} from '@angular/common/http';
 import { MenuNavComponent } from './page-clinica/menu-nav/menu-nav.component';
 import { PageErrorComponent } from './inicio/page-error/page-error.component';
+import { ListadosComponent } from './page-clinica/listados/listados.component';
+import { TablaPacientesComponent } from './page-clinica/tabla-pacientes/tabla-pacientes.component';
+import { TablaProfesionalesComponent } from './page-clinica/tabla-profesionales/tabla-profesionales.component';
+import { TurnosComponent } from './page-clinica/turnos/turnos.component';
+import { AltaUsuariosComponent } from './page-clinica/alta-usuarios/alta-usuarios.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,12 @@ import { PageErrorComponent } from './inicio/page-error/page-error.component';
     PrincipalComponent,
     RegistroComponent,
     MenuNavComponent,
-    PageErrorComponent
+    PageErrorComponent,
+    ListadosComponent,
+    TablaPacientesComponent,
+    TablaProfesionalesComponent,
+    TurnosComponent,
+    AltaUsuariosComponent
   ],
   imports: [
     BrowserModule,
