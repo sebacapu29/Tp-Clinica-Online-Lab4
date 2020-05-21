@@ -22,6 +22,8 @@ import { TablaPacientesComponent } from './page-clinica/tabla-pacientes/tabla-pa
 import { TablaProfesionalesComponent } from './page-clinica/tabla-profesionales/tabla-profesionales.component';
 import { TurnosComponent } from './page-clinica/turnos/turnos.component';
 import { AltaUsuariosComponent } from './page-clinica/alta-usuarios/alta-usuarios.component';
+import { TablaTurnosComponent } from './page-clinica/tabla-turnos/tabla-turnos.component';
+import { AtencionTurnosComponent } from './page-clinica/atencion-turnos/atencion-turnos.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { AltaUsuariosComponent } from './page-clinica/alta-usuarios/alta-usuario
     TablaPacientesComponent,
     TablaProfesionalesComponent,
     TurnosComponent,
-    AltaUsuariosComponent
+    AltaUsuariosComponent,
+    TablaTurnosComponent,
+    AtencionTurnosComponent
   ],
   imports: [
     BrowserModule,

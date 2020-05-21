@@ -10,22 +10,31 @@ export class ListadosComponent implements OnInit {
 
   mostrarListaPacientes:boolean;
   mostrarListaProfesionales:boolean;
+  mostrarListaTurnos:boolean;
 
   constructor( private route: ActivatedRoute) {  
    }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-    
-      if(params.get('tipo')=='profesional'){
-        this.mostrarListaProfesionales=true;
-        this.mostrarListaPacientes=false;
-      }
-      else{
-        this.mostrarListaPacientes=true;
-        this.mostrarListaProfesionales=false;
+      this.limpiarMostrarListados();
+
+      switch(params.get('tipo')){
+        case 'profesional':
+          this.mostrarListaProfesionales=true; 
+        break;
+        case 'pacientes':
+          this.mostrarListaPacientes=true;
+        break;
+        case 'turnos':
+          this.mostrarListaTurnos=true;
+        break;
       }
     });
   }
-
+  limpiarMostrarListados(){
+    this.mostrarListaPacientes =false;
+    this.mostrarListaProfesionales=false;
+    this.mostrarListaTurnos=false;
+  }
 }

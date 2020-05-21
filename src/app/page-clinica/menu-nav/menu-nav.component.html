@@ -2,10 +2,16 @@
 
 <ul ngbNav #nav="ngbNav" class="tabpanel bg-primary">  
   <li ngbNavItem>
-    <a ngbNavLink><i class="fa fa-home"></i></a>      
+    <a ngbNavLink (click)="inicio()"><i class="fa fa-home"></i></a>      
   </li>  
     <li ngbNavItem>
       <a ngbNavLink (click)="solicitarTurno()">Solicitar Turno</a>      
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink (click)="listadoTurnos()">Consultar Turnos</a>      
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink (click)="atenderTurnos()">Atender</a>      
     </li>
     <li ngbNavItem>
         <a ngbNavLink (click)="listadoPacientes()">Listado Pacientes</a>      
@@ -17,7 +23,7 @@
         <a ngbNavLink (click)="altaUsuario()">Alta Usuario</a>      
       </li>
       <li ngbNavItem>
-        <a ngbNavLink (click)="salir()">Log Out</a>      
+        <a ngbNavLink (click)="salir()"><strong>Log Out</strong></a>      
       </li>
   </ul>
   <div [ngbNavOutlet]="nav"></div>

@@ -26,6 +26,12 @@ export class MenuNavComponent implements OnInit {
   listadoPacientes(){
     this.router.navigate(['Listados','pacientes']);
   }
+  listadoTurnos(){
+    this.router.navigate(['Listados','turnos']);
+  }
+  atenderTurnos(){
+    this.router.navigate(['AtenderTurnos']);
+  }
   solicitarTurno(){
     this.router.navigate(['Turnos']);
   }
@@ -33,5 +39,8 @@ export class MenuNavComponent implements OnInit {
     this.usuarioServ.logOut();
     this.onLogOut.emit();
     this.router.navigate(['Login']);
+  }
+  inicio(){
+    this.router.navigate(['']);
   }
 }

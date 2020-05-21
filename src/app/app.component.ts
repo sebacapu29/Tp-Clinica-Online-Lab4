@@ -11,9 +11,9 @@ export class AppComponent {
   esUsuarioLogueado:boolean=false;
 
   constructor(public usuarioSevice:UsuarioService){
-    if(usuarioSevice.IsLogIn()){
-      this.esUsuarioLogueado=true;
-    }
+    // if(usuarioSevice.IsLogIn()){
+    //   this.esUsuarioLogueado=true;
+    // }
   }
   tomarLogueoDeUsuario(){
     this.esUsuarioLogueado = true;
