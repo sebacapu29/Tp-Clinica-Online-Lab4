@@ -8,9 +8,17 @@ import { UsuarioService } from './servicios/usuario.service';
 })
 export class AppComponent {
   title = 'clinica-online';
-  usuarioLogueado:boolean=true;
+  esUsuarioLogueado:boolean=false;
 
   constructor(public usuarioSevice:UsuarioService){
-
+    if(usuarioSevice.IsLogIn()){
+      this.esUsuarioLogueado=true;
+    }
+  }
+  tomarLogueoDeUsuario(){
+    this.esUsuarioLogueado = true;
+  }
+  tomarDeslogueoDeUsuario(){
+    this.esUsuarioLogueado = false;
   }
 }

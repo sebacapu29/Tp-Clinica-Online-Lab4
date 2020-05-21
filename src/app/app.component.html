@@ -1,5 +1,6 @@
 <div class="principal">
-    <app-menu-nav *ngIf="usuarioLogueado"></app-menu-nav>
-    
+    <app-menu-nav *ngIf="esUsuarioLogueado"
+    (onLogOut)="tomarDeslogueoDeUsuario()"></app-menu-nav>
+    <app-login *ngIf="!esUsuarioLogueado" (onLoginUsuario)="tomarLogueoDeUsuario()"></app-login>
     <router-outlet></router-outlet>
 </div>

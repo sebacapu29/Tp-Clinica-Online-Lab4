@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Usuario } from 'src/app/clases/usuario';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   usuario:Usuario;
   ingresando:boolean=false;
-
+  @Output() onLoginUsuario:EventEmitter<any> = new EventEmitter();
   constructor(private router:Router,private usuarioServicio:UsuarioService
    ) {
     this.inicializarUsuario();
@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
     }
     this.ingresando=true;
     this.usuarioServicio.login(this.usuario).then(res=>{
-      //  console.log(res);
+       console.log(res);
+       this.onLoginUsuario.emit();
       this.router.navigate(['']);   
      })
      .catch(error=> {
@@ -45,5 +46,10 @@ export class LoginComponent implements OnInit {
     this.usuario = new Usuario();
     this.usuario.clave="";
     this.usuario.mail="";    
+  }
+  LoginInvitado(){
+    this.usuario.mail="invitado@clinica.com";
+    this.usuario.clave="invitado123";
+    this.LoginUsuario();
   }
 }

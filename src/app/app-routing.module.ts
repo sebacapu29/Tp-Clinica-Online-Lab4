@@ -13,7 +13,7 @@ const routes: Routes = [
   {path:'',component:PrincipalComponent,canActivate:[CanActivateGuard]},
   {path:'Login',component:LoginComponent},
   {path:'Registro',component:RegistroComponent},
-  {path:'Listados',component:ListadosComponent,canActivate:[CanActivateGuard]},
+  {path:'Listados/:tipo',component:ListadosComponent,canActivate:[CanActivateGuard]},
   {path:'Turnos',component:TurnosComponent,canActivate:[CanActivateGuard]},
   {path:'Alta',component:AltaUsuariosComponent,canActivate:[CanActivateGuard]},
   {path:'**',component:PageErrorComponent}
