@@ -9,8 +9,8 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 })
 export class PrincipalComponent implements OnInit {
 
-  constructor(private data:DataService) {
-   
+  constructor(private usuarioServ:UsuarioService) {
+    this.usuarioServ.obtenerUsuarios();
    }
 
   ngOnInit(): void {

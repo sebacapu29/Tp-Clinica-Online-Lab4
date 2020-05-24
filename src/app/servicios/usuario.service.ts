@@ -20,8 +20,11 @@ export class UsuarioService {
       console.log(res));
    }
    obtenerUnUsuario(id){
-    this.dataServ.getAll("usuarios").subscribe(res => 
+    this.dataServ.getOne("usuarios",id).subscribe(res => 
       console.log(res));
+   }
+   CrearUsuarioEnBD(usuario:Usuario){
+     return this.dataServ.PostUsuario(usuario);
    }
    login(usuario:Usuario){
      const { mail , clave } = usuario;//destructuring
@@ -32,5 +35,8 @@ export class UsuarioService {
    }
    IsLogIn(){
      return this.authServ.authState;
+   }
+   registroAutentificado(mailUsuario:string,clave:string){
+     return this.authServ.createUserWithEmailAndPassword(mailUsuario,clave);
    }
 }

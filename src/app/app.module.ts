@@ -24,6 +24,8 @@ import { TurnosComponent } from './page-clinica/turnos/turnos.component';
 import { AltaUsuariosComponent } from './page-clinica/alta-usuarios/alta-usuarios.component';
 import { TablaTurnosComponent } from './page-clinica/tabla-turnos/tabla-turnos.component';
 import { AtencionTurnosComponent } from './page-clinica/atencion-turnos/atencion-turnos.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { AtencionTurnosComponent } from './page-clinica/atencion-turnos/atencion
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

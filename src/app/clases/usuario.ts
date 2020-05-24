@@ -1,6 +1,5 @@
-export class Usuario {
-    idFireB:string;
-    id:number;
+export class Usuario {   
+    id:string;
     mail:string;
     clave:string;
     nombre:string;
@@ -9,5 +8,7 @@ export class Usuario {
     edad:number;
     fecha_nacimiento:string;
     activo:boolean;
+    foto:string;
+    roll:number;
 }
 //rfcj`/D/Hhe_KY5,
