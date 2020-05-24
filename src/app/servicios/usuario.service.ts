@@ -16,8 +16,7 @@ export class UsuarioService {
    }
 
    obtenerUsuarios(){
-    this.dataServ.getAll("usuarios").subscribe(res => 
-      console.log(res));
+    return this.dataServ.getAll("usuarios");
    }
    obtenerUnUsuario(id){
     this.dataServ.getOne("usuarios",id).subscribe(res => 

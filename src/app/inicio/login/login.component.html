@@ -4,6 +4,7 @@
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Login</h5>
+           
             <form class="form-signin">
               <div class="form-label-group">
                 <input type="email" [(ngModel)]="usuario.mail" id="inputEmail"  class="form-control" placeholder="Email" name="usuario" required autofocus>              
@@ -18,7 +19,9 @@
               </div>
               <button class="btn btn-lg btn-primary btn-block text-uppercase" (click)="LoginUsuario()">Ingresar</button>
               <button class="btn btn-lg btn-secondary btn-block text-uppercase" (click)="Registrarme()">Registrarme</button>
-              <button class="btn btn-lg btn-warning btn-block text-uppercase" (click)="LoginInvitado()">Invitado</button>
+              <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('paciente')">Paciente</button>
+              <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('profesional')">Profesional</button>
+              <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('admin')">Admin</button>
               <hr class="my-4">
               <!-- <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fa fa-google mr-2"></i>Ingresar con Google</button> -->
             </form>

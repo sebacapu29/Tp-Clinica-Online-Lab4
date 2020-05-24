@@ -10,8 +10,14 @@ import { Router } from '@angular/router';
 export class MenuNavComponent implements OnInit {
 
   @Output() onLogOut:EventEmitter<any>= new EventEmitter();
+  esProfesional:boolean;
+  esAdmin:boolean;
+  esPaciente:boolean;
+  esUsuaioLogueado:boolean;
+  
+  constructor(private usuarioServ:UsuarioService,private router:Router) {
 
-  constructor(private usuarioServ:UsuarioService,private router:Router) { }
+   }
 
   ngOnInit(): void {
   }
@@ -37,7 +43,7 @@ export class MenuNavComponent implements OnInit {
   }
   salir(){
     this.usuarioServ.logOut();
-    this.onLogOut.emit();
+    this.onLogOut.emit(false);
     this.router.navigate(['Login']);
   }
   inicio(){

@@ -17,6 +17,10 @@ export class LoginComponent implements OnInit {
   constructor(private router:Router,private usuarioServicio:UsuarioService,private toastr:ToastrService
    ) {
     this.inicializarUsuario();
+   this.usuarioServicio.IsLogIn().subscribe((e)=>{
+     
+   });
+
    }
 
   ngOnInit(): void {
@@ -28,9 +32,9 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.ingresando=true;
+
     this.usuarioServicio.login(this.usuario).then(res=>{
-      //  console.log(res);
-      // this.usuarioServicio.obtenerUnUsuario(this.res)
+      localStorage.setItem("usuarioLogueadoMail",this.usuario.mail);
        this.onLoginUsuario.emit();
        this.router.navigate(['']);   
      })
@@ -49,10 +53,20 @@ export class LoginComponent implements OnInit {
     this.usuario.clave="";
     this.usuario.mail="";    
   }
-  LoginInvitado(){
-    this.usuario.mail="invitado@clinica.com";
-    this.usuario.clave="invitado123";
-    this.LoginUsuario();
+  LoginInvitado(tipoInivitado:string)
+  {
+    switch(tipoInivitado){
+      case 'profesional':
+        break;
+        case 'paciente':
+          this.usuario.mail="invitado_paciente@clinica.com";
+          this.usuario.clave="invitado123";
+          this.LoginUsuario();
+          break;
+          case 'admin':
+            break;
+    }
+   
   }
   mostrarMensajeError(mensaje){
     this.toastr.error("Ocurrio un error: "+mensaje);

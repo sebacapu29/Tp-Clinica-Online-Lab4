@@ -1,1 +1,4 @@
-<p>principal</p>
+<app-menu-nav *ngIf="usuarioServ.IsLogIn() | async"
+(onLogOut)="tomarEstadoUsuario($event)"></app-menu-nav>
+<app-login *ngIf="!esUsuarioLogueado && !esInicioConFoto"></app-login>
+<app-login-foto *ngIf="!esUsuarioLogueado && esInicioConFoto"></app-login-foto>

@@ -43,7 +43,9 @@
     padding: 1rem;
     transition: all 0.2s;
   }
-  
+  .btnInvitado{
+    margin-top: 10px;
+  }
   .form-label-group {
     position: relative;
     margin-bottom: 1rem;

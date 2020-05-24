@@ -17,11 +17,18 @@ export class CanActivateGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.authService.IsLogIn().pipe(
       map( user=> {
-        if(!user){
-          // redirect LOGIN page
-          this.router.navigate(['Login']);
+        if(!user){    
+          var hayFoto = localStorage.getItem("imgUsuarioRegistrado");
+          console.log(hayFoto);
+          if(hayFoto!= undefined){
+            this.router.navigate(['']);
+            return false;
+          }      
+          // redirect LOGIN page          
+          this.router.navigate(['']);
           return false;
         }
+        
         return true;
       })
     );
