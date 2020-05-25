@@ -1,1 +1,38 @@
-<p>tabla-pacientes works!</p>
+<table class="table table-condensed">
+    <thead>   
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Apellido
+            </th>
+            <th>
+                Sexo
+            </th>
+            <th>
+                Edad
+            </th>
+            <th>
+                DNI
+            </th>
+            <th>
+                Mail
+            </th>
+            <th>
+                Foto
+            </th>
+        </tr>
+    </thead>
+    <tbody *ngIf="listaPacientes">
+        <tr *ngFor="let paciente of listaPacientes" (click)="onPacienteSeleccionada(paciente)">
+            <td >{{paciente.nombre}}</td>
+            <td>{{paciente.apellido}}</td>
+            <td>{{paciente.sexo}}</td>
+            <td>{{paciente.edad}}</td>
+            <td>{{paciente.DNI}}</td>
+            <td>{{paciente.mail}}</td>
+            <td> <img [src]="paciente.foto"></td>
+        </tr>
+    </tbody>
+</table>

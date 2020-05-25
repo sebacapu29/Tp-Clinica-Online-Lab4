@@ -29,6 +29,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { LoginFotoComponent } from './inicio/login-foto/login-foto.component';
 import { BannerComponent } from './page-clinica/banner/banner.component';
 import { FooterPageComponent } from './page-clinica/footer-page/footer-page.component';
+import { ModalEsperaComponent } from './inicio/modal-espera/modal-espera.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { FooterPageComponent } from './page-clinica/footer-page/footer-page.comp
     AtencionTurnosComponent,
     LoginFotoComponent,
     BannerComponent,
-    FooterPageComponent
+    FooterPageComponent,
+    ModalEsperaComponent
   ],
   imports: [
     BrowserModule,

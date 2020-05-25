@@ -10,5 +10,6 @@ export class Usuario {
     activo:boolean;
     foto:string;
     roll:number;
+    DNI:string;
 }
 //rfcj`/D/Hhe_KY5,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/clases/usuario';
 
 @Component({
   selector: 'app-tabla-pacientes',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablaPacientesComponent implements OnInit {
 
+  listaPacientes:Usuario[]=[];
   constructor() { }
 
   ngOnInit(): void {
   }
+  onPacienteSeleccionada(paciente:Usuario){
 
+  }
 }

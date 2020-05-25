@@ -6,6 +6,7 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { finalize, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -19,15 +20,17 @@ export class RegistroComponent implements OnInit {
   uploadPercent:number=0;
   foto:any;
   pathRegistro:string = environment.pathImgRegistro;
-  
+  registrando:boolean;
+
   constructor(private storage:AngularFireStorage, private usuarioServ:UsuarioService
-              ,public toastr: ToastrService) {
+              ,public toastr: ToastrService,private router:Router) {
       this.usuario = new Usuario();
    }
 
   ngOnInit(): void {
   }
 Registrarme(){
+  this.registrando=true;
   if(this.usuario.nombre== undefined || this.usuario.mail== undefined ||
     this.usuario.clave== undefined || this.usuario.fecha_nacimiento==undefined 
     || this.foto== undefined || this.usuario.sexo== undefined ||
@@ -72,11 +75,15 @@ Registrarme(){
       this.usuarioServ.CrearUsuarioEnBD(this.usuario).then(function(docRef) {
         // console.log("docref",docRef);
             usuario.id = docRef.id;    
-            localStorage.setItem("usuario",docRef.id.toString());
+            // localStorage.setItem("usuario",docRef.id.toString());
+            localStorage.setItem("usuarioLogueadoMail",registro.usuario.mail);
             registro.mostrarMensajeExito();
+            registro.registrando=false;
+            registro.router.navigate(['']);
           })
           .catch(function(error) {
             registro.mostrarMensajeError(error);
+            registro.registrando=false;
           }
           );
     },

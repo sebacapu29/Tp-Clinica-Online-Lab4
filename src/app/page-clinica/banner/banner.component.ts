@@ -9,9 +9,10 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 export class BannerComponent implements OnInit {
 
   mostrarBanner:boolean;
+  nombreUsuario:string;
 
   constructor(private usuarioServ:UsuarioService) {
-
+    this.nombreUsuario = localStorage.getItem("usuarioLogueadoMail");
    }
 
   ngOnInit(): void {

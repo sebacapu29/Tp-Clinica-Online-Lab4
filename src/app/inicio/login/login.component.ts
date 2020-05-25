@@ -69,11 +69,14 @@ export class LoginComponent implements OnInit {
           this.LoginUsuario();
         break;
         case 'paciente':
-          this.usuario.mail="invitado_paciente@clinica.com";
+          this.usuario.mail="paciente_invitado@clinica.com";
           this.usuario.clave="invitado123";
           this.LoginUsuario();
           break;
           case 'admin':
+            this.usuario.mail="admin@clinica.com";
+            this.usuario.clave="admin123456";
+            this.LoginUsuario();
             break;
     }
   }

@@ -17,8 +17,12 @@ export class MenuNavComponent implements OnInit , OnDestroy {
 
   constructor(private usuarioServ:UsuarioService,private router:Router) {
    this.TraerTodos(this.listUsuarios);
+   
    }
   ngOnDestroy(): void {
+  }
+  consulta(){
+    console.log(this.usuarioMenu);
   }
   TraerTodos(listaUsuarios?:Usuario[]){
     this.usuarioServ.obtenerUsuarios().subscribe(res => 
