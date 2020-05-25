@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Turno } from 'src/app/clases/turno';
 
 @Component({
   selector: 'app-tabla-turnos',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablaTurnosComponent implements OnInit {
 
+  listaTurnos:Turno[];
   constructor() { }
 
   ngOnInit(): void {
   }
+  onTurnoSeleccionada(turno){
 
+  }
 }

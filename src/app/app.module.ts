@@ -26,8 +26,9 @@ import { TablaTurnosComponent } from './page-clinica/tabla-turnos/tabla-turnos.c
 import { AtencionTurnosComponent } from './page-clinica/atencion-turnos/atencion-turnos.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { LoginFotoComponent } from './page-clinica/login-foto/login-foto.component';
+import { LoginFotoComponent } from './inicio/login-foto/login-foto.component';
 import { BannerComponent } from './page-clinica/banner/banner.component';
+import { FooterPageComponent } from './page-clinica/footer-page/footer-page.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { BannerComponent } from './page-clinica/banner/banner.component';
     TablaTurnosComponent,
     AtencionTurnosComponent,
     LoginFotoComponent,
-    BannerComponent
+    BannerComponent,
+    FooterPageComponent
   ],
   imports: [
     BrowserModule,

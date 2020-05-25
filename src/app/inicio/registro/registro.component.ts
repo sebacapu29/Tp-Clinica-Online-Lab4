@@ -67,6 +67,7 @@ Registrarme(){
       this.usuario.foto = urlImg;
       var registro=this;
       var usuario = this.usuario;
+      console.log(urlImg);
       localStorage.setItem('imgUsuarioRegistrado',urlImg);
       this.usuarioServ.CrearUsuarioEnBD(this.usuario).then(function(docRef) {
         // console.log("docref",docRef);

@@ -1,4 +1,15 @@
-<app-menu-nav *ngIf="usuarioServ.IsLogIn() | async"
-(onLogOut)="tomarEstadoUsuario($event)"></app-menu-nav>
-<app-login *ngIf="!esUsuarioLogueado && !esInicioConFoto"></app-login>
-<app-login-foto *ngIf="!esUsuarioLogueado && esInicioConFoto"></app-login-foto>
+
+<app-menu-nav *ngIf="esUsuarioLogueado"
+(onLogOut)="tomarEstadoUsuario($event)"
+[usuarioMenu]="usuarioLogueado"></app-menu-nav>
+
+<div *ngIf="!ocultarPorRegistro">
+    <app-login *ngIf="!esUsuarioLogueado && !esInicioConFoto"
+    [mailUsuario]="mailUsuarioCatche"
+    (onSeleccionRegistro)="seleccionoRegistrar()"
+    (onLoginUsuario)="tomarUsuarioLogueado($event)" ></app-login> 
+    
+    <app-login-foto *ngIf="!esUsuarioLogueado && esInicioConFoto"
+    (iniciarSesionConUsuario)="tomarUsuarioMail($event)"></app-login-foto>   
+</div>
+    

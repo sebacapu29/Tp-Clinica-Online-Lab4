@@ -1,1 +1,50 @@
-<p>turnos works!</p>
+<form class="container">
+    <div class="">
+        <div class="">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Seleccione Especialidad</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem>Odontologo</button>
+              <button ngbDropdownItem>Pediatra</button>
+              <button ngbDropdownItem>Clinico</button>
+            </div>
+          </div>
+        </div>
+        <div class="">
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Seleccione Medico</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem>Roberto</button>
+                <button ngbDropdownItem>Daniel</button>
+                <button ngbDropdownItem>Maria</button>
+              </div>
+            </div>
+          </div>
+      
+          <div class="">
+            <div ngbDropdown class="d-inline-block">
+              <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Seleccione el Centro</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem>Barracas</button>
+                <button ngbDropdownItem>Belgrano</button>
+                <button ngbDropdownItem>Lanus</button>
+              </div>
+            </div>
+          </div>
+    
+          <div class="form-group">
+            <label for="">Fecha</label>
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd"
+                     name="dp" 
+                     [(ngModel)]="turno.fecha" 
+                     ngbDatepicker #d="ngbDatepicker"
+                     name="fecha">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+          </div>
+    <button type="submit" (click)="onSubmit()" class="btn btn-primary">Enviar</button>
+    </div>
+  </form>

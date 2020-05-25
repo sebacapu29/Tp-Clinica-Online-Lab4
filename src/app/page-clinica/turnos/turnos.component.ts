@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Turno } from 'src/app/clases/turno';
 
 @Component({
   selector: 'app-turnos',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TurnosComponent implements OnInit {
 
-  constructor() { }
+  turno:Turno;
+  
+  constructor() { 
+    this.turno=new Turno();
+  }
 
   ngOnInit(): void {
   }
+  onSubmit(){
 
+  }
 }

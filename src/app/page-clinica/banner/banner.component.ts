@@ -8,15 +8,14 @@ import { UsuarioService } from 'src/app/servicios/usuario.service';
 })
 export class BannerComponent implements OnInit {
 
-  mostrarBanner:boolean=false;
+  mostrarBanner:boolean;
 
   constructor(private usuarioServ:UsuarioService) {
-    if(this.usuarioServ.IsLogIn()){
-      this.mostrarBanner=true;
-    }
+
    }
 
   ngOnInit(): void {
+    this.usuarioServ.IsLogIn().subscribe(res=>{ this.mostrarBanner=res!=null;});
   }
 
 }

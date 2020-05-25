@@ -5,22 +5,22 @@
     <a ngbNavLink (click)="inicio()"><i class="fa fa-home"></i></a>      
   </li>  
     <li ngbNavItem>
-      <a ngbNavLink *ngIf="esPaciente" (click)="solicitarTurno()">Solicitar Turno</a>      
+      <a ngbNavLink *ngIf="usuarioMenu.roll==0" (click)="solicitarTurno()">Solicitar Turno</a>      
     </li>
     <li ngbNavItem>
-      <a ngbNavLink *ngIf="esProfesional || esAdmin" (click)="listadoTurnos()">Consultar Turnos</a>      
+      <a ngbNavLink *ngIf="usuarioMenu.roll==0 || usuarioMenu.roll==2" (click)="listadoTurnos()">Consultar Turnos</a>      
     </li>
     <li ngbNavItem>
-      <a ngbNavLink *ngIf="esProfesional" (click)="atenderTurnos()">Atender</a>      
+      <a ngbNavLink *ngIf="usuarioMenu.roll==1 || usuarioMenu.roll==2" (click)="atenderTurnos()">Atender</a>      
     </li>
     <li ngbNavItem>
-        <a ngbNavLink *ngIf="esProfesional || esAdmin" (click)="listadoPacientes()">Listado Pacientes</a>      
+        <a ngbNavLink *ngIf="usuarioMenu.roll==1" (click)="listadoPacientes()">Listado Pacientes</a>      
       </li>
       <li ngbNavItem>
-        <a ngbNavLink *ngIf="esAdmin" (click)="listadoProfesionales()" >Listado Profesionales</a>      
+        <a ngbNavLink *ngIf="usuarioMenu.roll==2" (click)="listadoProfesionales()" >Listado Profesionales</a>      
       </li>
       <li ngbNavItem>
-        <a ngbNavLink *ngIf="esAdmin" (click)="altaUsuario()">Alta Usuario</a>      
+        <a ngbNavLink *ngIf="usuarioMenu.roll==2" (click)="altaUsuario()">Alta Usuario</a>      
       </li>
       <li ngbNavItem>
         <a ngbNavLink *ngIf="esUsuaioLogueado"(click)="salir()"><strong>Log Out</strong></a>      

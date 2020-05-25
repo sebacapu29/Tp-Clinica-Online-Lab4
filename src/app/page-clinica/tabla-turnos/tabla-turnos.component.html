@@ -1,1 +1,33 @@
-<p>tabla-turnos works!</p>
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>
+                Especialista
+            </th>
+            <th>
+                Fecha
+            </th>
+            <th>
+                Paciente
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+                Centro
+            </th>
+            <th>
+                Observaciones
+            </th>
+        </tr>
+    </thead>
+    <tbody *ngIf="listaTurnos">
+        <tr *ngFor="let turno of listaTurnos" (click)="onTurnoSeleccionada(turno)">
+            <td >{{turno.especialista}}</td>
+            <td>{{turno.paciente}}</td>
+            <td>{{turno.fecha}}</td>
+            <td>{{turno.estado}}</td>
+            <td>{{turno.centro}}</td>          
+        </tr>
+    </tbody>
+</table>

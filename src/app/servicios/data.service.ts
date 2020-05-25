@@ -48,7 +48,7 @@ export class DataService {
       fecha_nacimiento:usuario.fecha_nacimiento,
       activo:'true',
       foto:usuario.foto,
-      roll:'1'
+      roll:'0'
   });
   }
 }

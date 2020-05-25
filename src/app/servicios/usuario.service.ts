@@ -38,4 +38,5 @@ export class UsuarioService {
    registroAutentificado(mailUsuario:string,clave:string){
      return this.authServ.createUserWithEmailAndPassword(mailUsuario,clave);
    }
+   
 }

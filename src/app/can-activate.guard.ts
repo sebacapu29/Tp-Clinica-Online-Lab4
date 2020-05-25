@@ -25,7 +25,7 @@ export class CanActivateGuard implements CanActivate {
             return false;
           }      
           // redirect LOGIN page          
-          this.router.navigate(['']);
+          this.router.navigate(['Login']);
           return false;
         }
         

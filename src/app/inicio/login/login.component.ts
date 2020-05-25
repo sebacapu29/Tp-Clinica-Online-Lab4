@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Usuario } from 'src/app/clases/usuario';
 import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
@@ -11,12 +11,15 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-  usuario:Usuario;
+  @Input() usuario:Usuario;
   ingresando:boolean=false;
+  @Input() mailUsuario;
   @Output() onLoginUsuario:EventEmitter<any> = new EventEmitter();
+  @Output() onSeleccionRegistro:EventEmitter<any> = new EventEmitter();
+
   constructor(private router:Router,private usuarioServicio:UsuarioService,private toastr:ToastrService
    ) {
-    this.inicializarUsuario();
+
    this.usuarioServicio.IsLogIn().subscribe((e)=>{
      
    });
@@ -24,6 +27,7 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.inicializarUsuario();
   }
   LoginUsuario(){
 
@@ -35,8 +39,8 @@ export class LoginComponent implements OnInit {
 
     this.usuarioServicio.login(this.usuario).then(res=>{
       localStorage.setItem("usuarioLogueadoMail",this.usuario.mail);
-       this.onLoginUsuario.emit();
-       this.router.navigate(['']);   
+       this.onLoginUsuario.emit(this.usuario.mail);
+       this.router.navigate(['']);      
      })
      .catch(error=> {
        this.mostrarMensajeError(error);
@@ -46,17 +50,23 @@ export class LoginComponent implements OnInit {
      ); 
   }
   Registrarme(){
+    this.onSeleccionRegistro.emit();
     this.router.navigate(['Registro']);
   }
   inicializarUsuario(){
-    this.usuario = new Usuario();
-    this.usuario.clave="";
-    this.usuario.mail="";    
+    
+    if(this.usuario==null){
+      this.usuario = new Usuario();
+    }
+    this.usuario.mail=this.mailUsuario;
   }
   LoginInvitado(tipoInivitado:string)
   {
     switch(tipoInivitado){
       case 'profesional':
+        this.usuario.mail="profesional@gmail.com";
+          this.usuario.clave="abc123456";
+          this.LoginUsuario();
         break;
         case 'paciente':
           this.usuario.mail="invitado_paciente@clinica.com";
@@ -66,7 +76,6 @@ export class LoginComponent implements OnInit {
           case 'admin':
             break;
     }
-   
   }
   mostrarMensajeError(mensaje){
     this.toastr.error("Ocurrio un error: "+mensaje);

@@ -13,9 +13,9 @@ img:hover{
     height: 100%;
     padding-bottom: 250px;
 }
-p a{
+ a{
     color: blue;
 }
-p a:hover{
+ a:hover{
     cursor: pointer;
 }
