@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto contenidoPrincipal">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Registro</h5>
+            <form class="form-signin">
+                <div class="row row-space">                        
+                        <div class="input-group">
+                            <div class="">
+                                <select class="form-control" >
+                                    <option disabled="disabled" selected="selected">ESPECILIDAD</option>
+                                    <option>Odontologo</option>
+                                    <option>Clinica Medica</option>
+                                    <option>Pediatria</option>
+                                </select>
+                                <div class=""></div>
+                            </div>
+                        </div>             
+                </div>
+              <div class="form-label-group">
+                <input type="nombre" [(ngModel)]="usuario.nombre"  class="form-control" placeholder="Nombre" name="usuario" required autofocus>              
+              </div>
+              <div class="form-label-group">
+                <input type="apellido" [(ngModel)]="usuario.apellido" class="form-control" placeholder="Apellido" name="usuario" required autofocus>              
+              </div>
+                       
+              <div class="form-label-group">
+                <input type="password" [(ngModel)]="usuario.clave"  class="form-control" name="clave" placeholder="Clave" required>
+              </div>
+              <div class="form-label-group">
+                <input type="password" [(ngModel)]="confimarcionClave"  class="form-control" name="confirmClave" placeholder="Confirmar Clave" required>
+              </div>              
+                 
+              <button class="btn btn-lg btn-success btn-block text-uppercase" (click)="EnviarRevision()">Enviar Solicitud</button>
+              <hr class="my-4">
+              <div class="spinner-border text-primary" role="status" *ngIf="registrando">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

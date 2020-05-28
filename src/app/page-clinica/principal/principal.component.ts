@@ -17,6 +17,7 @@ export class PrincipalComponent implements OnInit {
   esInicioConFoto:boolean;
   mailUsuarioCatche:string;
   ocultarPorRegistro:boolean;
+  ocultarBanner:boolean;
 
   constructor(public usuarioServ:UsuarioService) {
         this.traerTodos(this.listUsuarios);
@@ -63,5 +64,9 @@ export class PrincipalComponent implements OnInit {
   }
   seleccionoRegistrar(){
     this.ocultarPorRegistro=true;
+  }
+  tomarOcultarBanner(e){
+    console.log(e);
+   this.ocultarBanner = e == null? false:true;
   }
 }

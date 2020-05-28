@@ -12,6 +12,7 @@ export class MenuNavComponent implements OnInit , OnDestroy {
 
   @Output() onLogOut:EventEmitter<any>= new EventEmitter();
   @Input() usuarioMenu:Usuario;//0=paciente,1=profesional,2=admin
+  @Output() onOcultarBanner:EventEmitter<any> = new EventEmitter();
   esUsuaioLogueado:boolean;
   listUsuarios: Usuario[]=[];
 
@@ -53,22 +54,28 @@ export class MenuNavComponent implements OnInit , OnDestroy {
 
   altaUsuario(){
     this.router.navigate(['Alta']);
+    this.onOcultarBanner.emit();
   }
   
   listadoProfesionales(){
     this.router.navigate(['Listados','profesional']);
+    this.onOcultarBanner.emit();
   }
   listadoPacientes(){
     this.router.navigate(['Listados','pacientes']);
+    this.onOcultarBanner.emit();
   }
   listadoTurnos(){
     this.router.navigate(['Listados','turnos']);
+    this.onOcultarBanner.emit();
   }
   atenderTurnos(){
     this.router.navigate(['AtenderTurnos']);
+    this.onOcultarBanner.emit();
   }
   solicitarTurno(){
     this.router.navigate(['Turnos']);
+    this.onOcultarBanner.emit();
   }
   salir(){
     this.usuarioServ.logOut();
@@ -77,6 +84,6 @@ export class MenuNavComponent implements OnInit , OnDestroy {
     this.router.navigate(['Login']);
   }
   inicio(){
-    this.router.navigate(['']);
+    this.onOcultarBanner.emit('inicio');
   }
 }

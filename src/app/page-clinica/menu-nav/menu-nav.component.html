@@ -14,7 +14,10 @@
       <a ngbNavLink *ngIf="usuarioMenu.roll==1" (click)="atenderTurnos()">Atender</a>      
     </li>
     <li ngbNavItem>
-        <a ngbNavLink *ngIf="usuarioMenu.roll==1  || usuarioMenu.roll==2" (click)="listadoPacientes()">Listado Pacientes</a>      
+        <a ngbNavLink *ngIf="usuarioMenu.roll==2" (click)="listadoPacientes()">Listado Pacientes</a>      
+      </li>
+      <li ngbNavItem>
+        <a ngbNavLink *ngIf="usuarioMenu.roll==2" (click)="listadoPacientes()">Registrar</a>      
       </li>
       <li ngbNavItem>
         <a ngbNavLink *ngIf="usuarioMenu.roll==2" (click)="listadoProfesionales()" >Listado Profesionales</a>      

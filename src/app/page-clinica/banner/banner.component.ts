@@ -10,9 +10,11 @@ export class BannerComponent implements OnInit {
 
   mostrarBanner:boolean;
   nombreUsuario:string;
+  imgProfesional:string;
 
   constructor(private usuarioServ:UsuarioService) {
     this.nombreUsuario = localStorage.getItem("usuarioLogueadoMail");
+    this.imgProfesional = "assets/imagenes/profesional.jpg"
    }
 
   ngOnInit(): void {

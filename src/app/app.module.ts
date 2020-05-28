@@ -30,6 +30,7 @@ import { LoginFotoComponent } from './inicio/login-foto/login-foto.component';
 import { BannerComponent } from './page-clinica/banner/banner.component';
 import { FooterPageComponent } from './page-clinica/footer-page/footer-page.component';
 import { ModalEsperaComponent } from './inicio/modal-espera/modal-espera.component';
+import { RegistroProfesionalComponent } from './page-clinica/registro-profesional/registro-profesional.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ModalEsperaComponent } from './inicio/modal-espera/modal-espera.compone
     LoginFotoComponent,
     BannerComponent,
     FooterPageComponent,
-    ModalEsperaComponent
+    ModalEsperaComponent,
+    RegistroProfesionalComponent
   ],
   imports: [
     BrowserModule,
