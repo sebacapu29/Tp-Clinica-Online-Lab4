@@ -17,13 +17,16 @@ export class MenuNavComponent implements OnInit , OnDestroy {
   listUsuarios: Usuario[]=[];
 
   constructor(private usuarioServ:UsuarioService,private router:Router) {
-   this.TraerTodos(this.listUsuarios);
+   
    
    }
   ngOnDestroy(): void {
-  }
-  consulta(){
-    console.log(this.usuarioMenu);
+  } 
+  ngOnInit(): void {
+    this.TraerTodos(this.listUsuarios);
+    this.usuarioServ.IsLogIn().subscribe(resp=>{  
+      this.esUsuaioLogueado = resp!=null;
+    });
   }
   TraerTodos(listaUsuarios?:Usuario[]){
     this.usuarioServ.obtenerUsuarios().subscribe(res => 
@@ -46,44 +49,32 @@ export class MenuNavComponent implements OnInit , OnDestroy {
     }
   }
 }
-  ngOnInit(): void {
-    this.usuarioServ.IsLogIn().subscribe(resp=>{  
-      this.esUsuaioLogueado = resp!=null;
-    });
-  }
+  
 
   altaUsuario(){
-    this.router.navigate(['Alta']);
-    this.onOcultarBanner.emit();
+    this.router.navigate(['Alta']);   
   }
   
   listadoProfesionales(){
-    this.router.navigate(['Listados','profesional']);
-    this.onOcultarBanner.emit();
+    this.router.navigate(['Listados','profesional']);  
   }
   listadoPacientes(){
-    this.router.navigate(['Listados','pacientes']);
-    this.onOcultarBanner.emit();
+    this.router.navigate(['Listados','pacientes']);  
   }
   listadoTurnos(){
-    this.router.navigate(['Listados','turnos']);
-    this.onOcultarBanner.emit();
+    this.router.navigate(['Listados','turnos']);    
   }
   atenderTurnos(){
-    this.router.navigate(['AtenderTurnos']);
-    this.onOcultarBanner.emit();
+    this.router.navigate(['AtenderTurnos']);   
   }
   solicitarTurno(){
-    this.router.navigate(['Turnos']);
-    this.onOcultarBanner.emit();
+    this.router.navigate(['Turnos']);  
   }
   salir(){
     this.usuarioServ.logOut();
-    // this.usuarioMenu.roll=3;
-    this.onLogOut.emit(false);
-    this.router.navigate(['Login']);
+    this.router.navigate(['']);
   }
   inicio(){
-    this.onOcultarBanner.emit('inicio');
+    this.router.navigate(['Principal']);
   }
 }

@@ -26,18 +26,10 @@ export class DataService {
         }))
     );
   }
-  public getOne(entidad,id):Observable<any[]>{
-    
-    return this.dataStore.collection(entidad + "/" + id).snapshotChanges().pipe(
-      map( actions=> 
-        actions.map(a=>{
-          const data = a.payload.doc.data();
-          // const id = a.payload.doc.id;
-          return data;
-        }))
-    );
+  public getByProperty<T>(parameter:string,value:string,entidad:string){   
+
+    return this.dataStore.collection<T>(entidad, ref => ref.where(parameter,'==', value )).valueChanges();
   }
-  
   public PostUsuario(usuario:Usuario){
     console.log(usuario);
     return this.dataStore.collection("usuarios").add({

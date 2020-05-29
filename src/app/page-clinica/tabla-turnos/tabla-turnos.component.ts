@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Turno } from 'src/app/clases/turno';
 
 @Component({
@@ -8,12 +8,17 @@ import { Turno } from 'src/app/clases/turno';
 })
 export class TablaTurnosComponent implements OnInit {
 
-  listaTurnos:Turno[];
-  constructor() { }
+  @Input() listaTurnos:Turno[];
+  @Output() turnoSeleccionado:EventEmitter<Turno>= new EventEmitter<Turno>();
+
+  constructor() { 
+    this.listaTurnos=new Array<Turno>();
+  }
 
   ngOnInit(): void {
   }
-  onTurnoSeleccionada(turno){
-
+  onTurnoSeleccionado(turno:Turno){    
+    this.turnoSeleccionado.emit(turno);
   }
+  
 }

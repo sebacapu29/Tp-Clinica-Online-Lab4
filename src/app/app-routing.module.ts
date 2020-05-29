@@ -14,11 +14,13 @@ import { BannerComponent } from './page-clinica/banner/banner.component';
 import { FooterPageComponent } from './page-clinica/footer-page/footer-page.component';
 import { MenuNavComponent } from './page-clinica/menu-nav/menu-nav.component';
 import { RegistroProfesionalComponent } from './page-clinica/registro-profesional/registro-profesional.component';
+import { LoginPrincipalComponent } from './inicio/login-principal/login-principal.component';
 
 const routes: Routes = [
-  {path:'',component:BannerComponent},
+  {path:'',component:PrincipalComponent,canActivate:[CanActivateGuard]},
   {path:'Registro',component:RegistroComponent},
-  {path:'Login',component:FooterPageComponent},  
+  {path:'Login',component:LoginPrincipalComponent}, 
+  {path:'Principal',component:PrincipalComponent,canActivate:[CanActivateGuard]},   
   {path:'Listados/:tipo',component:ListadosComponent,canActivate:[CanActivateGuard]},
   {path:'Turnos',component:TurnosComponent,canActivate:[CanActivateGuard]},
   {path:'AtenderTurnos',component:AtencionTurnosComponent,canActivate:[CanActivateGuard]},

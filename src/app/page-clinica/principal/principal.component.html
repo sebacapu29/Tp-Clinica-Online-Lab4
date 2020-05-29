@@ -1,20 +1,17 @@
 <div class="contenido">
  
-    <app-menu-nav *ngIf="esUsuarioLogueado"
-    (onLogOut)="tomarEstadoUsuario($event)"
-    (onOcultarBanner)="tomarOcultarBanner($event)"
-    [usuarioMenu]="usuarioLogueado"></app-menu-nav>
-    <app-banner *ngIf="ocultarBanner">
+    <app-menu-nav></app-menu-nav>
+    <app-banner>
       
     </app-banner>
-    <div *ngIf="!ocultarPorRegistro">
+    <!-- <div *ngIf="!ocultarPorRegistro">
         <app-login *ngIf="!esUsuarioLogueado && !esInicioConFoto"
         [mailUsuario]="mailUsuarioCatche"
         (onSeleccionRegistro)="seleccionoRegistrar()"
-        (onLoginUsuario)="tomarUsuarioLogueado($event)" ></app-login> 
+        (onLoginUsuario)="tomarUsuarioLogueado($event)">
+    </app-login>  -->
         
-        <app-login-foto *ngIf="!esUsuarioLogueado && esInicioConFoto"
-        (iniciarSesionConUsuario)="tomarUsuarioMail($event)"></app-login-foto>   
+        <!-- <app-login-foto *ngIf="!esUsuarioLogueado && esInicioConFoto"
+        (iniciarSesionConUsuario)="tomarUsuarioMail($event)"></app-login-foto>    -->
     </div>
-</div>
     

@@ -1,6 +1,6 @@
 
 
-<ul ngbNav #nav="ngbNav" class="tabpanel bg-primary">  
+<ul ngbNav #nav="ngbNav" class="tabpanel bg-primary" *ngIf="usuarioMenu">  
   <li ngbNavItem>
     <a ngbNavLink (click)="inicio()"><i class="fa fa-home"></i></a>      
   </li>  
@@ -29,5 +29,5 @@
         <a ngbNavLink *ngIf="esUsuaioLogueado"(click)="salir()"><strong>Log Out</strong></a>      
       </li>
   </ul>
-  <div [ngbNavOutlet]="nav"></div>
+  <!-- <div [ngbNavOutlet]="nav"></div> -->
 <!-- <button (click)="consulta()">dd</button> -->

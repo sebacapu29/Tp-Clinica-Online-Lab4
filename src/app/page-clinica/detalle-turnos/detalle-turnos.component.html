@@ -1,0 +1,14 @@
+<div class="card" style="width: 18rem;" *ngIf="turnoSeleccionado">
+    <!-- <img class="card-img-top" alt="Card image cap"> -->
+    <div class="card-body">
+      <h5 class="card-title"> {{turnoSeleccionado.paciente}}</h5>
+      <p class="card-text"><strong>Fecha: {{turnoSeleccionado.fecha}}</strong></p>
+      <p class="card-text">Estado: {{turnoSeleccionado.estado}}</p>
+      <p class="card-text">Profesional: {{turnoSeleccionado.especialista}}</p>
+      <p class="card-text">Especialidad: {{turnoSeleccionado.especialidad}}</p>
+      <p class="card-text">Centro: {{turnoSeleccionado.centro}}</p>
+      <button class="btn btn-danger" (click)="onBorrarTurno()">Cancelar Turno</button>
+      <button class="btn btn-warning" (click)="onModificar()"> Modificar </button>
+    </div>
+  </div>
+ 

@@ -1,22 +1,16 @@
-    <!-- Sidebar -->
-    <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">Start Bootstrap </div>
-        <div class="list-group list-group-flush">
-          <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
-          <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
-          <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
-          <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
-          <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
-          <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
-        </div>
-      </div>
-      <div id="page-content-wrapper">
+<div class="d-flex" id="wrapper">
+   
+<div id="page-content-wrapper" class="container-fluid">
+
 <table class="table table-condensed">
     <thead>
         <tr>
             <th>
-                Especialista
+                Profesional
             </th>
+            <th>
+                Esp.
+             </th>
             <th>
                 Fecha
             </th>
@@ -29,18 +23,21 @@
             <th>
                 Centro
             </th>
+           
             <th>
-                Observaciones
+                Obs
             </th>
         </tr>
     </thead>
     <tbody *ngIf="listaTurnos">
-        <tr *ngFor="let turno of listaTurnos" (click)="onTurnoSeleccionada(turno)">
+        <tr *ngFor="let turno of listaTurnos" (click)="onTurnoSeleccionado(turno)">
             <td >{{turno.especialista}}</td>
+            <td>{{turno.especialidad}}</td>
             <td>{{turno.paciente}}</td>
             <td>{{turno.fecha}}</td>
-            <td>{{turno.estado}}</td>
-            <td>{{turno.centro}}</td>          
+            <td>{{turno.estado}}</td>           
+            <td>{{turno.centro}}</td>    
+            <td>{{turno.observaciones}}</td>   
         </tr>
     </tbody>
 </table>

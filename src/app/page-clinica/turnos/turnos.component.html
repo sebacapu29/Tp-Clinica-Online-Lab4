@@ -1,3 +1,7 @@
+<app-menu-nav
+[usuarioMenu]="usuarioLogueado">
+</app-menu-nav>
+
   <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
     <div class="wrapper wrapper--w680">
         <div class="card card-1">
@@ -8,35 +12,22 @@
                     <!-- <div class="input-group">
                         <input class="input--style-1" type="text" placeholder="NAME" name="name">
                     </div> -->
-                    <div class="row row-space">
-                        
-                        <div class="">
-                            <div class="input-group">
-                                <div class="">
-                                    <select class="especialista">
-                                        <option disabled="disabled" selected="selected">ESPECILIDAD</option>
-                                        <option>Odontologo</option>
-                                        <option>Clinica Medica</option>
-                                        <option>Pediatria</option>
+                    <div class="row row-space">                                               
+                                    <select class="form-control" [(ngModel)]="profesionalSeleccionado" name="profesional">                                        
+                                        <option *ngFor="let profesional of listaProfesionales" (click)="tomarProfesional(profesional)" >{{profesional.nombre + profesional.apellido}}</option>                                
                                     </select>
-                                    <div class=""></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="input-group col-6">
-                            <div class="">
-                                <select class="especialista">
-                                    <option disabled="disabled" selected="selected">CENTRO</option>
-                                    <option>Odontologo</option>
-                                    <option>Clinica Medica</option>
-                                    <option>Pediatria</option>
+                                                          
+                    </div>            
+                                <select class="form-control">
+                                
+                                    <option  *ngFor="let especialidad of especialidades.especialidad" selected="selected">{{especialidad}}</option>                                                                  
+                                
                                 </select>
-                                <div class=""></div>
-                            </div>
-                        </div>
-                    </div>                   
+                                <select class="form-control">
+                                    
+                                    <option  *ngFor="let centro of centros.localidad" selected="selected">{{centro}}</option>                                                                  
+                                
+                                </select>           
                     <div class="col-2">
                         <div class="input-group">
                             <input ngbDatepicker #d="ngbDatepicker" class="input--style-1" type="text" placeholder="FECHA" name="birthday">

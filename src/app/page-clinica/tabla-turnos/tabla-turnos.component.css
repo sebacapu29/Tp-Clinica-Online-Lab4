@@ -11,7 +11,9 @@
     padding: 0.875rem 1.25rem;
     font-size: 1.2rem;
   }
-  
+  tbody tr:hover{
+      cursor: pointer;
+  }
   #sidebar-wrapper .list-group {
     width: 15rem;
   }

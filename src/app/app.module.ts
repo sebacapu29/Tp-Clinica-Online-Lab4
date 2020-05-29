@@ -31,6 +31,8 @@ import { BannerComponent } from './page-clinica/banner/banner.component';
 import { FooterPageComponent } from './page-clinica/footer-page/footer-page.component';
 import { ModalEsperaComponent } from './inicio/modal-espera/modal-espera.component';
 import { RegistroProfesionalComponent } from './page-clinica/registro-profesional/registro-profesional.component';
+import { DetalleTurnosComponent } from './page-clinica/detalle-turnos/detalle-turnos.component';
+import { LoginPrincipalComponent } from './inicio/login-principal/login-principal.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { RegistroProfesionalComponent } from './page-clinica/registro-profesiona
     BannerComponent,
     FooterPageComponent,
     ModalEsperaComponent,
-    RegistroProfesionalComponent
+    RegistroProfesionalComponent,
+    DetalleTurnosComponent,
+    LoginPrincipalComponent
   ],
   imports: [
     BrowserModule,

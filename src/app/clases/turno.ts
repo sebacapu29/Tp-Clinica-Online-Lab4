@@ -4,4 +4,5 @@ export class Turno {
     estado:string;
     especialista:string;
     centro:string;
+    especialidad:string;
 }

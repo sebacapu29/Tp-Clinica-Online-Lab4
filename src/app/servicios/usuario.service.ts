@@ -18,10 +18,15 @@ export class UsuarioService {
    obtenerUsuarios(){
     return this.dataServ.getAll("usuarios");
    }
-   obtenerUnUsuario(id){
-    this.dataServ.getOne("usuarios",id).subscribe(res => 
-      console.log(res));
+   obtenerProfesionales(){
+    return this.dataServ.getAll("usuarios");
    }
+   obtenerUnProfesional(param,value){
+    //  return this.dataServ.getOneByProperty(param,value);
+   }  
+   obtenerPorEntidadYParametros<T>(param,value,entidad){
+    return this.dataServ.getByProperty<T>(param,value,entidad);
+  }  
    CrearUsuarioEnBD(usuario:Usuario){
      return this.dataServ.PostUsuario(usuario);
    }
