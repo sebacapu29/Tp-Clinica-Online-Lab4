@@ -1,5 +1,6 @@
 export class Turno {
     fecha:string;
+    hora:string;
     paciente:string;
     estado:string;
     especialista:string;

@@ -12,29 +12,71 @@
                     <!-- <div class="input-group">
                         <input class="input--style-1" type="text" placeholder="NAME" name="name">
                     </div> -->
-                    <div class="row row-space">                                               
-                                    <select class="form-control" [(ngModel)]="profesionalSeleccionado" name="profesional">                                        
-                                        <option *ngFor="let profesional of listaProfesionales" (click)="tomarProfesional(profesional)" >{{profesional.nombre + profesional.apellido}}</option>                                
+                                 <div class="col-8 ddSeleccion"> 
+                                    <div>Especialista</div>                                              
+                                    <select class="form-control" (change)="onChange($event.target.value)" [(ngModel)]="profesionalSeleccionado" name="profesional">                                        
+                                        <option *ngFor="let profesional of listaProfesionales" (click)="tomarProfesional(profesional)" [value]="profesional.nombre" >{{profesional.apellido}}</option>                                
+                                    </select>                                                          
+                                </div>            
+                                <div class="col-8 ddSeleccion">
+                                    <div>Especialidad</div>     
+                                    <select class="form-control">
+                                        <option  *ngFor="let especialidad of listaEspecialidades" selected="selected">{{especialidad}}</option>                                                                                              
                                     </select>
-                                                          
-                    </div>            
-                                <select class="form-control">
-                                
-                                    <option  *ngFor="let especialidad of especialidades.especialidad" selected="selected">{{especialidad}}</option>                                                                  
-                                
-                                </select>
-                                <select class="form-control">
-                                    
-                                    <option  *ngFor="let centro of centros.localidad" selected="selected">{{centro}}</option>                                                                  
-                                
-                                </select>           
-                    <div class="col-2">
+                                </div>
+                                <div class="col-8 ddSeleccion">
+                                    <div>Centro</div>     
+                                    <select class="form-control">
+                                        <option  *ngFor="let centro of listaLocalidades" selected="selected">{{centro}}</option>                                                                                                  
+                                    </select>   
+                                </div>
+                                <div class="col-8 ddSeleccion">
+                                    <div>Horarios</div>     
+                                    <select class="form-control">
+                                        <option  *ngFor="let horario of listaHorarios" selected="selected">{{horario}}</option>                                                                                                  
+                                    </select>          
+                                </div>
+                                <div class="fecha"><span>Fecha</span></div>                      
+                    <!-- <div class="col-6">
                         <div class="input-group">
-                            <input ngbDatepicker #d="ngbDatepicker" class="input--style-1" type="text" placeholder="FECHA" name="birthday">
-                            <!-- <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i> -->
-                            <i class="fas fa-calendar-alt input-icon js-btn-calendar" (click)="d.toggle()"></i>
+                            <ngb-datepicker #dp [markDisabled]="markDisabled" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t" outsideDays="hidden">
+                            </ngb-datepicker>
+                            
+                            <ng-template #t let-date let-focused="focused">
+                              <span class="custom-day"
+                                    [class.focused]="focused"
+                                    [class.range]="isRange(date)"
+                                    [class.faded]="isHovered(date) || isInside(date)"
+                                    (mouseenter)="hoveredDate = date"
+                                    (mouseleave)="hoveredDate = null">
+                                {{ date.day }}
+                              </span>
+                            </ng-template>
                         </div>
-                    </div>          
+                    </div> -->
+                    <!-- <form class="form-inline">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" (dateSelect)="onDateSelection($event)" [hidden]="true"
+                                   name="dp" [(ngModel)]="model" ngbDatepicker [dayTemplate]="customDay" [markDisabled]="isDisabled" #d="ngbDatepicker">
+                            <div class="input-group-append"> -->
+                              <!-- <button class="btn btn-outline-secondary calendar" (click)="d.open()" type="button"><i class="fas fa-calendar-alt"></i></button> -->
+                            <!-- </div>
+                          </div>
+                        </div>
+                      </form> -->
+                      <ngb-datepicker [dayTemplate]="customDay" [markDisabled]="IsDisabled" >
+                          <ng-template  #customDay let-date let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
+                              <span  class="custom-day" [class.diaLaborable]="esDiaLaborable(date)" [class.focused]="focused"
+                              [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth" [class.text-muted]="disabled"
+                              [class.range]="isFrom(date) || isTo(date)"
+                              [class.day-disabled]="disabled"
+                              >
+                              {{ date.day }}
+                            </span>
+                        </ng-template>
+                    </ngb-datepicker>
+                    <div class="fecha"><span>Nota: Los dias pintados en naranja son los disponibles</span></div>           
                     <div class="p-t-20">
                         <button class="btn btn--radius btn--green" type="submit">Aceptar</button>
                     </div>
