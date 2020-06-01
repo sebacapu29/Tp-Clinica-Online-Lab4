@@ -20,7 +20,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private router:Router,private usuarioServicio:UsuarioService,private toastr:ToastrService,public activeModal:NgbActiveModal
    ) {
-
+     if(activeModal==null){
+       activeModal = new NgbActiveModal();
+     }
    this.usuarioServicio.IsLogIn().subscribe((e)=>{
      
    });

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-login-principal',
@@ -10,11 +12,14 @@ export class LoginPrincipalComponent implements OnInit {
   esConFoto:boolean=false;
   nombreUsuario:string;
 
-  constructor() { 
+  constructor(private modalService: NgbModal) { 
     var hayFoto = localStorage.getItem("imgUsuarioRegistrado");
     if(hayFoto!= undefined){
       this.esConFoto=true;
-    }          
+    }   
+    else{
+      const modalRef = this.modalService.open(LoginComponent,{windowClass: 'modal-holder', centered: true});
+    }       
   }
 
   ngOnInit(): void {

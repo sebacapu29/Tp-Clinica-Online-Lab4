@@ -1,33 +1,45 @@
+    <div class="menuPrincipal" *ngIf="usuarioMenu">
+      <button mat-button (click)="inicio()" ><i class="fa fa-home"></i>   </button>
+      <button mat-button *ngIf="usuarioMenu.roll==0" (click)="solicitarTurno()">Solicitar Turno </button>
+      <button mat-button  *ngIf="usuarioMenu.roll==0 || usuarioMenu.roll==2" (click)="listadoTurnos()">Consultar Turnos</button>
+      <button mat-button *ngIf="usuarioMenu.roll==1" (click)="atenderTurnos()">Atender</button>
+      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="listadoPacientes()">Listado Pacientes</button>
+      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="listadoPacientes()">Registrar</button>
+      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="listadoProfesionales()" >Listado Prof.</button>
+      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="pendientes()" >Pendiente Aprob.</button>
+      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="altaUsuario()">Alta Usuario</button>
+      <button mat-button *ngIf="esUsuaioLogueado"(click)="salir()"><strong>Log Out</strong></button>
+  
+  </div>
 
-
-<ul ngbNav #nav="ngbNav" class="tabpanel bg-primary" *ngIf="usuarioMenu">  
-  <li ngbNavItem>
-    <a ngbNavLink (click)="inicio()"><i class="fa fa-home"></i></a>      
+<!-- <ul  #nav="" class="tabpanel bg-primary" *ngIf="usuarioMenu">  
+  <li >
+    <a  (click)="inicio()"><i class="fa fa-home"></i></a>      
   </li>  
-    <li ngbNavItem>
-      <a ngbNavLink *ngIf="usuarioMenu.roll==0" (click)="solicitarTurno()">Solicitar Turno</a>      
+    <li >
+      <a  *ngIf="usuarioMenu.roll==0" (click)="solicitarTurno()">Solicitar Turno</a>      
     </li>
-    <li ngbNavItem>
-      <a ngbNavLink *ngIf="usuarioMenu.roll==0 || usuarioMenu.roll==2" (click)="listadoTurnos()">Consultar Turnos</a>      
+    <li >
+      <a  *ngIf="usuarioMenu.roll==0 || usuarioMenu.roll==2" (click)="listadoTurnos()">Consultar Turnos</a>      
     </li>
-    <li ngbNavItem>
-      <a ngbNavLink *ngIf="usuarioMenu.roll==1" (click)="atenderTurnos()">Atender</a>      
+    <li >
+      <a  *ngIf="usuarioMenu.roll==1" (click)="atenderTurnos()">Atender</a>      
     </li>
-    <li ngbNavItem>
-        <a ngbNavLink *ngIf="usuarioMenu.roll==2" (click)="listadoPacientes()">Listado Pacientes</a>      
+    <li >
+        <a  *ngIf="usuarioMenu.roll==2" (click)="listadoPacientes()">Listado Pacientes</a>      
       </li>
-      <li ngbNavItem>
-        <a ngbNavLink *ngIf="usuarioMenu.roll==2" (click)="listadoPacientes()">Registrar</a>      
+      <li >
+        <a  *ngIf="usuarioMenu.roll==2" (click)="listadoPacientes()">Registrar</a>      
       </li>
-      <li ngbNavItem>
-        <a ngbNavLink *ngIf="usuarioMenu.roll==2" (click)="listadoProfesionales()" >Listado Profesionales</a>      
+      <li >
+        <a  *ngIf="usuarioMenu.roll==2" (click)="listadoProfesionales()" >Listado Profesionales</a>      
       </li>
-      <li ngbNavItem>
-        <a ngbNavLink *ngIf="usuarioMenu.roll==2" (click)="altaUsuario()">Alta Usuario</a>      
+      <li >
+        <a  *ngIf="usuarioMenu.roll==2" (click)="altaUsuario()">Alta Usuario</a>      
       </li>
-      <li ngbNavItem>
-        <a ngbNavLink *ngIf="esUsuaioLogueado"(click)="salir()"><strong>Log Out</strong></a>      
+      <li >
+        <a  *ngIf="esUsuaioLogueado"(click)="salir()"><strong>Log Out</strong></a>      
       </li>
-  </ul>
-  <!-- <div [ngbNavOutlet]="nav"></div> -->
+  </ul> -->
+  <!-- <div [Outlet]="nav"></div> -->
 <!-- <button (click)="consulta()">dd</button> -->

@@ -3,7 +3,7 @@
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto contenidoPrincipal">
         <div class="card card-signin my-5"> -->
           <div class="card-body">
-            <h5 class="card-title text-center">Iniciar Sesion</h5>
+            <h4 class="card-title text-center">Iniciar Sesion</h4>
            
             <form class="form-signin">
               <div class="form-label-group">
@@ -17,11 +17,17 @@
                 <input  type="checkbox" class="custom-control-input" id="customCheck1">
                 <label class="custom-control-label" for="customCheck1">Recordarme</label>
               </div>
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" (click)="LoginUsuario()">Ingresar</button>
-              <button class="btn btn-lg btn-secondary btn-block text-uppercase" (click)="Registrarme()">Registrarme</button>
-              <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('paciente')">Paciente</button>
-              <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('profesional')">Profesional</button>
-              <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('admin')">Admin</button>
+              <div class="registro">
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" (click)="LoginUsuario()">Ingresar</button>
+                <button class="btn btn-lg btn-secondary btn-block text-uppercase" (click)="Registrarme()">Registrarme</button>
+              </div>
+              <div class="invitadosPanel">
+                <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('paciente')">Paciente 1</button>
+                <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('paciente2')">Paciente 2</button>
+                <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('profesional')">Profesional 1</button>
+                <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('profesional2')">Profesional 2</button>
+                <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('admin')">Admin</button>
+              </div>
               <hr class="my-4">
               <!-- <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fa fa-google mr-2"></i>Ingresar con Google</button> -->
             </form>

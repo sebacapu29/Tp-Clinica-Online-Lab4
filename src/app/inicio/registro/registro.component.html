@@ -53,8 +53,13 @@
                 <label for="">Adjuntar una foto</label>
                 <input type="file" (change)="loadFoto($event)">
                 <p class="help-block"></p>
-              </div>       
-              <button class="btn btn-lg btn-secondary btn-block text-uppercase" (click)="Registrarme()">Registrarme</button>
+              </div>   
+              <span>Es Profesional</span>
+              <input type="checkbox" (change)="checkValue($event)" class="form-control">
+              <div >
+                <app-registro-profesional ></app-registro-profesional>
+              </div>    
+              <button class="btn btn-lg btn-secondary btn-block text-uppercase" (click)="Registrarme()">Enviar Solicitud</button>
               <hr class="my-4">
               <div class="spinner-border text-primary" role="status" *ngIf="registrando">
                 <span class="sr-only">Loading...</span>

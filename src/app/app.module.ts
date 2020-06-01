@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './inicio/login/login.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { PrincipalComponent } from './page-clinica/principal/principal.component';
 import { RegistroComponent } from './inicio/registro/registro.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -33,6 +33,8 @@ import { ModalEsperaComponent } from './inicio/modal-espera/modal-espera.compone
 import { RegistroProfesionalComponent } from './page-clinica/registro-profesional/registro-profesional.component';
 import { DetalleTurnosComponent } from './page-clinica/detalle-turnos/detalle-turnos.component';
 import { LoginPrincipalComponent } from './inicio/login-principal/login-principal.component';
+import {MaterialModule} from './angular-material/material-module/material-module.module';
+import { PendienteRegistroComponent } from './page-clinica/pendiente-registro/pendiente-registro.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,8 @@ import { LoginPrincipalComponent } from './inicio/login-principal/login-principa
     ModalEsperaComponent,
     RegistroProfesionalComponent,
     DetalleTurnosComponent,
-    LoginPrincipalComponent
+    LoginPrincipalComponent,
+    PendienteRegistroComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,9 @@ import { LoginPrincipalComponent } from './inicio/login-principal/login-principa
     AngularFireAuthModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MaterialModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

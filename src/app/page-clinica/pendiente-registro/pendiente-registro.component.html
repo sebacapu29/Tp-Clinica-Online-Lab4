@@ -1,0 +1,39 @@
+<app-menu-nav></app-menu-nav>
+<table class="table table-condensed table-dark">
+    <thead>   
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Apellido
+            </th>
+            <th>
+                Sexo
+            </th>
+            <th>
+                Edad
+            </th>
+            <th>
+                DNI
+            </th>
+            <th>
+                Mail
+            </th>
+            <th>
+                Foto
+            </th>
+        </tr>
+    </thead>
+    <tbody *ngIf="listaProfesionales">
+        <tr *ngFor="let usuario of listaProfesionales" (click)="onusuarioSeleccionada(usuario)">
+            <td >{{usuario.nombre}}</td>
+            <td>{{usuario.apellido}}</td>
+            <td>{{usuario.sexo}}</td>
+            <td>{{usuario.edad}}</td>
+            <td>{{usuario.DNI}}</td>
+            <td>{{usuario.mail}}</td>
+            <td> <img [src]="usuario.foto"></td>
+        </tr>
+    </tbody>
+</table>

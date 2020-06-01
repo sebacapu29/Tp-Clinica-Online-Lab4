@@ -7,6 +7,8 @@ import { finalize, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Especialidad } from 'src/app/clases/especialidad';
+import { Jornada } from 'src/app/clases/jornada';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -21,6 +23,9 @@ export class RegistroComponent implements OnInit {
   foto:any;
   pathRegistro:string = environment.pathImgRegistro;
   registrando:boolean;
+  esProfesional:boolean;
+  especialidades:Especialidad;
+  jornada:Jornada;
 
   constructor(private storage:AngularFireStorage, private usuarioServ:UsuarioService
               ,public toastr: ToastrService,private router:Router) {
@@ -28,6 +33,14 @@ export class RegistroComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+  checkValue(check){
+    if(check){
+      this.esProfesional=true;    
+    }
+    else{
+      this.esProfesional=false;
+    }
   }
 Registrarme(){
   this.registrando=true;
@@ -70,7 +83,16 @@ Registrarme(){
       this.usuario.foto = urlImg;
       var registro=this;
       var usuario = this.usuario;
-      console.log(urlImg);
+      // console.log(urlImg);
+      if(this.esProfesional){
+          this.usuario.activo=false;
+          this.usuario.roll=1;
+          //instanciar jornadas
+          //instanciar especialidades
+      }
+      else{
+        this.usuario.roll=0;
+      }
       localStorage.setItem('imgUsuarioRegistrado',urlImg);
       this.usuarioServ.CrearUsuarioEnBD(this.usuario).then(function(docRef) {
         // console.log("docref",docRef);

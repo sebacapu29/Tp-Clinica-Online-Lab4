@@ -1,6 +1,6 @@
 <div>
-    <app-login *ngIf="!esConFoto"
-    [mailUsuario]="nombreUsuario"></app-login>
+    <!-- <app-login *ngIf="!esConFoto"
+    [mailUsuario]="nombreUsuario"></app-login> -->
     <app-login-foto *ngIf="esConFoto"
     (iniciarConOtraCuenta)="tomarOtraCuenta()"
     (iniciarSesionConUsuario)="tomarUsuario($event)"></app-login-foto>

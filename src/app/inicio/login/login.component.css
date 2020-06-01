@@ -26,7 +26,7 @@
     width: 100%;
   }
   
-  .form-signin .btn {
+  .form-signin .registro .btn {
     font-size: 80%;
     border-radius: 5rem;
     letter-spacing: .1rem;
@@ -35,7 +35,8 @@
     transition: all 0.2s;
   }
   .btnInvitado{
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-right: 10px;
   }
   .form-label-group {
     position: relative;

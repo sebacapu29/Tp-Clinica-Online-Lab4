@@ -29,6 +29,11 @@ export class DataService {
   public getByProperty<T>(parameter:string,value:string,entidad:string){   
 
     return this.dataStore.collection<T>(entidad, ref => ref.where(parameter,'==', value )).valueChanges();
+
+  }
+  public getByPrortyArray<T>(parameter:string,value:string,entidad:string){ 
+
+    return this.dataStore.collection<T>(entidad, ref => ref.where(parameter,"array-contains", value )).valueChanges();
   }
   public PostUsuario(usuario:Usuario){
     console.log(usuario);
@@ -40,7 +45,7 @@ export class DataService {
       fecha_nacimiento:usuario.fecha_nacimiento,
       activo:'true',
       foto:usuario.foto,
-      roll:'0'
+      roll: usuario.roll.toString()
   });
   }
 }

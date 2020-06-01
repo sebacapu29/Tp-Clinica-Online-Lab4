@@ -42,8 +42,8 @@ export class MenuNavComponent implements OnInit , OnDestroy {
     const usuarioEnDB = this.listUsuarios[index]; 
     // console.log("usuarioDBMail",JSON.stringify(usuarioEnDB.mail));
     // console.log("mailLogueado",mailUsuarioLogueado)
-    if(JSON.stringify(usuarioEnDB.mail).trim() === JSON.stringify(mailUsuarioLogueado).trim()){
-      this.usuarioMenu = usuarioEnDB;          
+    if(JSON.stringify(usuarioEnDB.mail).trim() === JSON.stringify(mailUsuarioLogueado).trim()){      
+      this.usuarioMenu = usuarioEnDB;  
       localStorage.setItem("imgUsuarioRegistrado",JSON.stringify(usuarioEnDB.foto));   
       break;
     }
@@ -72,7 +72,10 @@ export class MenuNavComponent implements OnInit , OnDestroy {
   }
   salir(){
     this.usuarioServ.logOut();
-    this.router.navigate(['']);
+    this.router.navigate(['Login']);
+  }
+  pendientes(){
+    this.router.navigate(['Pendientes']);
   }
   inicio(){
     this.router.navigate(['Principal']);

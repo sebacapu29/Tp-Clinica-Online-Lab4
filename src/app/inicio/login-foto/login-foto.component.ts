@@ -31,7 +31,8 @@ export class LoginFotoComponent implements OnInit {
     this.iniciarSesionConUsuario.emit(this.nombreUsuario);
   }
   otraCuenta(){    
-    this.iniciarConOtraCuenta.emit();
+    this.openModal("");
+    this.iniciarSesionConUsuario.emit();
   }
   openModal(mailUsuario:string){    
     const modalRef = this.modalService.open(LoginComponent,{windowClass: 'modal-holder', centered: true});

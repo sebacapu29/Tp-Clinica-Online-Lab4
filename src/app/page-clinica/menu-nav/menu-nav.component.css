@@ -1,3 +1,7 @@
-a{
-    color: white;
+
+ul li{
+    display: flex;
+}
+.menuPrincipal{
+    padding: 15px;
 }

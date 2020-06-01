@@ -11,4 +11,7 @@ export class TurnoService {
   ObtenerTurnos(){
     return this.dataServ.getAll("turnos");
   }
+  obtenerPorEntidadYParametros<T>(param,value,entidad){
+    return this.dataServ.getByProperty<T>(param,value,entidad);
+  }  
 }
