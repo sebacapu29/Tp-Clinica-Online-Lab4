@@ -11,25 +11,25 @@
                 <form>                                             
                                 <mat-form-field>
                                     <mat-label>Especialidad</mat-label>
-                                    <mat-select  (selectionChange)="onChangeEspecialidad($event.value)">
+                                    <mat-select  (selectionChange)="onChangeEspecialidad($event.value)" [(ngModel)]="turno.especialidad" name="especialidad">
                                       <mat-option *ngFor="let especialidad of listaEspecialidades" [value]="especialidad">{{especialidad}}</mat-option>
                                     </mat-select>
                                   </mat-form-field>
                                   <mat-form-field>
                                     <mat-label>Profesional</mat-label>
-                                    <mat-select  (selectionChange)="onProfesionalSeleccionado($event)" [(ngModel)]="objProfesionalSeleccionado.apellido" name="apellido">
+                                    <mat-select  (selectionChange)="onProfesionalSeleccionado($event)" [(ngModel)]="objProfesionalSeleccionado" name="apellido">
                                       <mat-option *ngFor="let profesional of listaProfesionales" [value]="profesional">{{profesional.apellido}}</mat-option>
                                     </mat-select>
                                   </mat-form-field>
                                   <mat-form-field>
                                     <mat-label>Dias</mat-label>
                                     <mat-select [formControl]="toppings" multiple (selectionChange)="onDiaSeleccionado($event)">
-                                      <mat-option *ngFor="let dia of listaDiasDeSemana" [value]="dia" >{{dia}}</mat-option>
+                                      <mat-option *ngFor="let dia of listaDiasDeSemana" [value]="dia" >{{dia | diasSemana}}</mat-option>
                                     </mat-select>
                                   </mat-form-field>
                                 
                                 <div class="fecha"><span>Fecha</span></div>                                      
-                      <ngb-datepicker [dayTemplate]="customDay" [markDisabled]="IsDisabled" >
+                      <ngb-datepicker [dayTemplate]="customDay" [markDisabled]="IsDisabled" [(ngModel)]="turno.fecha" name="fecha" >
                           <ng-template  #customDay let-date let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
                               <span  class="custom-day" [class.diaLaborable]="esDiaLaborable(date)" [class.focused]="focused"
                               [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth" [class.text-muted]="disabled"                              
@@ -38,13 +38,15 @@
                             </span>
                         </ng-template>
                     </ngb-datepicker>
-                    <div class="fecha"><span>Ayuda: Los dias pintados en naranja son los disponibles.
+                    <div class="fecha"><span>Nota: 1- Los dias pintados en naranja son los disponibles.
                                              Debe seleccionar un profesional (En el boton de cada fila)
-                                             Para ver sus dias y horarios.            
+                                             Para ver sus dias y horarios.
+                                             2 - Debe seleccionar un profesional de la tabla para que aparezcan
+                                             sus dias en el calendario.              
                     </span></div>    
                     <mat-form-field>
                       <mat-label>Horario</mat-label>
-                      <mat-select>
+                      <mat-select [(ngModel)]="turno.hora" name="horario">
                         <mat-option *ngFor="let horario of listaHorarios" [value]="horario">{{horario}}</mat-option>
                       </mat-select>
                     </mat-form-field>
@@ -65,11 +67,17 @@
                           <mat-header-cell *matHeaderCellDef> Sexo </mat-header-cell>
                           <mat-cell *matCellDef="let element"> {{element.sexo}} </mat-cell>
                         </ng-container>
-                      
-                        <ng-container matColumnDef="foto">
+
+                        <ng-container matColumnDef="especialidad">
+                          <mat-header-cell *matHeaderCellDef> Especialidad </mat-header-cell>
+                          <mat-cell *matCellDef="let element">{{element.especialidad}} </mat-cell>
+                        </ng-container>
+
+                        <!-- <ng-container matColumnDef="foto">
                           <mat-header-cell *matHeaderCellDef> Foto </mat-header-cell>
                           <mat-cell *matCellDef="let element"><img [src]="element.foto"> </mat-cell>
-                        </ng-container>
+                        </ng-container> -->
+                      
                         <ng-container matColumnDef="seleccion">
                             <mat-header-cell *matHeaderCellDef> Seleccionar </mat-header-cell>
                             <mat-cell  *matCellDef="let element"><button mat-button ><i class="fa fa-angle-left"></i></button> </mat-cell>
@@ -77,8 +85,15 @@
                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                         <mat-row *matRowDef="let row; columns: displayedColumns;"  (click)="rowSelected($event,row)"></mat-row>
                       </mat-table>  
+                      <div class="turnoLabel">
+                        <h4>Detalle del Turno</h4>
+                        <p>Usted esta solicitando turno con: <strong>{{objProfesionalSeleccionado? objProfesionalSeleccionado.apellido : "-"}}</strong></p>
+                        <p>Dia: <input type="label" class="fechaInput" ngbDatepicker [(ngModel)]="turno.fecha" name="fecha"/></p>
+                        <p>Hora: <strong>{{turno.hora}}</strong></p>                       
+                        <p>Epecialidad: <strong>{{turno.especialidad}}</strong></p>
+                      </div>
                     <div class="p-t-20">
-                        <button class="btn btn--radius btn--green" type="submit" (ngSubmit)="SubmitTurno()">Aceptar</button>
+                        <button class="btn btn--radius btn--green" type="submit" (click)="SubmitTurno()">Solicitar Turno</button>
                     </div>
                 </form>
             </div>

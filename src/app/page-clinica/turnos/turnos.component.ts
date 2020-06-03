@@ -10,7 +10,8 @@ import { TurnoService } from 'src/app/servicios/turno.service';
 import { ESPECIALIDADES,DIAS_SEMANA } from '../../clases/constantes';
 import { Profesional } from 'src/app/clases/profesional';
 import { FormControl } from '@angular/forms';
-
+import { error } from '@angular/compiler/src/util';
+import { DiaSemanaPipe} from '../../pipes/dia-semana.pipe';
 @Component({
   selector: 'app-turnos',
   templateUrl: './turnos.component.html',
@@ -37,8 +38,11 @@ export class TurnosComponent implements OnInit {
   toDate: NgbDate | null;
   minDate:NgbDate| null;
   datesDisabled:boolean;
+  especialidad:Especialidad;
+  diaSeleccionado:any;
+  horarioSeleccionado:string;
   toppings = new FormControl();
-  displayedColumns: string[] = ['nombre', 'apellido', 'sexo', 'foto','seleccion'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'sexo', 'especialidad','seleccion'];
   dataSource:any[];
 
   model: NgbDateStruct;
@@ -51,7 +55,9 @@ export class TurnosComponent implements OnInit {
     this.usuarioServ.obtenerJornadas().subscribe((response)=>{
       this.listaJornadas = response;
     });
-    
+    this.usuarioServ.ObtenerTodasLasEspecialidades().subscribe((response)=>{
+      this.especialidades = response;
+    });
     this.objProfesionalSeleccionado = new Usuario();
     this.listaHorarios=new Array<string>("Seleccione Profesional");
     this.listaDias = new Array<string>();
@@ -62,6 +68,7 @@ export class TurnosComponent implements OnInit {
     this.minDate=calendar.getToday();  
     this.listaEspecialidades = ESPECIALIDADES;
     this.listaDiasDeSemana = DIAS_SEMANA;
+    this.especialidad = new Especialidad();
   }
   IsDisabled = (date:NgbDate,current: {month:number}) =>{
   
@@ -82,15 +89,13 @@ export class TurnosComponent implements OnInit {
     }  
   }
   onProfesionalSeleccionado(event){
-    this.buscarProfesionalPorId(event.value.mail);
+    // this.buscarProfesionalPorId(event.value.mail);
+    this.BuscarProfesionalPorID(event.value.mail)
     this.rowSelected(null,event.value);
     this.listaDiasDeSemana = new Array<string>();
     this.listaDiasDeSemana = DIAS_SEMANA;
   }
   
-  SubmitTurno(){
-
-  }
 esDiaLaborable(date: NgbDate){
 
   if(this.listaDias.length>0){
@@ -141,8 +146,16 @@ buscarProfesionalPorId(idProfesional){
 }
 rowSelected(event, row:Usuario){
   this.objProfesionalSeleccionado.apellido = row.apellido;
-  this.seleccionJornada(row.mail);
-
+  this.seleccionJornada(row.mail); 
+  this.SeleccionarEspecialidad(row.mail); 
+}
+SeleccionarEspecialidad(mail:string){
+  this.especialidad = this.especialidades.find((especialidad)=>{
+    if(especialidad.idProfesional == mail){
+      return especialidad;
+    }
+  });
+  console.log(this.especialidad);
 }
 seleccionJornada(mailProfesional){
 
@@ -151,10 +164,7 @@ seleccionJornada(mailProfesional){
 
       if(response!=null){
         this.SeleccionarDiasParaCalendario(response[0]);
-      }
-      // this.FiltrarListaProfesionalesPorDias(response);
-      // this.listaDias = response[0].dias.split(",");//modificar
-      // console.log(this.listaDias);
+      }   
       var horaEntrada = response[0].horarioEntrada;
       var horaSalida = response[0].horarioSalida;
       var pieces = horaEntrada.split(':');
@@ -271,14 +281,26 @@ onDiaSeleccionado(event){
     }
   }
   BuscarProfesionalPorID(idProfesional:string){
-    
+    console.log(idProfesional);
     var listaFiltrada = new Array<Usuario>();
     var iListaFiltrada=0;
+
+
     for (let index = 0; index < this.listaProfesionales.length; index++) {
       const profesional = this.listaProfesionales[index];
       if(profesional.mail==idProfesional){
-        listaFiltrada[iListaFiltrada]=profesional;
-        iListaFiltrada++;
+        for (let index2 = 0; index2 < this.especialidades.length; index2++) {
+          const especialidad = this.especialidades[index2];
+          // console.log("especialidad",especialidad);
+          // console.log("es",especialidad);
+          // if(especialidad.idProfesional==idProfesional){
+
+          //   profesional.especialidad=especialidad.especialidad;
+              listaFiltrada[iListaFiltrada]=profesional;
+          //     iListaFiltrada++;
+            
+          // }          
+        }
       }      
     }
     this.dataSource= listaFiltrada;
@@ -287,13 +309,25 @@ onDiaSeleccionado(event){
   }
   ngOnInit(): void {
   }
-  onSubmit(){
-
-  }
   onDateSelection(date: NgbDate) {
  
   }
 
+  SubmitTurno(){   
+    // var nuevoTurno = new Turno();
+    var usuario = localStorage.getItem("usuarioLogueadoMail");
+    this.turno.especialista = this.objProfesionalSeleccionado.apellido;
+    this.turno.estado= "Activo";
+    this.turno.observaciones = "Sin Obs";
+    this.turno.paciente = usuario;    
+    console.log(this.turno);
+   
+    this.turnoServ.pedirTurno(this.turno).then((response=>{
+      alert("exito");
+    })
+  ).
+  catch(((err)=>alert("error" + err)));
+  }  
   isHovered(date: NgbDate) {
     return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
   }

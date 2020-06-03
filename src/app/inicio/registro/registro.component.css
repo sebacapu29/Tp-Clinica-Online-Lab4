@@ -1,6 +1,6 @@
 
 
-.container {
+.contenido {
     background-image:url('/assets/imagenes/fondo-registro.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -9,12 +9,23 @@
     height: 100%;
     padding-bottom: 250px;
   }
+  .btnRegistro{
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
 .foto{
   margin-top: 35px;
   margin-bottom: 50px;
   border: 0.5px solid lightgrey;
   border-radius: 10px;
 }
+
+.resgistroProfesional{
+  border: 1px solid grey;
+  border-radius: 20px;
+  padding: 10px;
+}
+
 .foto label{
   margin-top: 20px;
 }

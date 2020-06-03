@@ -30,6 +30,9 @@ export class UsuarioService {
   obtenerEspecialidades<T>(param,value,entidad){
     return this.dataServ.getByPrortyArray<T>(param,value,entidad);
   }  
+  ObtenerTodasLasEspecialidades<T>(){
+    return this.dataServ.getAll("especialidades");
+  }  
   obtenerJornadas(){
     return this.dataServ.getAll("jornadas");
    }

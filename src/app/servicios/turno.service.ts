@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
+import { Turno } from '../clases/turno';
 
 @Injectable({
   providedIn: 'root'
@@ -14,4 +15,7 @@ export class TurnoService {
   obtenerPorEntidadYParametros<T>(param,value,entidad){
     return this.dataServ.getByProperty<T>(param,value,entidad);
   }  
+  pedirTurno(turno:Turno){
+    return this.dataServ.PostTurno(turno);
+  }
 }

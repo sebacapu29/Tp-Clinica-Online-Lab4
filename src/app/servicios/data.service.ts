@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import { Usuario } from '../clases/usuario';
+import { Turno } from '../clases/turno';
 
 
 @Injectable({
@@ -35,8 +36,21 @@ export class DataService {
 
     return this.dataStore.collection<T>(entidad, ref => ref.where(parameter,"array-contains", value )).valueChanges();
   }
+  
+  public PostTurno(turno:Turno){
+    return this.dataStore.collection("turnos").add({
+      fecha:turno.fecha,
+      hora: turno.hora,
+      paciente: turno.paciente,
+      estado: turno.estado,
+      especialista: turno.especialista,
+      centro: "S/C",
+      especialidad: turno.especialidad,
+      observaciones: turno.observaciones
+  });
+  }
   public PostUsuario(usuario:Usuario){
-    console.log(usuario);
+    // console.log(usuario);
     return this.dataStore.collection("usuarios").add({
       mail: usuario.mail,
       nombre: usuario.nombre,

@@ -35,6 +35,7 @@ import { DetalleTurnosComponent } from './page-clinica/detalle-turnos/detalle-tu
 import { LoginPrincipalComponent } from './inicio/login-principal/login-principal.component';
 import {MaterialModule} from './angular-material/material-module/material-module.module';
 import { PendienteRegistroComponent } from './page-clinica/pendiente-registro/pendiente-registro.component';
+import { DiaSemanaPipe } from './pipes/dia-semana.pipe';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { PendienteRegistroComponent } from './page-clinica/pendiente-registro/pe
     RegistroProfesionalComponent,
     DetalleTurnosComponent,
     LoginPrincipalComponent,
-    PendienteRegistroComponent
+    PendienteRegistroComponent,
+    DiaSemanaPipe
   ],
   imports: [
     BrowserModule,

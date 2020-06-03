@@ -1,82 +1,54 @@
-<div class="container">        
-                <div class="row row-space">                        
-                        <div class="input-group">                            
-                                <select class="form-control" >
-                                    <option disabled="disabled" selected="selected">ESPECILIDAD</option>
-                                    <option>Odontologo</option>
-                                    <option>Clinica Medica</option>
-                                    <option>Pediatria</option>
-                                </select>                           
+<div class="container">    
+  <span>Es Profesional</span>
+  <input type="checkbox" (change)="checkValue($event)" class="check">    
+                <div class="row row-space" >                        
+                        <div class="input-group">                                                                
+                                <mat-form-field>
+                                  <mat-label>ESPECILIDAD</mat-label>
+                                  <mat-select [disabled]="checkProfesional">
+                                    <mat-option value="Odontologo" >Odontologo</mat-option>
+                                    <mat-option value="Clinica Medica" >Clinica Medica</mat-option>
+                                    <mat-option value="Pediatria" >Pediatria</mat-option>
+                                  </mat-select>
+                                </mat-form-field>                    
                         </div>   
                         <div class="input-group">                            
-                          <select class="form-control" >
-                              <option disabled="disabled" selected="selected">CENTRO</option>
-                              <option>Belgrano</option>
-                              <option>Barracas</option>
-                              <option>Avellaneda</option>
-                          </select>                           
+                                               
+                        <mat-form-field>
+                          <mat-label>CENTRO</mat-label>
+                          <mat-select [disabled]="checkProfesional">
+                            <mat-option value="Belgrano" >Belgrano</mat-option>
+                            <mat-option value="Barracas" >Barracas</mat-option>
+                            <mat-option value="Avellaneda" >Avellaneda</mat-option>
+                          </mat-select>
+                        </mat-form-field>                         
                   </div> 
-                  <div class="row">
                     <div class="col">
-                      <div ngbDropdown class="d-inline-block">
-                        <button class="btn btn-outline-primary" id="dropdownForm1" ngbDropdownToggle>Dias</button>
-                        <div ngbDropdownMenu aria-labelledby="dropdownForm1">
-                          <div class="px-4 py-3">
-                            <div class="form-check">
-                              <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                              <label class="form-check-label" for="dropdownCheck">
-                               Lunes
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                              <label class="form-check-label" for="dropdownCheck">
-                                Martes
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                              <label class="form-check-label" for="dropdownCheck">
-                                Miercoles
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                              <label class="form-check-label" for="dropdownCheck">
-                                Jueves
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                              <label class="form-check-label" for="dropdownCheck">
-                                Viernes
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                              <label class="form-check-label" for="dropdownCheck">
-                                Sabado
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                              <label class="form-check-label" for="dropdownCheck">
-                                Domingo
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                              <label class="form-check-label" for="dropdownCheck">
-                                Todos
-                              </label>
-                            </div>
-                          </div>
-                          <div class="dropdown-divider"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>              
-                </div>       
+
+                        <mat-form-field>
+                          <mat-label>Dias</mat-label>
+                          <mat-select multiple (selectionChange)="onDiaSeleccionado($event)" [disabled]="checkProfesional">
+                            <mat-option *ngFor="let dia of listaDiasDeSemana" [value]="dia" >{{dia | diasSemana}}</mat-option>
+                          </mat-select>
+                        </mat-form-field><br>
+                      
+                        <mat-form-field>
+                          <mat-label>Hora Entrada</mat-label>
+                          <mat-select  (selectionChange)="onHorarioEntrada($event)" [disabled]="checkProfesional">
+                            <mat-option *ngFor="let horario of listaHorarios" [value]="horario" >{{horario}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                          <mat-label>Hora Salida</mat-label>
+                          <mat-select  (selectionChange)="onHorarioSalida($event)" [disabled]="checkProfesional">
+                            <mat-option *ngFor="let horario of listaHorarios" [value]="horario" >{{horario}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                    </div>                            
+                </div>      
+                <button class="btn btn-warning" (click)="cargarProfesional()" [disabled]="checkProfesional">Cargar</button>
+                <p class="nota">Nota: Debe Presionar el boton en "Cargar" para adjuntar los datos de Profesional (Especialidad, Centro, Dias, Horarios)</p>
               <hr class="my-4">        
   </div>
   
