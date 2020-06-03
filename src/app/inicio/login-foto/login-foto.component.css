@@ -1,17 +1,9 @@
 .card{
-    margin-left: 40%;
+    margin-left: 38%;
+    border-radius: 10px;
 }
 img:hover{
     cursor: pointer;
-}
-.container {
-    background-image:url('/assets/imagenes/fondo-inicio.jpg');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-position: top center;
-    width: 100%;
-    height: 100%;
-    padding-bottom: 250px;
 }
  a{
     color: blue;

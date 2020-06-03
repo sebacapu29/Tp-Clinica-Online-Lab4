@@ -30,9 +30,9 @@ export class UsuarioService {
   obtenerEspecialidades<T>(param,value,entidad){
     return this.dataServ.getByPrortyArray<T>(param,value,entidad);
   }  
-  // obtenerTodasLasEspecialidades<T>(entidad){
-  //   return this.dataServ.getAll(entidad);
-  // }  
+  obtenerJornadas(){
+    return this.dataServ.getAll("jornadas");
+   }
    CrearUsuarioEnBD(usuario:Usuario){
      return this.dataServ.PostUsuario(usuario);
    }
