@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   @Input() mailUsuario;
   @Output() onLoginUsuario:EventEmitter<any> = new EventEmitter();
   @Output() onSeleccionRegistro:EventEmitter<any> = new EventEmitter();
+  recaptcha:boolean =false;
 
   constructor(private router:Router,private usuarioServicio:UsuarioService,private toastr:ToastrService,public activeModal:NgbActiveModal
    ) {
@@ -31,6 +32,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.inicializarUsuario();
+  }
+  public resolved(captchaResponse: string) {
+    this.recaptcha=true;
+    // console.log(`Resolved captcha with response: ${captchaResponse}`);
   }
   LoginUsuario(){
 

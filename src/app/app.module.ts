@@ -36,6 +36,9 @@ import { LoginPrincipalComponent } from './inicio/login-principal/login-principa
 import {MaterialModule} from './angular-material/material-module/material-module.module';
 import { PendienteRegistroComponent } from './page-clinica/pendiente-registro/pendiente-registro.component';
 import { DiaSemanaPipe } from './pipes/dia-semana.pipe';
+import { RecaptchaModule } from 'ng-recaptcha';
+// if you need forms support:
+// import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -75,7 +78,8 @@ import { DiaSemanaPipe } from './pipes/dia-semana.pipe';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RecaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

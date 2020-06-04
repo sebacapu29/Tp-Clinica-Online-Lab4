@@ -294,11 +294,9 @@ onDiaSeleccionado(event){
           // console.log("especialidad",especialidad);
           // console.log("es",especialidad);
           // if(especialidad.idProfesional==idProfesional){
-
           //   profesional.especialidad=especialidad.especialidad;
               listaFiltrada[iListaFiltrada]=profesional;
-          //     iListaFiltrada++;
-            
+          //     iListaFiltrada++;            
           // }          
         }
       }      

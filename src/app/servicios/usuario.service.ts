@@ -3,6 +3,8 @@ import { DataService } from './data.service';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Observable} from 'rxjs';
 import { Usuario } from '../clases/usuario';
+import { Jornada } from '../clases/jornada';
+import { Especialidad } from '../clases/especialidad';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +19,12 @@ export class UsuarioService {
 
    obtenerUsuarios(){
     return this.dataServ.getAll("usuarios");
+   }
+   CrearJornadaEnBD(jornada:Jornada){
+
+   }
+   CrearEspecialidadesEnBD(especialidad:Especialidad[]){
+
    }
    obtenerProfesionales(){
     return this.dataServ.getAll("usuarios");

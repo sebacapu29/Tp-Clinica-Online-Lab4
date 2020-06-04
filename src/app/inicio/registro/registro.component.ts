@@ -24,7 +24,7 @@ export class RegistroComponent implements OnInit {
   pathRegistro:string = environment.pathImgRegistro;
   registrando:boolean;
   esProfesional:boolean;
-  especialidades:Especialidad;
+  especialidades:Especialidad[];
   jornada:Jornada;
 
   constructor(private storage:AngularFireStorage, private usuarioServ:UsuarioService
@@ -87,8 +87,15 @@ Registrarme(){
       if(this.esProfesional){
           this.usuario.activo=false;
           this.usuario.roll=1;
-          //instanciar jornadas
-          //instanciar especialidades
+          //
+          // this.usuarioServ.CrearJornadaEnBD(this.jornada).then(function(docRef) {
+
+          // });
+          // this.usuarioServ.CrearEspecialidadesEnBD(this.especialidades).then(function(docRef) {
+
+          // });
+          //insertar jornadas
+          //instar especialidades
       }
       else{
         this.usuario.roll=0;
@@ -127,5 +134,17 @@ Registrarme(){
 }
 mostrarMensajeError(mensaje){
   this.toastr.error("Ocurrio un error: "+mensaje);
+}
+tomarJornada(jornada:Jornada){
+  this.jornada= jornada;
+}
+tomarEspecialidad(especialidades:string[]){
+  for (let index = 0; index < especialidades.length; index++) {
+    const especialidad = especialidades[index];
+    var especialidadAux = new Especialidad();
+    especialidadAux.idProfesional= this.usuario.mail;
+    especialidadAux.especialidad = especialidad;
+  }
+  // this.especialidades = especialidades;
 }
 }

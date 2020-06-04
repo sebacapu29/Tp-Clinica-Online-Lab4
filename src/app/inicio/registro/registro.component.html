@@ -56,7 +56,9 @@
               </div>   
               <hr class="my-4">
               <div class="resgistroProfesional">
-                <app-registro-profesional ></app-registro-profesional>
+                <app-registro-profesional 
+                (onCargarEspecialidad)="tomarEspecialidad($event)"
+                (onCargarJornada)="tomarJornada($event)"></app-registro-profesional>
               </div>    
               <button class="btn btn-lg btn-secondary btn-block btnRegistro" (click)="Registrarme()">Enviar Solicitud</button>
               

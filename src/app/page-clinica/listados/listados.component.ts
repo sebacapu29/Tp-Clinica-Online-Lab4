@@ -51,17 +51,19 @@ export class ListadosComponent implements OnInit {
     var pacienteLogueado = localStorage.getItem("usuarioLogueadoMail");
     // console.log(JSON.stringify(pacienteLogueado));
 
-    this.listTurnosPaciente = this.listTurnosPaciente.map((turno)=>{
+    this.listTurnosPaciente = this.listTurnosPaciente.filter((turno)=>{
       
       if(JSON.stringify(turno.paciente)== JSON.stringify(pacienteLogueado)){
-        
+        turno.paciente = JSON.stringify(turno.paciente);
         return turno;
       }     
-    })
+    });
+    console.log(this.listTurnosPaciente);
   }
   ObtenerTodosLosTurnos(){
     this.turnoServ.ObtenerTurnos().subscribe(res=>{
       this.listTurnosPaciente = res;   
+      
       this.ObtenerTurnosPaciente();
     });
   }
