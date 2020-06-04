@@ -9,4 +9,4 @@ Sistema de turnos online
 
 Inicio de sesion
 
-https://github.com/sebacapu29/Tp-Clinica-Online-Lab4/tree/master/src/assets/imagenes/assets/login.PNG
+https://raw.githubusercontent.com/sebacapu29/Tp-Clinica-Online-Lab4/tree/master/src/assets/imagenes/assets/login.PNG
