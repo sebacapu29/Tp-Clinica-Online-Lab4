@@ -30,13 +30,14 @@ import { LoginFotoComponent } from './inicio/login-foto/login-foto.component';
 import { BannerComponent } from './page-clinica/banner/banner.component';
 import { FooterPageComponent } from './page-clinica/footer-page/footer-page.component';
 import { ModalEsperaComponent } from './inicio/modal-espera/modal-espera.component';
-import { RegistroProfesionalComponent } from './page-clinica/registro-profesional/registro-profesional.component';
+import { RegistroProfesionalComponent } from './inicio/registro-profesional/registro-profesional.component';
 import { DetalleTurnosComponent } from './page-clinica/detalle-turnos/detalle-turnos.component';
 import { LoginPrincipalComponent } from './inicio/login-principal/login-principal.component';
 import {MaterialModule} from './angular-material/material-module/material-module.module';
 import { PendienteRegistroComponent } from './page-clinica/pendiente-registro/pendiente-registro.component';
 import { DiaSemanaPipe } from './pipes/dia-semana.pipe';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { PendienteModalComponent } from './page-clinica/pendiente-modal/pendiente-modal.component';
 // if you need forms support:
 // import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
@@ -63,7 +64,8 @@ import { RecaptchaModule } from 'ng-recaptcha';
     DetalleTurnosComponent,
     LoginPrincipalComponent,
     PendienteRegistroComponent,
-    DiaSemanaPipe
+    DiaSemanaPipe,
+    PendienteModalComponent
   ],
   imports: [
     BrowserModule,

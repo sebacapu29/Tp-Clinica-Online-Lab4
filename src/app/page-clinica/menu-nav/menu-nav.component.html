@@ -1,45 +1,15 @@
-    <div class="menuPrincipal" *ngIf="usuarioMenu">
+    <div class="menuPrincipal" *ngIf="usuarioMenu && usuarioMenu.activo">
       <button mat-button (click)="inicio()" ><i class="fa fa-home"></i>   </button>
       <button mat-button *ngIf="usuarioMenu.roll==0" (click)="solicitarTurno()">Solicitar Turno </button>
-      <button mat-button  *ngIf="usuarioMenu.roll==0 || usuarioMenu.roll==2" (click)="listadoTurnos()">Consultar Turnos</button>
+      <button mat-button  *ngIf="usuarioMenu.roll==0" (click)="listadoTurnos()">Consultar Turnos</button>
       <button mat-button *ngIf="usuarioMenu.roll==1" (click)="atenderTurnos()">Atender</button>
-      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="listadoPacientes()">Listado Pacientes</button>
-      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="listadoPacientes()">Registrar</button>
-      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="listadoProfesionales()" >Listado Prof.</button>
+      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="listadoUsuarios()">Listado Usuarios</button>
+      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="RegistroAdmin()">Registrar Admin</button>
+      <!-- <button mat-button *ngIf="usuarioMenu.roll==2" (click)="listadoProfesionales()" >Listado Prof.</button> -->
       <button mat-button *ngIf="usuarioMenu.roll==2" (click)="pendientes()" >Pendiente Aprob.</button>
-      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="altaUsuario()">Alta Usuario</button>
       <button mat-button *ngIf="esUsuaioLogueado"(click)="salir()"><strong>Log Out</strong></button>
-  
   </div>
-
-<!-- <ul  #nav="" class="tabpanel bg-primary" *ngIf="usuarioMenu">  
-  <li >
-    <a  (click)="inicio()"><i class="fa fa-home"></i></a>      
-  </li>  
-    <li >
-      <a  *ngIf="usuarioMenu.roll==0" (click)="solicitarTurno()">Solicitar Turno</a>      
-    </li>
-    <li >
-      <a  *ngIf="usuarioMenu.roll==0 || usuarioMenu.roll==2" (click)="listadoTurnos()">Consultar Turnos</a>      
-    </li>
-    <li >
-      <a  *ngIf="usuarioMenu.roll==1" (click)="atenderTurnos()">Atender</a>      
-    </li>
-    <li >
-        <a  *ngIf="usuarioMenu.roll==2" (click)="listadoPacientes()">Listado Pacientes</a>      
-      </li>
-      <li >
-        <a  *ngIf="usuarioMenu.roll==2" (click)="listadoPacientes()">Registrar</a>      
-      </li>
-      <li >
-        <a  *ngIf="usuarioMenu.roll==2" (click)="listadoProfesionales()" >Listado Profesionales</a>      
-      </li>
-      <li >
-        <a  *ngIf="usuarioMenu.roll==2" (click)="altaUsuario()">Alta Usuario</a>      
-      </li>
-      <li >
-        <a  *ngIf="esUsuaioLogueado"(click)="salir()"><strong>Log Out</strong></a>      
-      </li>
-  </ul> -->
-  <!-- <div [Outlet]="nav"></div> -->
-<!-- <button (click)="consulta()">dd</button> -->
+  <div class="menuPrincipal" *ngIf="usuarioMenu && !usuarioMenu.activo">
+    <button mat-button>Su solicitud esta pendiente de Aprobacion</button>
+    <button mat-button *ngIf="esUsuaioLogueado"(click)="salir()"><strong>Log Out</strong></button>
+  </div>

@@ -11,6 +11,5 @@ export class Usuario {
     foto:string;
     roll:number;
     DNI:string;
-    especialidad:string;
 }
 //rfcj`/D/Hhe_KY5,

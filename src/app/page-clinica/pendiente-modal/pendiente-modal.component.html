@@ -1,0 +1,9 @@
+<div class="card" style="width: 18rem;" *ngIf="profesionalSeleccionado">
+    <img class="card-img-top" [src]="profesionalSeleccionado.foto" alt="Foto no encontrada">
+    <div class="card-body">
+      <h5 class="card-title">Nombre: {{profesionalSeleccionado.apellido}}</h5>
+      <p class="card-text estado ">Estado: {{profesionalSeleccionado.activo == false ? "Deshabilitado" : "Activo"}}</p> 
+      <button class="btn btn-success" (click)="Autorizar()">Autorizar</button>  
+    </div>
+  </div>
+ 

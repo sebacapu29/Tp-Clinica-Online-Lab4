@@ -30,17 +30,10 @@ export class RegistroComponent implements OnInit {
   constructor(private storage:AngularFireStorage, private usuarioServ:UsuarioService
               ,public toastr: ToastrService,private router:Router) {
       this.usuario = new Usuario();
+      this.especialidades = new Array<Especialidad>();
    }
 
   ngOnInit(): void {
-  }
-  checkValue(check){
-    if(check){
-      this.esProfesional=true;    
-    }
-    else{
-      this.esProfesional=false;
-    }
   }
 Registrarme(){
   this.registrando=true;
@@ -86,19 +79,20 @@ Registrarme(){
       // console.log(urlImg);
       if(this.esProfesional){
           this.usuario.activo=false;
-          this.usuario.roll=1;
-          //
-          // this.usuarioServ.CrearJornadaEnBD(this.jornada).then(function(docRef) {
+          this.usuario.roll=1;         
+          this.usuarioServ.CrearJornadaEnBD(this.jornada).then(function(docRef) {
 
-          // });
-          // this.usuarioServ.CrearEspecialidadesEnBD(this.especialidades).then(function(docRef) {
+          });
+        for (let index = 0; index < this.especialidades.length; index++) {
+          const especialidad = this.especialidades[index];
+            this.usuarioServ.CrearEspecialidadesEnBD(especialidad).then(function(docRef) {
 
-          // });
-          //insertar jornadas
-          //instar especialidades
+          });
+        }        
       }
       else{
         this.usuario.roll=0;
+        this.usuario.activo=true;
       }
       localStorage.setItem('imgUsuarioRegistrado',urlImg);
       this.usuarioServ.CrearUsuarioEnBD(this.usuario).then(function(docRef) {
@@ -121,10 +115,14 @@ Registrarme(){
     )
   ).subscribe();
  
-   task.percentageChanges().subscribe((perChanges)=>{
-     this.uploadPercent = Math.round(100.0 * perChanges);
-    // console.log(this.uploadPercent);
-   }); 
+  //  task.percentageChanges().subscribe((perChanges)=>{
+  //    this.uploadPercent = Math.round(100.0 * perChanges);
+  //   // console.log(this.uploadPercent);
+  //  }); 
+ }
+ prueba(){
+   console.log(this.especialidades);
+   console.log(this.jornada);
  }
  loadFoto(e){
   this.foto = e.target.files[0];   //para obtener la imagen del archivo.
@@ -138,13 +136,15 @@ mostrarMensajeError(mensaje){
 tomarJornada(jornada:Jornada){
   this.jornada= jornada;
 }
-tomarEspecialidad(especialidades:string[]){
+tomarEspecialidad(especialidades:Especialidad[]){
+  // console.log("especialidades",especialidades);
+  this.esProfesional=true;
   for (let index = 0; index < especialidades.length; index++) {
     const especialidad = especialidades[index];
     var especialidadAux = new Especialidad();
     especialidadAux.idProfesional= this.usuario.mail;
-    especialidadAux.especialidad = especialidad;
+    especialidadAux.especialidad = especialidad.especialidad;
+    this.especialidades[index] = especialidadAux;
   }
-  // this.especialidades = especialidades;
 }
 }

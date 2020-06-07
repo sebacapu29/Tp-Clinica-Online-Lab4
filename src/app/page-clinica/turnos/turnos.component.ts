@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Turno } from 'src/app/clases/turno';
-import { Usuario } from 'src/app/clases/usuario';
+import { Profesional } from 'src/app/clases/Profesional';
 import { UsuarioService } from 'src/app/servicios/usuario.service';
 import { Especialidad } from 'src/app/clases/especialidad';
 import { Centro } from 'src/app/clases/centro';
@@ -8,10 +8,12 @@ import { Jornada } from 'src/app/clases/jornada';
 import { NgbCalendar, NgbDateParserFormatter, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { TurnoService } from 'src/app/servicios/turno.service';
 import { ESPECIALIDADES,DIAS_SEMANA } from '../../clases/constantes';
-import { Profesional } from 'src/app/clases/profesional';
 import { FormControl } from '@angular/forms';
 import { error } from '@angular/compiler/src/util';
 import { DiaSemanaPipe} from '../../pipes/dia-semana.pipe';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-turnos',
   templateUrl: './turnos.component.html',
@@ -20,10 +22,10 @@ import { DiaSemanaPipe} from '../../pipes/dia-semana.pipe';
 export class TurnosComponent implements OnInit {
 
   turno:Turno;
-  profesional:Usuario;
-  listaProfesionales:Usuario[];
-  usuarioLogueado:Usuario;
-  objProfesionalSeleccionado:Usuario; 
+  profesional:Profesional;
+  listaProfesionales:Profesional[];
+  ProfesionalLogueado:Profesional;
+  objProfesionalSeleccionado:Profesional; 
   listaJornadas:Jornada[];   
   profesionalSeleccionado:string;
   centros:Centro;
@@ -42,33 +44,104 @@ export class TurnosComponent implements OnInit {
   diaSeleccionado:any;
   horarioSeleccionado:string;
   toppings = new FormControl();
-  displayedColumns: string[] = ['nombre', 'apellido', 'sexo', 'especialidad','seleccion'];
-  dataSource:any[];
-
+  displayedColumns: string[] = ['nombre', 'apellido', 'especialidad','diaSemana','seleccion'];
+  dataSource:MatTableDataSource<Profesional>;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  
   model: NgbDateStruct;
   constructor(private usuarioServ:UsuarioService,private calendar: NgbCalendar, public formatter: NgbDateParserFormatter,private turnoServ:TurnoService) { 
     this.turno=new Turno();
-    this.usuarioServ.obtenerPorEntidadYParametros<Usuario>("roll","1","usuarios").subscribe((response)=>{
+    this.usuarioServ.obtenerPorEntidadYParametros<Profesional>("roll","1","usuarios").subscribe((response)=>{
       this.listaProfesionales = response;
       this.profesionalSeleccionado = response[0].nombre.toString();
-    });
-    this.usuarioServ.obtenerJornadas().subscribe((response)=>{
-      this.listaJornadas = response;
-    });
-    this.usuarioServ.ObtenerTodasLasEspecialidades().subscribe((response)=>{
-      this.especialidades = response;
-    });
-    this.objProfesionalSeleccionado = new Usuario();
-    this.listaHorarios=new Array<string>("Seleccione Profesional");
-    this.listaDias = new Array<string>();
-    this.listaEspecialidades =new Array<string>("Seleccione Profesional");
-    this.listaLocalidades =new Array<string>("Seleccione Profesional");    
+      this.dataSource = response != null? new MatTableDataSource(this.listaProfesionales) : new MatTableDataSource(new Array<Profesional>());      
+      this.listaHorarios = new Array<string>();
+      
+        this.usuarioServ.obtenerJornadas().subscribe((response)=>{
+          this.listaJornadas = response;
+            
+              this.usuarioServ.ObtenerTodasLasEspecialidades().subscribe((response)=>{        
+              this.especialidades = response;
+              var listaFiltrada = new Array<Profesional>();
+              var indexLiFiltrada =0;
+              // console.log("res",response);
+              if(response!=null){
+                for (const keyProfesional in this.listaProfesionales) {
+                  var profesional = this.listaProfesionales[keyProfesional];  
+                  for (const key in this.especialidades) {
+                    var especialidad = this.especialidades[key]; 
+                    
+                    if(profesional.mail == especialidad.idProfesional){
+            
+                      var nuevoProfesional = new Profesional();
+                       nuevoProfesional.nombre = profesional.nombre;
+                       nuevoProfesional.apellido = profesional.apellido;
+                       nuevoProfesional.mail = profesional.mail;
+                       nuevoProfesional.activo = profesional.activo;
+                       nuevoProfesional.foto = profesional.foto;
+                       nuevoProfesional.roll = profesional.roll;
+                       nuevoProfesional.fecha_nacimiento = profesional.fecha_nacimiento;
+                       nuevoProfesional.sexo = profesional.sexo;
+                       nuevoProfesional.especialidad = especialidad;
+                      listaFiltrada[indexLiFiltrada]= nuevoProfesional;
+                      indexLiFiltrada++;
+                    }
+                  }
+                }             
+              }
+              for (const keyP in listaFiltrada) {  
+                const profesional = listaFiltrada[keyP];
+                for (const keyJ in this.listaJornadas) {
+                  if (this.listaJornadas.hasOwnProperty(keyJ)) {
+                    const jornada = this.listaJornadas[keyJ];
+                    if(jornada.idJornada == profesional.especialidad.idJornada){
+                      listaFiltrada[keyP].jornada = jornada;
+                      listaFiltrada[keyP].dias = this.GetFormatoDias(jornada);
+                    }
+                  }
+                }       
+              }
+              this.dataSource = new MatTableDataSource(listaFiltrada);
+              this.InicializarPaginator();
+            });
+          });
+      }
+    );    
+    this.objProfesionalSeleccionado = new Profesional();
+  
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 0);       
     this.minDate=calendar.getToday();  
     this.listaEspecialidades = ESPECIALIDADES;
     this.listaDiasDeSemana = DIAS_SEMANA;
     this.especialidad = new Especialidad();
+  }
+  GetFormatoDias(jornada:Jornada){
+    var strDias="";
+
+    if(jornada.lunes){
+      strDias = strDias.concat("Lu,");
+    }
+    if(jornada.martes){
+      strDias = strDias.concat("Ma,");
+    }
+    if(jornada.miercoles){
+      strDias = strDias.concat("Mie,");
+    }
+    if(jornada.jueves){
+      strDias = strDias.concat("Jue,");
+    }  
+    if(jornada.viernes){
+      strDias = strDias.concat("Vie,");
+    }
+    if(jornada.sabado){
+      strDias = strDias.concat("Sa,");
+    }
+    if(jornada.domingo){
+      strDias = strDias.concat("Do");
+    }  
+    return strDias;
   }
   IsDisabled = (date:NgbDate,current: {month:number}) =>{
   
@@ -88,85 +161,77 @@ export class TurnosComponent implements OnInit {
       return true;
     }  
   }
-  onProfesionalSeleccionado(event){
-    // this.buscarProfesionalPorId(event.value.mail);
-    this.BuscarProfesionalPorID(event.value.mail)
-    this.rowSelected(null,event.value);
-    this.listaDiasDeSemana = new Array<string>();
-    this.listaDiasDeSemana = DIAS_SEMANA;
-  }
+  // onProfesionalSeleccionado(event){
+  //   // this.buscarProfesionalPorId(event.value.mail);
+  //   this.BuscarProfesionalPorID(event.value.mail)
+  //   this.rowSelected(null,event.value);
+  //   this.listaDiasDeSemana = new Array<string>();
+  //   this.listaDiasDeSemana = DIAS_SEMANA;
+  // }
   
-esDiaLaborable(date: NgbDate){
+// esDiaLaborable(date: NgbDate){
 
-  if(this.listaDias.length>0){
-    for (let index = 0; index < this.listaDias.length; index++) {
-      const element = this.listaDias[index]; 
-      if(this.calendar.getWeekday(date)== parseInt(element)){     
-      return true;
-      } 
-    }
-    return false;
-  }
-}
+//   if(this.listaDias.length>0){
+//     for (let index = 0; index < this.listaDias.length; index++) {
+//       const element = this.listaDias[index]; 
+//       if(this.calendar.getWeekday(date)== parseInt(element)){     
+//       return true;
+//       } 
+//     }
+//     return false;
+//   }
+// }
 //Obtengo las especialidades que tienen idProfesional, luego recorro la lista de profesionales buscando esos ids de esas especialidades
-onChangeEspecialidad(especialidadSeleccionada){
+// onChangeEspecialidad(especialidadSeleccionada){
 
-  this.listaDias = new Array<string>();  
-  this.listaDiasDeSemana = new Array<string>();//Refresco comboDiasDeSemana
-  this.listaDiasDeSemana = DIAS_SEMANA;
-  var turnos = new Array<Turno>();
-  var turno =new Turno();
-  this.usuarioServ.obtenerPorEntidadYParametros<Especialidad>("especialidad",especialidadSeleccionada,"especialidades").subscribe((resp)=>{
-   this.especialidades = resp;
+//   this.listaDias = new Array<string>();  
+//   this.listaDiasDeSemana = new Array<string>();//Refresco comboDiasDeSemana
+//   this.listaDiasDeSemana = DIAS_SEMANA;
+//   var turnos = new Array<Turno>();
+//   var turno = new Turno();
+//   this.usuarioServ.obtenerPorEntidadYParametros<Especialidad>("especialidad",especialidadSeleccionada,"especialidades").subscribe((resp)=>{
+//    this.especialidades = resp;
    
-  this.dataSource = this.listaProfesionales.filter((profesional)=> {
-    for (let index = 0; index < this.especialidades.length; index++) {
-      const element = this.especialidades[index];
-      // console.log("profesional.mail",profesional.mail);
-      // console.log("element.idProfesional",element.idProfesional);
-      if(JSON.stringify(profesional.mail)== JSON.stringify(element.idProfesional)){
-        return profesional;
-      }
-    }
-  });
-  });
-
-}
+//   var listaFiltrada =  this.listaProfesionales.filter((profesional)=> {
+//     for (let index = 0; index < this.especialidades.length; index++) {
+//       const element = this.especialidades[index];
+//       // console.log("profesional.mail",profesional.mail);
+//       // console.log("element.idProfesional",element.idProfesional);
+//       if(JSON.stringify(profesional.mail)== JSON.stringify(element.idProfesional)){
+//         return profesional;
+//       }
+//     }
+//     this.dataSource = new MatTableDataSource(listaFiltrada);
+//   });
+//   });
+// }
 //
 buscarProfesionalPorId(idProfesional){
 
   var turnos = new Array<Turno>();
   var turno =new Turno();
   this.listaDias= Array<string>();
-  this.dataSource = this.listaProfesionales.filter((profesional)=> {       
+  var listaFiltrada =  this.listaProfesionales.filter((profesional)=> {       
       if(JSON.stringify(profesional.mail)== JSON.stringify(idProfesional)){
         return profesional;
       }    
   });
+  this.dataSource = new MatTableDataSource(listaFiltrada);
 }
-rowSelected(event, row:Usuario){
+rowSelected(event, row:Profesional){
   this.objProfesionalSeleccionado.apellido = row.apellido;
-  this.seleccionJornada(row.mail); 
-  this.SeleccionarEspecialidad(row.mail); 
+  this.turno.especialidad = row.especialidad.especialidad;
+  console.log(row.dias);
+  this.seleccionJornada(row);  
 }
-SeleccionarEspecialidad(mail:string){
-  this.especialidad = this.especialidades.find((especialidad)=>{
-    if(especialidad.idProfesional == mail){
-      return especialidad;
-    }
-  });
-  console.log(this.especialidad);
-}
-seleccionJornada(mailProfesional){
 
-  this.usuarioServ.obtenerPorEntidadYParametros<Jornada>("idProfesional",mailProfesional,"jornadas").subscribe((response)=>{       
-    if(response.length>0){
+seleccionJornada(profesional:Profesional){
+  this.listaHorarios=new Array<string>();
 
-      if(response!=null){
-        this.SeleccionarDiasParaCalendario(response[0]);
-      }   
-      var horaEntrada = response[0].horarioEntrada;
-      var horaSalida = response[0].horarioSalida;
+  // this.usuarioServ.obtenerPorEntidadYParametros<Jornada>("idProfesional",mailProfesional,"jornadas").subscribe((response)=>{       
+    
+      var horaEntrada =  profesional.jornada.horarioEntrada;
+      var horaSalida = profesional.jornada.horarioSalida;
       var pieces = horaEntrada.split(':');
       var piezaSalida = horaSalida.split(':');
       var horaEntradaInt, minute, second;
@@ -188,8 +253,6 @@ seleccionJornada(mailProfesional){
       }
       // console.log(this.listaHorarios);
   }
-  });
-}
 SeleccionarDiasParaCalendario(jornada:Jornada){
     this.listaDias = new Array<string>();
     var indexDias=  this.listaDias.length==0? 1: this.listaDias.length;
@@ -231,7 +294,7 @@ onDiaSeleccionado(event){
 }
   FiltrarListaProfesionalesPorDias(aSeleccion:string[]){
     // console.log("d",this.listaJornadas);
-    this.dataSource = new Array<Usuario>();//Refresca la tabla  
+    this.dataSource = new MatTableDataSource(new Array<Profesional>());//Refresca la tabla  
     for (let index = 0; index < this.listaJornadas.length; index++) {
       const jornada = this.listaJornadas[index];
       // console.log(aSeleccion);
@@ -282,7 +345,7 @@ onDiaSeleccionado(event){
   }
   BuscarProfesionalPorID(idProfesional:string){
     console.log(idProfesional);
-    var listaFiltrada = new Array<Usuario>();
+    var listaFiltrada = new Array<Profesional>();
     var iListaFiltrada=0;
 
 
@@ -290,34 +353,29 @@ onDiaSeleccionado(event){
       const profesional = this.listaProfesionales[index];
       if(profesional.mail==idProfesional){
         for (let index2 = 0; index2 < this.especialidades.length; index2++) {
-          const especialidad = this.especialidades[index2];
-          // console.log("especialidad",especialidad);
-          // console.log("es",especialidad);
-          // if(especialidad.idProfesional==idProfesional){
-          //   profesional.especialidad=especialidad.especialidad;
+          const especialidad = this.especialidades[index2];     
               listaFiltrada[iListaFiltrada]=profesional;
-          //     iListaFiltrada++;            
-          // }          
+              
         }
       }      
     }
-    this.dataSource= listaFiltrada;
-  // console.log("adasdasdsad");
-  //   return index.toString();
+    this.dataSource= new MatTableDataSource(listaFiltrada);
   }
   ngOnInit(): void {
+
   }
-  onDateSelection(date: NgbDate) {
- 
+  InicializarPaginator(){
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   SubmitTurno(){   
     // var nuevoTurno = new Turno();
-    var usuario = localStorage.getItem("usuarioLogueadoMail");
+    var Profesional = localStorage.getItem("ProfesionalLogueadoMail");
     this.turno.especialista = this.objProfesionalSeleccionado.apellido;
     this.turno.estado= "Activo";
     this.turno.observaciones = "Sin Obs";
-    this.turno.paciente = usuario;    
+    this.turno.paciente = Profesional;    
     console.log(this.turno);
    
     this.turnoServ.pedirTurno(this.turno).then((response=>{
@@ -329,5 +387,12 @@ onDiaSeleccionado(event){
   isHovered(date: NgbDate) {
     return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
   }
- 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }

@@ -48,7 +48,11 @@ export class MenuNavComponent implements OnInit , OnDestroy {
       break;
     }
   }
+
 }
+  public RegistroAdmin(){
+
+  }
   
 
   altaUsuario(){
@@ -58,7 +62,7 @@ export class MenuNavComponent implements OnInit , OnDestroy {
   listadoProfesionales(){
     this.router.navigate(['Listados','profesional']);  
   }
-  listadoPacientes(){
+  listadoUsuarios(){
     this.router.navigate(['Listados','pacientes']);  
   }
   listadoTurnos(){

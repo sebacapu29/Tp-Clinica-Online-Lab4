@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TurnoService } from 'src/app/servicios/turno.service';
 import { Turno } from 'src/app/clases/turno';
+import { UsuarioService } from 'src/app/servicios/usuario.service';
+import { Usuario } from 'src/app/clases/usuario';
 
 @Component({
   selector: 'app-listados',
@@ -14,9 +16,28 @@ export class ListadosComponent implements OnInit {
   mostrarListaProfesionales:boolean;
   mostrarListaTurnos:boolean;
   listTurnosPaciente:Turno[];
+  listaUsuarios:Usuario[];
   turnoParaDetalle:Turno;
 
-  constructor( private route: ActivatedRoute,private turnoServ:TurnoService) {  
+  constructor( private route: ActivatedRoute,private turnoServ:TurnoService,private usuarioServ:UsuarioService) {  
+    this.listaUsuarios = new Array<Usuario>();    
+    this.usuarioServ.obtenerUsuarios().subscribe((resp)=>{
+      if(resp!=null){
+        // for (const key in resp) {
+        //   if (resp.hasOwnProperty(key)) {
+        //     const usuario = <Usuario>resp[key];
+        //     if(usuario.foto!=null){
+        //       this.listaUsuarios[key]=usuario;
+        //     }
+        //     else{
+        //       this.listaUsuarios[key]=usuario;
+        //       this.listaUsuarios[key].foto ="assets/imagenes/defaul-user.png";
+        //       console.log(this.listaUsuarios[key]);                             
+        //     }            
+        //   }
+        // }
+      }
+    })
    }
 
   ngOnInit(): void {

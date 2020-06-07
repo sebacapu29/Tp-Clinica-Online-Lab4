@@ -26,7 +26,7 @@
         </tr>
     </thead>
     <tbody *ngIf="listaProfesionales">
-        <tr *ngFor="let usuario of listaProfesionales" (click)="onusuarioSeleccionada(usuario)">
+        <tr *ngFor="let usuario of listaProfesionales" (click)="OnUsuarioSeleccionada(usuario)">
             <td >{{usuario.nombre}}</td>
             <td>{{usuario.apellido}}</td>
             <td>{{usuario.sexo}}</td>

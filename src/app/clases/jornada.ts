@@ -1,4 +1,5 @@
 export class Jornada {
+    idJornada:string;
     horarioEntrada:string;
     horarioSalida:string;
     idProfesional:string;

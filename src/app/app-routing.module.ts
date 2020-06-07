@@ -13,7 +13,7 @@ import { LoginFotoComponent } from './inicio/login-foto/login-foto.component';
 import { BannerComponent } from './page-clinica/banner/banner.component';
 import { FooterPageComponent } from './page-clinica/footer-page/footer-page.component';
 import { MenuNavComponent } from './page-clinica/menu-nav/menu-nav.component';
-import { RegistroProfesionalComponent } from './page-clinica/registro-profesional/registro-profesional.component';
+import { RegistroProfesionalComponent } from './inicio/registro-profesional/registro-profesional.component';
 import { LoginPrincipalComponent } from './inicio/login-principal/login-principal.component';
 import { PendienteRegistroComponent } from './page-clinica/pendiente-registro/pendiente-registro.component';
 

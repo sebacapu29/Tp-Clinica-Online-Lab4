@@ -5,6 +5,9 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import { Usuario } from '../clases/usuario';
 import { Turno } from '../clases/turno';
+import { Especialidad } from '../clases/especialidad';
+import { Jornada } from '../clases/jornada';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
@@ -12,7 +15,9 @@ import { Turno } from '../clases/turno';
 })
 export class DataService {
 
-  constructor(private dataStore:AngularFirestore) { }
+  private docRefId:string="";
+
+  constructor(private dataStore:AngularFirestore,private toastr:ToastrService) { }
 
   public getAll(entidad):Observable<any[]>{
 
@@ -20,12 +25,59 @@ export class DataService {
     return this.dataStore.collection(entidad).snapshotChanges().pipe(
       map( actions=> 
         actions.map(a=>{
-          const data = a.payload.doc.data();
-          // console.log(a.payload.doc.id, " => ", a data());
-          // const id = a.payload.doc.id;
+          const data = <Usuario>a.payload.doc.data();
+          // console.log(a.payload.doc.id, " => ", a.payload.doc.data());
+          const id = a.payload.doc.id;
+          data.id = a.payload.doc.id;
           return data;
         }))
     );
+  }
+  public PostEspecialidad(especialidad:Especialidad){
+    return this.dataStore.collection("especialidades").add({
+      idProfesional:especialidad.idProfesional,
+      especialidad: especialidad.especialidad,     
+  });
+  }
+  public PostJornada(jornada:Jornada){
+    return this.dataStore.collection("jornadas").add({
+      idProfesional: jornada.idProfesional == null ? "s/p" : jornada.idProfesional,
+      horarioEntrada:jornada.horarioEntrada,
+      horarioSalida: jornada.horarioSalida,
+      lunes: jornada.lunes == null ? false : true,
+      martes:jornada.martes == null ? false : true,
+      miercoles:jornada.miercoles == null ? false : true,
+      jueves:jornada.jueves == null ? false : true,
+      viernes:jornada.viernes == null ? false : true,
+      sabado:jornada.sabado == null ? false : true,
+      domingo:jornada.domingo == null ? false : true    
+  });
+  }
+  //Busca el document reference de Firebase de la coleccion y actualiza el usuario
+  public UpdateUsuario(usuario:Usuario){
+    var docId = "";
+    return this.dataStore.collection("usuarios").snapshotChanges().subscribe((data)=> {
+      data.map((actions=> {
+        var usuariofb = <Usuario>actions.payload.doc.data();
+        
+        if(usuariofb.mail == usuario.mail){
+          // console.log("encontrado!!",actions.payload.doc.id);
+          this.docRefId = actions.payload.doc.id; 
+          console.log(this.docRefId);
+          console.log(actions.payload.doc.id);
+          this.UpdateUsuario2();  
+        }     
+      }));
+    });
+  }
+  public UpdateUsuario2(usuario?:Usuario){
+    var docRef = this.dataStore.collection("usuarios").doc(this.docRefId);
+    docRef.update({activo:true}).then(
+      (res)=>this.mostrarMensajeExito()
+      ).catch((resp)=>  this.mostrarMensajeError(resp));   
+  }
+  mostrarMensajeError(mensaje){
+    this.toastr.error("Ocurrio un error: "+mensaje);
   }
   public getByProperty<T>(parameter:string,value:string,entidad:string){   
 
@@ -57,9 +109,12 @@ export class DataService {
       apellido: usuario.apellido,
       sexo: usuario.sexo,  
       fecha_nacimiento:usuario.fecha_nacimiento,
-      activo:'true',
+      activo:usuario.activo,
       foto:usuario.foto,
       roll: usuario.roll.toString()
   });
+  }
+  mostrarMensajeExito() {
+    this.toastr.success("Usuario Autorizado!");
   }
 }

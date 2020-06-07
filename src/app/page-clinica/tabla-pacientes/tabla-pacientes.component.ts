@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Usuario } from 'src/app/clases/usuario';
 
 @Component({
@@ -8,7 +8,7 @@ import { Usuario } from 'src/app/clases/usuario';
 })
 export class TablaPacientesComponent implements OnInit {
 
-  listaPacientes:Usuario[]=[];
+  @Input() listaPacientes:Usuario[]=[];
   constructor() { }
 
   ngOnInit(): void {

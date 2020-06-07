@@ -20,11 +20,14 @@ export class UsuarioService {
    obtenerUsuarios(){
     return this.dataServ.getAll("usuarios");
    }
-   CrearJornadaEnBD(jornada:Jornada){
-
+   public AutorizarProfesional(usuario:Usuario){
+     return this.dataServ.UpdateUsuario(usuario);
    }
-   CrearEspecialidadesEnBD(especialidad:Especialidad[]){
-
+   CrearJornadaEnBD(jornada:Jornada){
+    return this.dataServ.PostJornada(jornada);
+   }
+   CrearEspecialidadesEnBD(especialidad:Especialidad){
+    return this.dataServ.PostEspecialidad(especialidad);
    }
    obtenerProfesionales(){
     return this.dataServ.getAll("usuarios");

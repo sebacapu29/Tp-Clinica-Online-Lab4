@@ -1,7 +1,8 @@
 <app-menu-nav></app-menu-nav>
 
-<div class="row">
-    <app-tabla-pacientes *ngIf="mostrarListaPacientes">
+<!-- <div class="row"> -->
+    <app-tabla-pacientes *ngIf="mostrarListaPacientes"
+    [listaPacientes]="listaUsuarios">
     </app-tabla-pacientes>
     <app-tabla-profesionales *ngIf="mostrarListaProfesionales">
     </app-tabla-profesionales>
@@ -10,8 +11,8 @@
     (turnoSeleccionado)="tomarTurnoParaDetalle($event)">
     </app-tabla-turnos>
      <!-- Sidebar -->
- <div class="bg-light border-right" id="sidebar-wrapper">    
+  <div class="bg-light border-right" id="sidebar-wrapper">    
     <app-detalle-turnos [turnoSeleccionado]="turnoParaDetalle"></app-detalle-turnos>
   </div>
-</div>
+<!-- </div> -->
 
