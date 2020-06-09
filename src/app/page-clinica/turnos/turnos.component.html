@@ -1,5 +1,4 @@
-<app-menu-nav
-[usuarioMenu]="usuarioLogueado">
+<app-menu-nav>
 </app-menu-nav>
 
   <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
@@ -53,6 +52,13 @@
                           <mat-option *ngFor="let horario of listaHorarios" [value]="horario">{{horario}}</mat-option>
                         </mat-select>
                       </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Dias</mat-label>
+                        <mat-select [(ngModel)]="turno" name="dias">
+                          <mat-option *ngFor="let dias of listaDias" [value]="dias">{{dias}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
                       <div class="turnoLabel">
                         <h4>Detalle del Turno</h4>
                         <p>Usted esta solicitando turno con: <strong>{{objProfesionalSeleccionado? objProfesionalSeleccionado.apellido : "-"}}</strong></p>

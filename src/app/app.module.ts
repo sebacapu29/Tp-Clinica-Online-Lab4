@@ -38,6 +38,7 @@ import { PendienteRegistroComponent } from './page-clinica/pendiente-registro/pe
 import { DiaSemanaPipe } from './pipes/dia-semana.pipe';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { PendienteModalComponent } from './page-clinica/pendiente-modal/pendiente-modal.component';
+import { ModalDetalleTurnoComponent } from './page-clinica/modal-detalle-turno/modal-detalle-turno.component';
 // if you need forms support:
 // import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
@@ -65,7 +66,8 @@ import { PendienteModalComponent } from './page-clinica/pendiente-modal/pendient
     LoginPrincipalComponent,
     PendienteRegistroComponent,
     DiaSemanaPipe,
-    PendienteModalComponent
+    PendienteModalComponent,
+    ModalDetalleTurnoComponent
   ],
   imports: [
     BrowserModule,

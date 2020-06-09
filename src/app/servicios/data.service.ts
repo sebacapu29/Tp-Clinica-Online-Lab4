@@ -63,18 +63,15 @@ export class DataService {
         if(usuariofb.mail == usuario.mail){
           // console.log("encontrado!!",actions.payload.doc.id);
           this.docRefId = actions.payload.doc.id; 
-          console.log(this.docRefId);
-          console.log(actions.payload.doc.id);
-          this.UpdateUsuario2();  
+          // console.log(this.docRefId);
+          // console.log(actions.payload.doc.id);
+          var docRef = this.dataStore.collection("usuarios").doc(this.docRefId);
+          docRef.update({activo:true}).then(
+            (res)=>this.mostrarMensajeExito("Usuario Actualizado!")
+            ).catch((resp)=>  this.mostrarMensajeError(resp));  
         }     
       }));
     });
-  }
-  public UpdateUsuario2(usuario?:Usuario){
-    var docRef = this.dataStore.collection("usuarios").doc(this.docRefId);
-    docRef.update({activo:true}).then(
-      (res)=>this.mostrarMensajeExito()
-      ).catch((resp)=>  this.mostrarMensajeError(resp));   
   }
   mostrarMensajeError(mensaje){
     this.toastr.error("Ocurrio un error: "+mensaje);
@@ -114,7 +111,30 @@ export class DataService {
       roll: usuario.roll.toString()
   });
   }
-  mostrarMensajeExito() {
-    this.toastr.success("Usuario Autorizado!");
+  mostrarMensajeExito(mensaje:string) {
+    this.toastr.success(mensaje);
   }
-}
+  public UpdateTuno(turno:Turno){
+    var docId = "";
+    return this.dataStore.collection("turnos").snapshotChanges().subscribe((data)=> {
+      data.map((actions=> {
+        var turnoFb = <Turno>actions.payload.doc.data();
+        
+        if(turno.especialista == turnoFb.especialista && turno.paciente==turnoFb.paciente){
+
+          // console.log("encontrado!!",actions.payload.doc.id);
+          this.docRefId = actions.payload.doc.id; 
+          // var fecha = new Date();
+          var m = new Date();
+          var dateString = m.getUTCFullYear() +"/"+ (m.getUTCMonth()+1) +"/"+ m.getUTCDate() + " " + m.getUTCHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
+          var docRef = this.dataStore.collection("turnos").doc(this.docRefId);
+          docRef.update({estado:'atendido',
+                         fecha:dateString,
+                        observaciones:turno.observaciones}).then(
+            (res)=>this.mostrarMensajeExito("Registro Actualizado")
+            ).catch((resp)=>  this.mostrarMensajeError(resp)); 
+        }     
+      }));
+    });
+  }
+  }

@@ -1,2 +1,40 @@
 <app-menu-nav></app-menu-nav>
-<p>atencion-turnos works!</p>
+<div class="container">
+
+<div class="4">
+<!-- Tabla -->
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8" >              
+    <ng-container matColumnDef="nombre">
+      <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.paciente}} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="fecha">
+      <mat-header-cell *matHeaderCellDef> Fecha </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.fecha}} </mat-cell>
+    </ng-container>
+            
+    <ng-container matColumnDef="hora">
+      <mat-header-cell *matHeaderCellDef> Hora </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.hora}} </mat-cell>
+    </ng-container>
+ 
+    <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.estado}} </mat-cell>
+      </ng-container>
+                
+    <ng-container matColumnDef="especialidad">
+        <mat-header-cell *matHeaderCellDef> Especialidad </mat-header-cell>
+        <mat-cell  *matCellDef="let element">{{element.especialidad }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="observaciones">
+        <mat-header-cell *matHeaderCellDef> Obs. </mat-header-cell>
+        <mat-cell  *matCellDef="let element">{{element.Observaciones}}</mat-cell>
+      </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"  (click)="rowSelected($event,row)"></mat-row>
+  </mat-table> 
+</div>
+</div>

@@ -6,5 +6,6 @@ export class Turno {
     especialista:string;
     centro:string;
     especialidad:string;
-    observaciones:string;
+    observaciones:string; 
+    idProfesional:string;
 }

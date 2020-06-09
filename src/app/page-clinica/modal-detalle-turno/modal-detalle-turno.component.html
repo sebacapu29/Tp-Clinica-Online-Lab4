@@ -1,0 +1,16 @@
+<div class="card"  *ngIf="turnoSeleccionado">
+    <!-- <img class="card-img-top" alt="Card image cap"> -->
+    <div class="card-body">
+      <h5 class="card-title"> {{turnoSeleccionado.paciente}}</h5>
+      <p class="card-text"><strong>Fecha: {{turnoSeleccionado.fecha}}</strong></p>
+      <p class="card-text estado ">Estado: {{turnoSeleccionado.estado}}</p>
+      <p class="card-text">Profesional: {{turnoSeleccionado.especialista}}</p>
+      <p class="card-text">Especialidad: {{turnoSeleccionado.especialidad}}</p>
+      <p class="card-text">Centro: {{turnoSeleccionado.centro}}</p>
+      
+      <textarea class="form-control" [(ngModel)]="turnoSeleccionado.observaciones"  placeholder="Comentario" rows="3"></textarea>
+      <button class="btn btn-danger" (click)="onBorrarTurno()">Cancelar Turno</button>
+      <button class="btn btn-primary" (click)="onAtenderTurno()">Atender</button>
+    </div>
+  </div>
+ 
