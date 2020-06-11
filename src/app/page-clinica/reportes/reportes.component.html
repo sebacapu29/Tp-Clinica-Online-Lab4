@@ -1,0 +1,23 @@
+ <app-menu-nav></app-menu-nav>
+ <button mat-raised-button color="warn" (click)="ExportarPDF()" >Exportar PDF</button> 
+ <button mat-raised-button class="botonexc" (click)="ExportarExcel()">Exportar Excel</button> 
+ <!-- Tabla -->
+ <mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="reporte">              
+    <ng-container matColumnDef="usuario">
+      <mat-header-cell *matHeaderCellDef> Usuario </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.usuario}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha">
+      <mat-header-cell *matHeaderCellDef> Fecha Ing. </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.fecha}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="hora">
+        <mat-header-cell *matHeaderCellDef> Hora Ing. </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.hora}} </mat-cell>
+    </ng-container> 
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" ></mat-row>
+  </mat-table> 

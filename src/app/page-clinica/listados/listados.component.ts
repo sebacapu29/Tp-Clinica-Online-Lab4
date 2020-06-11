@@ -18,24 +18,12 @@ export class ListadosComponent implements OnInit {
   listTurnosPaciente:Turno[];
   listaUsuarios:Usuario[];
   turnoParaDetalle:Turno;
+  deshabilitarOp:boolean;
 
   constructor( private route: ActivatedRoute,private turnoServ:TurnoService,private usuarioServ:UsuarioService) {  
     this.listaUsuarios = new Array<Usuario>();    
     this.usuarioServ.obtenerUsuarios().subscribe((resp)=>{
-      if(resp!=null){
-        // for (const key in resp) {
-        //   if (resp.hasOwnProperty(key)) {
-        //     const usuario = <Usuario>resp[key];
-        //     if(usuario.foto!=null){
-        //       this.listaUsuarios[key]=usuario;
-        //     }
-        //     else{
-        //       this.listaUsuarios[key]=usuario;
-        //       this.listaUsuarios[key].foto ="assets/imagenes/defaul-user.png";
-        //       console.log(this.listaUsuarios[key]);                             
-        //     }            
-        //   }
-        // }
+      if(resp!=null){        
       }
     })
    }
@@ -59,7 +47,12 @@ export class ListadosComponent implements OnInit {
     });
   }
   tomarTurnoParaDetalle(turno:Turno){
-    console.log('tomarTurnoPdetalle',turno);
+    // console.log('tomarTurnoPdetalle',turno);
+    if(turno.estado.toLocaleLowerCase()=="cancelado" 
+    || turno.estado.toLocaleLowerCase()=="rechazado"
+    || turno.estado.toLocaleLowerCase()=="atendido"){
+      this.deshabilitarOp=true;
+    }
     this.turnoParaDetalle=turno;
 
   }

@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Especialidad } from 'src/app/clases/especialidad';
 import { Jornada } from 'src/app/clases/jornada';
+import { DIAS_SEMANA } from 'src/app/clases/constantes';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -26,17 +27,29 @@ export class RegistroComponent implements OnInit {
   esProfesional:boolean;
   especialidades:Especialidad[];
   jornada:Jornada;
+  checkProfesional:boolean=true;
+  checks:any;
+  listaDiasDeSemana:string[];
+  seleccionDiasDesemana:string[];
+  listaHorarios:string[];
+  listaEspecialidades:string[];
 
   constructor(private storage:AngularFireStorage, private usuarioServ:UsuarioService
               ,public toastr: ToastrService,private router:Router) {
       this.usuario = new Usuario();
       this.especialidades = new Array<Especialidad>();
+      this.usuario = new Usuario();
+      this.listaDiasDeSemana = DIAS_SEMANA;
+      this.jornada = new Jornada();
+      this.CargarListaHorarios();
    }
 
   ngOnInit(): void {
   }
 Registrarme(){
   this.registrando=true;
+  this.cargarProfesional();
+  
   if(this.usuario.nombre== undefined || this.usuario.mail== undefined ||
     this.usuario.clave== undefined || this.usuario.fecha_nacimiento==undefined 
     || this.foto== undefined || this.usuario.sexo== undefined ||
@@ -113,14 +126,10 @@ Registrarme(){
       error=> this.mostrarMensajeError(error)
     )
     )
-  ).subscribe();
- 
-  //  task.percentageChanges().subscribe((perChanges)=>{
-  //    this.uploadPercent = Math.round(100.0 * perChanges);
-  //   // console.log(this.uploadPercent);
-  //  }); 
+  ).subscribe(); 
  }
  prueba(){
+   this.cargarProfesional();
    console.log(this.especialidades);
    console.log(this.jornada);
  }
@@ -133,18 +142,81 @@ Registrarme(){
 mostrarMensajeError(mensaje){
   this.toastr.error("Ocurrio un error: "+mensaje);
 }
-tomarJornada(jornada:Jornada){
-  this.jornada= jornada;
-}
-tomarEspecialidad(especialidades:Especialidad[]){
-  // console.log("especialidades",especialidades);
-  this.esProfesional=true;
-  for (let index = 0; index < especialidades.length; index++) {
-    const especialidad = especialidades[index];
-    var especialidadAux = new Especialidad();
-    especialidadAux.idProfesional= this.usuario.mail;
-    especialidadAux.especialidad = especialidad.especialidad;
-    this.especialidades[index] = especialidadAux;
+
+cargarProfesional(){
+  for (let index = 0; index < this.seleccionDiasDesemana.length; index++) {
+    const dia = this.seleccionDiasDesemana[index];
+    switch(dia){
+      case '1':
+        this.jornada.lunes=true;
+      break;
+      case '2':
+        this.jornada.martes=true;
+      break;
+      case '3':
+        this.jornada.miercoles=true;
+      break;
+      case '4':
+        this.jornada.jueves=true;
+      break;
+      case '5':
+        this.jornada.viernes=true;
+      break;
+      case '6':
+        this.jornada.sabado=true;
+      break;
+      case '7':
+        this.jornada.domingo=true;
+      break;    
+    } 
   }
+// console.log(this.listaEspecialidades);
+  for (let index = 0; index < this.listaEspecialidades.length; index++) {
+    const especialidad = this.listaEspecialidades[index];
+    var nuevaEspecialidad = new Especialidad();
+    nuevaEspecialidad.idProfesional= this.usuario.mail;
+    nuevaEspecialidad.especialidad = especialidad;
+    this.especialidades.push(nuevaEspecialidad);
+  }
+  // console.log(this.jornada); 
+}
+CargarListaHorarios(){
+  this.listaHorarios= new Array<string>();
+  var horaEntrada = "00:00:00";
+  var horaSalida = "24:00:00";
+  var pieces = horaEntrada.split(':');
+  var piezaSalida = horaSalida.split(':');
+  var horaEntradaInt, minute, second;
+  var horaSalidaInt;
+
+if(pieces.length === 3) {
+  horaEntradaInt = parseInt(pieces[0], 10);
+  minute = parseInt(pieces[1], 10);
+  second = parseInt(pieces[2], 10);
+}
+horaSalidaInt = parseInt(piezaSalida[0], 10);
+
+  for (let index = horaEntradaInt; index < horaSalidaInt; index++) {
+    const element = horaEntradaInt;
+    if(element!=13){
+      var horario = <string>index + ":" + "00"+ ":" + "00";
+      this.listaHorarios.push(horario);
+    }
+  }
+}
+onHorarioSalida(e){
+
+}
+onHorarioEntrada(e){
+
+}
+checkValue(event){
+  this.checkProfesional = !event.target.checked;        
+}
+onDiaSeleccionado(event){
+  // console.log(event.value);
+}
+EnviarRevision(){
+  
 }
 }

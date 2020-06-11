@@ -6,13 +6,20 @@
     </app-tabla-pacientes>
     <app-tabla-profesionales *ngIf="mostrarListaProfesionales">
     </app-tabla-profesionales>
-    <app-tabla-turnos *ngIf="mostrarListaTurnos"
-    [listaTurnos]="listTurnosPaciente"
-    (turnoSeleccionado)="tomarTurnoParaDetalle($event)">
+    <div class="row">
+
+      <app-tabla-turnos *ngIf="mostrarListaTurnos"
+      [listaTurnos]="listTurnosPaciente"
+      (turnoSeleccionado)="tomarTurnoParaDetalle($event)"
+      >
     </app-tabla-turnos>
-     <!-- Sidebar -->
-  <div class="bg-light border-right" id="sidebar-wrapper">    
-    <app-detalle-turnos [turnoSeleccionado]="turnoParaDetalle"></app-detalle-turnos>
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">    
+      <app-detalle-turnos [turnoSeleccionado]="turnoParaDetalle"
+      [disabledOperaciones]="deshabilitarOp"></app-detalle-turnos>
+    </div>
+    <div>
+    </div>
   </div>
 <!-- </div> -->
 

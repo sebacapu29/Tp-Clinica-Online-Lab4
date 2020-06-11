@@ -1,7 +1,7 @@
 <app-menu-nav>
 </app-menu-nav>
 
-  <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+  <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">    
     <div class="wrapper wrapper--w680">
         <div class="card card-1">
             <div class="card-heading"></div>
@@ -51,23 +51,30 @@
                         <mat-select [(ngModel)]="turno.hora" name="horario">
                           <mat-option *ngFor="let horario of listaHorarios" [value]="horario">{{horario}}</mat-option>
                         </mat-select>
-                      </mat-form-field>
-                      <mat-form-field>
-                        <mat-label>Dias</mat-label>
-                        <mat-select [(ngModel)]="turno" name="dias">
-                          <mat-option *ngFor="let dias of listaDias" [value]="dias">{{dias}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-
+                      </mat-form-field>   <br>                 
+                      <ngb-datepicker [dayTemplate]="customDay" [markDisabled]="IsDisabled" [(ngModel)]="fecha" name="fecha" >
+                        <ng-template  #customDay let-date let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
+                            <span  class="custom-day" [class.diaLaborable]="esDiaLaborable(date)" [class.focused]="focused"
+                            [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth" [class.text-muted]="disabled"                              
+                            [class.day-disabled]="disabled">
+                            {{ date.day }}
+                          </span>
+                      </ng-template>
+                  </ngb-datepicker>
                       <div class="turnoLabel">
                         <h4>Detalle del Turno</h4>
                         <p>Usted esta solicitando turno con: <strong>{{objProfesionalSeleccionado? objProfesionalSeleccionado.apellido : "-"}}</strong></p>
-                        <p>Dia: <input type="label" class="fechaInput" ngbDatepicker [(ngModel)]="turno.fecha" name="fecha"/></p>
+                        <p>Dia: <input type="label" class="fechaInput" ngbDatepicker [(ngModel)]="fecha" name="fecha"/></p>
                         <p>Hora: <strong>{{turno.hora}}</strong></p>                       
                         <p>Epecialidad: <strong>{{turno.especialidad}}</strong></p>
                       </div>
                     <div class="p-t-20">
                         <button class="btn btn--radius btn--green" type="submit" (click)="SubmitTurno()">Solicitar Turno</button>
+                        <div class="text-center" *ngIf="registrando">
+                          <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                          </div>
+                        </div>
                     </div>
                 </form>
             </div>

@@ -26,6 +26,9 @@ export class UsuarioService {
    CrearJornadaEnBD(jornada:Jornada){
     return this.dataServ.PostJornada(jornada);
    }
+   public RegistrarLogueo(mailUsuario:string){
+    return this.dataServ.PostRegistroLogin(mailUsuario);
+   }
    CrearEspecialidadesEnBD(especialidad:Especialidad){
     return this.dataServ.PostEspecialidad(especialidad);
    }

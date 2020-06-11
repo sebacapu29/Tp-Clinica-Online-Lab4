@@ -65,6 +65,9 @@ export class MenuNavComponent implements OnInit , OnDestroy {
   listadoUsuarios(){
     this.router.navigate(['Listados','pacientes']);  
   }
+  listarReportes(){
+    this.router.navigate(['Reportes']);  
+  }
   listadoTurnos(){
     this.router.navigate(['Listados','turnos']);    
   }

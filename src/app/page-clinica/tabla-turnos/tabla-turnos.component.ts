@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Turno } from 'src/app/clases/turno';
+import { TruncateTextoLargoPipe} from '../../pipes/truncate-texto-largo.pipe';
 
 @Component({
   selector: 'app-tabla-turnos',
@@ -13,6 +14,7 @@ export class TablaTurnosComponent implements OnInit {
 
   constructor() { 
     this.listaTurnos=new Array<Turno>();
+    
   }
 
   ngOnInit(): void {

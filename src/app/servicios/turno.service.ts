@@ -9,8 +9,8 @@ export class TurnoService {
 
   constructor(private dataServ:DataService) { }
 
-  public AtenderTurno(turno:Turno){
-    return this.dataServ.UpdateTuno(turno);
+  public AtenderTurno(turno:Turno,estado:string){
+    return this.dataServ.UpdateTuno(turno,estado);
   }
 
   ObtenerTurnos(){

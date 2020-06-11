@@ -13,9 +13,9 @@ import { LoginFotoComponent } from './inicio/login-foto/login-foto.component';
 import { BannerComponent } from './page-clinica/banner/banner.component';
 import { FooterPageComponent } from './page-clinica/footer-page/footer-page.component';
 import { MenuNavComponent } from './page-clinica/menu-nav/menu-nav.component';
-import { RegistroProfesionalComponent } from './inicio/registro-profesional/registro-profesional.component';
 import { LoginPrincipalComponent } from './inicio/login-principal/login-principal.component';
 import { PendienteRegistroComponent } from './page-clinica/pendiente-registro/pendiente-registro.component';
+import { ReportesComponent } from './page-clinica/reportes/reportes.component';
 
 const routes: Routes = [
   {path:'',component:PrincipalComponent,canActivate:[CanActivateGuard]},
@@ -24,10 +24,10 @@ const routes: Routes = [
   {path:'Principal',component:PrincipalComponent,canActivate:[CanActivateGuard]},   
   {path:'Pendientes',component:PendienteRegistroComponent,canActivate:[CanActivateGuard]},   
   {path:'Listados/:tipo',component:ListadosComponent,canActivate:[CanActivateGuard]},
+  {path:'Reportes',component:ReportesComponent,canActivate:[CanActivateGuard]},
   {path:'Turnos',component:TurnosComponent,canActivate:[CanActivateGuard]},
   {path:'AtenderTurnos',component:AtencionTurnosComponent,canActivate:[CanActivateGuard]},
   {path:'Alta',component:AltaUsuariosComponent,canActivate:[CanActivateGuard]},
-  {path:'RigistrarProfesional',component:RegistroProfesionalComponent,canActivate:[CanActivateGuard]},
   {path:'**',component:PageErrorComponent}
 ];
 

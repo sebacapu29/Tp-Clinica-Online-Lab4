@@ -98,6 +98,17 @@ export class DataService {
       observaciones: turno.observaciones
   });
   }
+  public PostRegistroLogin(mailUsuario:string){
+    var m = new Date();
+    var strFecha =  m.getUTCDate() +"/"+ (m.getUTCMonth()+1) +"/"+  m.getUTCFullYear();
+    var hora = m.getUTCHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
+    
+    return this.dataStore.collection("registro_login").add({
+      usuario:mailUsuario,
+      fecha:strFecha,
+      hora:hora
+  });
+  }
   public PostUsuario(usuario:Usuario){
     // console.log(usuario);
     return this.dataStore.collection("usuarios").add({
@@ -114,7 +125,7 @@ export class DataService {
   mostrarMensajeExito(mensaje:string) {
     this.toastr.success(mensaje);
   }
-  public UpdateTuno(turno:Turno){
+  public UpdateTuno(turno:Turno,estado:string){
     var docId = "";
     return this.dataStore.collection("turnos").snapshotChanges().subscribe((data)=> {
       data.map((actions=> {
@@ -126,9 +137,9 @@ export class DataService {
           this.docRefId = actions.payload.doc.id; 
           // var fecha = new Date();
           var m = new Date();
-          var dateString = m.getUTCFullYear() +"/"+ (m.getUTCMonth()+1) +"/"+ m.getUTCDate() + " " + m.getUTCHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
+          var dateString =  m.getUTCDate() +"/"+ (m.getUTCMonth()+1) +"/"+  m.getUTCFullYear() + " " + m.getUTCHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
           var docRef = this.dataStore.collection("turnos").doc(this.docRefId);
-          docRef.update({estado:'atendido',
+          docRef.update({estado:estado,
                          fecha:dateString,
                         observaciones:turno.observaciones}).then(
             (res)=>this.mostrarMensajeExito("Registro Actualizado")

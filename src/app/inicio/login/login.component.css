@@ -47,7 +47,9 @@
     height: auto;
     border-radius: 2rem;
   }
-  
+  .btndefault{
+    border: 1px solid lightgrey;
+  }
   
   #inputEmail{
     padding: 5px;

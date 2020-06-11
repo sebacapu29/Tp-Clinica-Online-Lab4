@@ -43,7 +43,9 @@ export class TurnosComponent implements OnInit {
   especialidad:Especialidad;
   diaSeleccionado:any;
   horarioSeleccionado:string;
+  registrando:boolean=false;
   toppings = new FormControl();
+  fecha:NgbDate;
   displayedColumns: string[] = ['nombre', 'apellido', 'especialidad','diaSemana','seleccion'];
   dataSource:MatTableDataSource<Profesional>;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -119,6 +121,7 @@ export class TurnosComponent implements OnInit {
   }
   GetFormatoDias(jornada:Jornada){
     var strDias="";
+    this.listaDias = new Array<string>();
 
     if(jornada.lunes){
       strDias = strDias.concat("Lu,");
@@ -169,18 +172,19 @@ export class TurnosComponent implements OnInit {
   //   this.listaDiasDeSemana = DIAS_SEMANA;
   // }
   
-// esDiaLaborable(date: NgbDate){
+esDiaLaborable(date: NgbDate){
+  this.listaDias= this.listaDias == null? new Array<string>() : this.listaDias;
 
-//   if(this.listaDias.length>0){
-//     for (let index = 0; index < this.listaDias.length; index++) {
-//       const element = this.listaDias[index]; 
-//       if(this.calendar.getWeekday(date)== parseInt(element)){     
-//       return true;
-//       } 
-//     }
-//     return false;
-//   }
-// }
+  if(this.listaDias.length>0){
+    for (let index = 0; index < this.listaDias.length; index++) {
+      const element = this.listaDias[index]; 
+      if(this.calendar.getWeekday(date)== parseInt(element)){     
+      return true;
+      } 
+    }
+    return false;
+  }
+}
 //Obtengo las especialidades que tienen idProfesional, luego recorro la lista de profesionales buscando esos ids de esas especialidades
 // onChangeEspecialidad(especialidadSeleccionada){
 
@@ -220,6 +224,7 @@ buscarProfesionalPorId(idProfesional){
 }
 rowSelected(event, row:Profesional){
   this.objProfesionalSeleccionado.apellido = row.apellido;
+  this.objProfesionalSeleccionado.mail = row.mail;
   this.turno.especialidad = row.especialidad.especialidad;
   console.log(row.dias);
   this.seleccionJornada(row);  
@@ -371,18 +376,22 @@ onDiaSeleccionado(event){
 
   SubmitTurno(){   
     // var nuevoTurno = new Turno();
-    var Profesional = localStorage.getItem("ProfesionalLogueadoMail");
-    this.turno.especialista = this.objProfesionalSeleccionado.apellido;
+    var mailUsuario = localStorage.getItem("usuarioLogueadoMail");
+    this.turno.especialista = this.objProfesionalSeleccionado.mail;
     this.turno.estado= "Activo";
-    this.turno.observaciones = "Sin Obs";
-    this.turno.paciente = Profesional;    
+    this.turno.observaciones = "S/O";
+    this.turno.paciente = mailUsuario;  
+    this.registrando=true;  
+    this.turno.fecha = this.fecha.day + "/" + this.fecha.month + "/" + this.fecha.year; 
+    // console.log(this.turno.fecha);
     console.log(this.turno);
    
     this.turnoServ.pedirTurno(this.turno).then((response=>{
-      alert("exito");
+      alert("turno solicitado");
+      this.registrando=false;
     })
   ).
-  catch(((err)=>alert("error" + err)));
+  catch(((err)=> {alert("error" + err); this.registrando=false;}));
   }  
   isHovered(date: NgbDate) {
     return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);

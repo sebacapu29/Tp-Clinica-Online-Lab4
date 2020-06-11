@@ -8,9 +8,28 @@
       <p class="card-text">Especialidad: {{turnoSeleccionado.especialidad}}</p>
       <p class="card-text">Centro: {{turnoSeleccionado.centro}}</p>
       
-      <textarea class="form-control" [(ngModel)]="turnoSeleccionado.observaciones"  placeholder="Comentario" rows="3"></textarea>
-      <button class="btn btn-danger" (click)="onBorrarTurno()">Cancelar Turno</button>
-      <button class="btn btn-primary" (click)="onAtenderTurno()">Atender</button>
+      <textarea class="form-control" [(ngModel)]="turnoSeleccionado.observaciones"  [disabled]="disabledAceptarRechazar" placeholder="Reseña" rows="2"></textarea>
+      <div class="aceptar">
+
+        <button class="btn btn-danger" (click)="onRechazarTurno()" [disabled]="disabledAceptarRechazar" >Rechazar</button>
+        <button class="btn btn-primary" (click)="onAceptarTurno()" [disabled]="disabledAceptarRechazar" style="margin-left: 20px;">Aceptar</button>
+      </div>
+      <div class="operaciones">
+        <button class="btn btn-warning" [disabled]="disabledCancelar" (click)="onCancelarTurno()">Cancelar</button>
+        <button class="btn btn-success" [disabled]="disabledAtender" (click)="onAtenderTurno()" style="margin-left: 20px;">Atender</button>
+      </div>
+      <div class="encuesta">
+        <label>Por favor realice nuestra encuesta Sobre el sistema de Atencion</label><br>
+        <span>1. Puntaje (Siendo 1 el mas bajo y 5 el mas alto)</span><br>
+        <select class="form-control" [(ngModel)]="encuesta.puntaje" name="puntaje">
+          <option *ngFor="let puntaje of listaPuntaje">
+            {{puntaje}}
+          </option>
+        </select><br>
+        <span>2. Dejonos su comentario</span><br>
+        <textarea class="form-control" [(ngModel)]="encuesta.descripcion"  [disabled]="disabledAceptarRechazar" placeholder="Ingrese un comentario" rows="2"></textarea>
+      <div class="aceptar">
+      </div>
     </div>
   </div>
  

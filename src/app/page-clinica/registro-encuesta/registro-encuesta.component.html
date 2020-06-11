@@ -1,0 +1,21 @@
+<div class="card" style="">
+    <!-- <img class="card-img-top" alt="Card image cap"> -->
+    <div class="card-body">
+      <h3 class="card-title"><strong>Encuesta Satisfaccion</strong></h3>
+      <p class="card-text">1.Como evalua al profesional</p>
+      <p class="card-text"> <span>(Siendo 1 el mas bajo y 5 el mas alto)</span></p><br>
+      <select class="form-control" [(ngModel)]="encuesta.puntaje" name="puntaje">
+        <option [value]="puntaje" *ngFor="let puntaje of listaPuntaje">
+          {{puntaje}}
+        </option>
+      </select>      
+      <p class="card-text"><span>2. Dejonos tu comentario</span><br>
+      </p>
+      <p class="card-text"><textarea class="form-control" [(ngModel)]="encuesta.descripcion"  [disabled]="disabledAceptarRechazar" placeholder="Ingrese un comentario" rows="2"></textarea>
+      </p>
+      <div class="operacion">
+        <button class="btn btn-primary" [disabled]="disabledOperaciones" (click)="onEnviarEncuesta()">Enviar</button>
+      </div>
+    </div>
+  </div>
+ 

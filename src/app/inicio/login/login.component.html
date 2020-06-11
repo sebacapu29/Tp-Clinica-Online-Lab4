@@ -18,14 +18,14 @@
                 <label class="custom-control-label" for="customCheck1">Recordarme</label>
               </div> -->
 
-                <re-captcha
+                <re-captcha *ngIf="captchaHabilitado"
                   (resolved)="resolved($event)"
                   siteKey="6LeajQAVAAAAAJCtwsllAMR7H8hCno2G1IqABN9b"
                 ></re-captcha>
                 
-                <!-- [disabled]="!recaptcha" -->
               <div class="registro">
-                <button class="btn btn-lg btn-primary btn-block text-uppercase" (click)="LoginUsuario()" >Ingresar</button>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" [disabled]="!recaptcha"  (click)="LoginUsuario()" >Ingresar</button>
+                <button class="btn btn-lg btn-default btn-block text-uppercase btndefault" (click)="deshabilitarCaptcha()" >Deshabilitar Captcha</button>
                 <button class="btn btn-lg btn-secondary btn-block text-uppercase" (click)="Registrarme()">Registrarme</button>
               </div>
               <div class="invitadosPanel">

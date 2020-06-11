@@ -1,3 +1,9 @@
 .estado{
-    background-color: green;
+    background-color: goldenrod;
+   }
+   .operacion .btn-secondary{
+       margin-left: 10px;
+   }
+   .operacion{
+       margin-top: 20px;
    }

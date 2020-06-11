@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Turno } from 'src/app/clases/turno';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RegistroEncuestaComponent } from '../registro-encuesta/registro-encuesta.component';
 
 @Component({
   selector: 'app-detalle-turnos',
@@ -9,17 +11,20 @@ import { Turno } from 'src/app/clases/turno';
 export class DetalleTurnosComponent implements OnInit {
 
   @Input() turnoSeleccionado:Turno;
-  constructor() { 
+  @Input() disabledOperaciones:boolean=false;
+
+  constructor(private modal:NgbModal) { 
     this.turnoSeleccionado=new Turno();
 
   }
 
   ngOnInit(): void {
+    
   }
-  onModificar(){
+  onHabilitarEncuesta(){
+    const modalRef = this.modal.open(RegistroEncuestaComponent,{windowClass: 'modal-holder', centered: true});
 
   }
-  onBorrarTurno(){
-
+  onCancelarTurno(){
   }
 }

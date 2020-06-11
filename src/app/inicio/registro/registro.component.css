@@ -9,6 +9,10 @@
     height: 100%;
     padding-bottom: 250px;
   }
+  .contenido_profesional{
+    border: 1px solid lightgray;
+    border-radius: 20px;
+  }
   .btnRegistro{
     margin-top: 25px;
     margin-bottom: 25px;
@@ -19,9 +23,19 @@
   border: 0.5px solid lightgrey;
   border-radius: 10px;
 }
-
+.checkprofesional{
+  padding: 30px;
+  /* margin-left: 30px; */
+  background: lightskyblue;
+  border-radius: 15px;
+  border: 20px;
+  color: white;
+}
+.checkprofesional input{
+  margin-left: 25px;
+}
 .resgistroProfesional{
-  border: 1px solid grey;
+  border: 1px solid lightgrey;
   border-radius: 20px;
   padding: 10px;
 }

@@ -55,12 +55,50 @@
                 <p class="help-block"></p>
               </div>   
               <hr class="my-4">
-              <div class="resgistroProfesional">
-                <app-registro-profesional 
-                (onCargarEspecialidad)="tomarEspecialidad($event)"
-                (onCargarJornada)="tomarJornada($event)"></app-registro-profesional>
-              </div>   
-              <button class="btn btn-lg btn-secondary btn-block btnRegistro"(click)="Registrarme()" >Enviar Solicitud</button>
+              <div class="contenido_profesional">  
+                <div class="checkprofesional">
+                  <span>Es Profesional</span>
+                  <input type="checkbox" (change)="checkValue($event)" class="check">                        
+                </div>  
+                                                   
+                                      <div class="input-group">                                                                
+                                              <mat-form-field>
+                                                <mat-label>ESPECILIDAD</mat-label>
+                                                <mat-select multiple [disabled]="checkProfesional" [(ngModel)]="listaEspecialidades" name="especialidades">
+                                                  <mat-option value="Odontologo" >Odontologo</mat-option>
+                                                  <mat-option value="Clinica Medica" >Clinica Medica</mat-option>
+                                                  <mat-option value="Pediatria" >Pediatria</mat-option>
+                                                </mat-select>
+                                              </mat-form-field>                    
+                                      </div>   
+                                      <div class="input-group">                                                                                                                 
+                                </div> 
+                                  <div class="col">              
+                                      <mat-form-field>
+                                        <mat-label>Dias</mat-label>
+                                        <mat-select multiple (selectionChange)="onDiaSeleccionado($event)" [(ngModel)]="seleccionDiasDesemana" name="dias"[disabled]="checkProfesional">
+                                          <mat-option *ngFor="let dia of listaDiasDeSemana" [value]="dia" >{{dia | diasSemana}}</mat-option>
+                                        </mat-select>
+                                      </mat-form-field><br>
+                                    
+                                      <mat-form-field>
+                                        <mat-label>Hora Entrada</mat-label>
+                                        <mat-select  (selectionChange)="onHorarioEntrada($event)" [(ngModel)]="jornada.horarioEntrada" name="entrada"[disabled]="checkProfesional">
+                                          <mat-option *ngFor="let horario of listaHorarios" [value]="horario" >{{horario}}</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+              
+                                      <mat-form-field>
+                                        <mat-label>Hora Salida</mat-label>
+                                        <mat-select  (selectionChange)="onHorarioSalida($event)" [(ngModel)]="jornada.horarioSalida" name="salida" [disabled]="checkProfesional">
+                                          <mat-option *ngFor="let horario of listaHorarios" [value]="horario" >{{horario}}</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                                    
+                              </div>      
+                            <hr class="my-4">        
+                </div>  
+              <button class="btn btn-lg btn-secondary btn-block btnRegistro" (click)="Registrarme()">Enviar Solicitud</button>
               
               <div class="spinner-border text-primary" role="status" *ngIf="registrando">
                 <span class="sr-only">Loading...</span>

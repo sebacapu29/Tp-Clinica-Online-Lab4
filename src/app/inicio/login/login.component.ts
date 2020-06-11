@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   @Output() onLoginUsuario:EventEmitter<any> = new EventEmitter();
   @Output() onSeleccionRegistro:EventEmitter<any> = new EventEmitter();
   recaptcha:boolean =false;
+  captchaHabilitado:boolean=true;
 
   constructor(private router:Router,private usuarioServicio:UsuarioService,private toastr:ToastrService,public activeModal:NgbActiveModal
    ) {
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
     this.usuarioServicio.login(this.usuario).then(res=>{
       localStorage.setItem("usuarioLogueadoMail",this.usuario.mail);
        this.onLoginUsuario.emit(this.usuario.mail);
+       this.usuarioServicio.RegistrarLogueo(this.usuario.mail);
        this.activeModal.dismiss();
        this.router.navigate(['']);      
      })
@@ -62,6 +64,10 @@ export class LoginComponent implements OnInit {
     this.activeModal.close();
     this.onSeleccionRegistro.emit();
     this.router.navigate(['Registro']);
+  }
+  deshabilitarCaptcha(){
+    this.captchaHabilitado=false;
+    this.recaptcha=true;
   }
   inicializarUsuario(){
     

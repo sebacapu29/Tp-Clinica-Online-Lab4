@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { UsuarioService } from './servicios/usuario.service';
+import { PdfHelper } from './clases/utils/pdf-helper';
+import { ExcelHelper } from './clases/utils/excel-helper';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,8 @@ import { UsuarioService } from './servicios/usuario.service';
 })
 export class AppComponent {
   title = 'clinica-online';
-  
+
   constructor(){
- 
   }
  
 }

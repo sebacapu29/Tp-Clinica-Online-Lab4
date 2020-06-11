@@ -1,3 +1,7 @@
 mat-table{
     cursor: pointer;
 }
+.tabla{
+    width: 90%;
+    margin-left: 40px;
+}

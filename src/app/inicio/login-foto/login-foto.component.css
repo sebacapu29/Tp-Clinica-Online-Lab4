@@ -1,9 +1,14 @@
 .card{
-    margin-left: 38%;
+    margin-left: 35%;
     border-radius: 10px;
 }
 img:hover{
     cursor: pointer;
+}
+img{
+    width: 150px;
+    height: 180px;
+    margin-left: 25%;
 }
  a{
     color: blue;

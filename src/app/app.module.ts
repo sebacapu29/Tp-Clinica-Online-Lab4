@@ -30,7 +30,6 @@ import { LoginFotoComponent } from './inicio/login-foto/login-foto.component';
 import { BannerComponent } from './page-clinica/banner/banner.component';
 import { FooterPageComponent } from './page-clinica/footer-page/footer-page.component';
 import { ModalEsperaComponent } from './inicio/modal-espera/modal-espera.component';
-import { RegistroProfesionalComponent } from './inicio/registro-profesional/registro-profesional.component';
 import { DetalleTurnosComponent } from './page-clinica/detalle-turnos/detalle-turnos.component';
 import { LoginPrincipalComponent } from './inicio/login-principal/login-principal.component';
 import {MaterialModule} from './angular-material/material-module/material-module.module';
@@ -39,6 +38,9 @@ import { DiaSemanaPipe } from './pipes/dia-semana.pipe';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { PendienteModalComponent } from './page-clinica/pendiente-modal/pendiente-modal.component';
 import { ModalDetalleTurnoComponent } from './page-clinica/modal-detalle-turno/modal-detalle-turno.component';
+import { TruncateTextoLargoPipe } from './pipes/truncate-texto-largo.pipe';
+import { RegistroEncuestaComponent } from './page-clinica/registro-encuesta/registro-encuesta.component';
+import { ReportesComponent } from './page-clinica/reportes/reportes.component';
 // if you need forms support:
 // import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
@@ -61,13 +63,15 @@ import { ModalDetalleTurnoComponent } from './page-clinica/modal-detalle-turno/m
     BannerComponent,
     FooterPageComponent,
     ModalEsperaComponent,
-    RegistroProfesionalComponent,
     DetalleTurnosComponent,
     LoginPrincipalComponent,
     PendienteRegistroComponent,
     DiaSemanaPipe,
     PendienteModalComponent,
-    ModalDetalleTurnoComponent
+    ModalDetalleTurnoComponent,
+    TruncateTextoLargoPipe,
+    RegistroEncuestaComponent,
+    ReportesComponent
   ],
   imports: [
     BrowserModule,
