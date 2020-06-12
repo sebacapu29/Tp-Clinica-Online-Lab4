@@ -130,8 +130,11 @@ export class DataService {
     return this.dataStore.collection("turnos").snapshotChanges().subscribe((data)=> {
       data.map((actions=> {
         var turnoFb = <Turno>actions.payload.doc.data();
-        
-        if(turno.especialista == turnoFb.especialista && turno.paciente==turnoFb.paciente){
+        // console.log("turno.especialista->",JSON.stringify(turno.especialista));
+        // console.log("turnoFb.especialista->",JSON.stringify(turnoFb.especialista) );
+        // console.log("turno.paciente->",turno.paciente);
+        // console.log("turnoFb.paciente->",JSON.stringify(turnoFb.paciente));
+        if(JSON.stringify(turno.especialista) == JSON.stringify(turnoFb.especialista) && turno.paciente== JSON.stringify(turnoFb.paciente)){
 
           // console.log("encontrado!!",actions.payload.doc.id);
           this.docRefId = actions.payload.doc.id; 
@@ -141,9 +144,9 @@ export class DataService {
           var docRef = this.dataStore.collection("turnos").doc(this.docRefId);
           docRef.update({estado:estado,
                          fecha:dateString,
-                        observaciones:turno.observaciones}).then(
-            (res)=>this.mostrarMensajeExito("Registro Actualizado")
-            ).catch((resp)=>  this.mostrarMensajeError(resp)); 
+                        observaciones:turno.observaciones})
+            .then(()=>{this.mostrarMensajeExito("Registro Actualizado")})
+            .catch((resp)=>  this.mostrarMensajeError(resp)); 
         }     
       }));
     });

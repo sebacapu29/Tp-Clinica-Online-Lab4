@@ -53,6 +53,9 @@ export class ListadosComponent implements OnInit {
     || turno.estado.toLocaleLowerCase()=="atendido"){
       this.deshabilitarOp=true;
     }
+    else{
+      this.deshabilitarOp=false;
+    }
     this.turnoParaDetalle=turno;
 
   }

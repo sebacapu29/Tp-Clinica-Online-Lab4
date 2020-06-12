@@ -31,6 +31,7 @@ export class ModalDetalleTurnoComponent implements OnInit {
     }
   }
   onAtenderTurno(){
+    this.turnoSeleccionado.paciente= JSON.stringify(this.turnoSeleccionado.paciente);
     this.turnoServ.AtenderTurno(this.turnoSeleccionado,"Atendido");
   }
   onBorrarTurno(){
