@@ -384,10 +384,12 @@ onDiaSeleccionado(event){
     this.registrando=true;  
     this.turno.fecha = this.fecha.day + "/" + this.fecha.month + "/" + this.fecha.year; 
     // console.log(this.turno.fecha);
-    console.log(this.turno);
+    // console.log(this.turno);
    
     this.turnoServ.pedirTurno(this.turno).then((response=>{
       alert("turno solicitado");
+      // console.log(response.id);
+      this.turnoServ.ActualizarIdTurno(response.id);
       this.registrando=false;
     })
   ).

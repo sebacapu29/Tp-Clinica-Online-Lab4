@@ -52,6 +52,7 @@ export class ReportesComponent implements OnInit {
       lista.push(login.fecha);
       lista.push(login.hora);
       csv.push(lista.join(","));
+      lista = new Array<string>();
     }
     var csvFinal = csv.join("\n");
     // var csv2 = csv.join('\n');

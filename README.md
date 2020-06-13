@@ -10,11 +10,11 @@ Sistema de turnos online
 - Captcha google.
 - Prueba ingresando con usuarios predeterminados.
 
-# Arrancar el Proyecto
+# Ejecutar el Proyecto
 
 Clonar el repositorio, con la consola de comandos, posicionado en la carpeta principal del proyecto
  - Ejecutar el comando npm install
- - Ejecutar el comando ng serve --open para ejecutar el proyecto
+ - Ejecutar el comando ng serve --open para arrancar el proyecto
 
 
 # Inicio de Sesion

@@ -10,9 +10,11 @@ export class TurnoService {
   constructor(private dataServ:DataService) { }
 
   public AtenderTurno(turno:Turno,estado:string){
-    return this.dataServ.UpdateTuno(turno,estado);
+    return this.dataServ.UpdateTurno(turno,estado);
   }
-
+  public AtenderTurnoProfesional(turno:Turno,estado:string){
+    return this.dataServ.UpdateTurno(turno,estado);
+  }
   ObtenerTurnos(){
     return this.dataServ.getAll("turnos");
   }
@@ -21,5 +23,8 @@ export class TurnoService {
   }  
   pedirTurno(turno:Turno){
     return this.dataServ.PostTurno(turno);
+  }
+  public ActualizarIdTurno(idTurno:string){
+    return this.dataServ.UpdateIdTurno(idTurno);
   }
 }

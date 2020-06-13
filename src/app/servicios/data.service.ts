@@ -98,6 +98,10 @@ export class DataService {
       observaciones: turno.observaciones
   });
   }
+  public UpdateIdTurno(idTurno:string){
+    var docRef = this.dataStore.collection("turnos").doc(idTurno);
+    docRef.update({idTurno:idTurno});
+  }
   public PostRegistroLogin(mailUsuario:string){
     var m = new Date();
     var strFecha =  m.getUTCDate() +"/"+ (m.getUTCMonth()+1) +"/"+  m.getUTCFullYear();
@@ -123,9 +127,10 @@ export class DataService {
   });
   }
   mostrarMensajeExito(mensaje:string) {
+    console.log("pasa");
     this.toastr.success(mensaje);
   }
-  public UpdateTuno(turno:Turno,estado:string){
+  public UpdateTurno(turno:Turno,estado:string){
     var docId = "";
     return this.dataStore.collection("turnos").snapshotChanges().subscribe((data)=> {
       data.map((actions=> {
@@ -150,5 +155,18 @@ export class DataService {
         }     
       }));
     });
+  }
+  public UpdateTurnoByRefDoc(idDocRef:string,estado:string,observacion:string,fechaAct:string){
+    var m = new Date();
+    var dateString =  m.getUTCDate() +"/"+ (m.getUTCMonth()+1) +"/"+  m.getUTCFullYear();
+    var timeString = m.getUTCHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
+
+    var docRef = this.dataStore.collection("turnos").doc(idDocRef);
+          docRef.update({estado:estado,
+                         fecha_actualizacion:dateString,
+                         hora_actualizacion:timeString,
+                        observaciones:observacion})
+            .then(()=>{this.mostrarMensajeExito("Registro Actualizado")})
+            .catch((resp)=>  this.mostrarMensajeError(resp)); 
   }
   }

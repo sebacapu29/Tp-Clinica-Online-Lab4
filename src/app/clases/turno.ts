@@ -1,4 +1,5 @@
 export class Turno {
+    idTurno:string;
     fecha:string;
     hora:string;
     paciente:string;

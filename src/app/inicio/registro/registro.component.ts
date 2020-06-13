@@ -24,7 +24,7 @@ export class RegistroComponent implements OnInit {
   foto:any;
   pathRegistro:string = environment.pathImgRegistro;
   registrando:boolean;
-  esProfesional:boolean;
+  esProfesional:boolean=false;
   especialidades:Especialidad[];
   jornada:Jornada;
   checkProfesional:boolean=true;
@@ -33,7 +33,7 @@ export class RegistroComponent implements OnInit {
   seleccionDiasDesemana:string[];
   listaHorarios:string[];
   listaEspecialidades:string[];
-
+  fileName:string;
   constructor(private storage:AngularFireStorage, private usuarioServ:UsuarioService
               ,public toastr: ToastrService,private router:Router) {
       this.usuario = new Usuario();
@@ -42,13 +42,13 @@ export class RegistroComponent implements OnInit {
       this.listaDiasDeSemana = DIAS_SEMANA;
       this.jornada = new Jornada();
       this.CargarListaHorarios();
+      this.fileName = "Seleccione Archivo";
    }
 
   ngOnInit(): void {
   }
 Registrarme(){
   this.registrando=true;
-  this.cargarProfesional();
   
   if(this.usuario.nombre== undefined || this.usuario.mail== undefined ||
     this.usuario.clave== undefined || this.usuario.fecha_nacimiento==undefined 
@@ -70,7 +70,8 @@ Registrarme(){
  SubirFoto(){
   var metadata = {
     customMetadata: {
-      usuario: this.usuario.nombre
+      usuario: this.usuario.nombre,
+      mail:this.usuario.mail
     }
   }
   const idFoto = Math.random().toString(32).substring(2);//Obtiene un string aleatorio como identificador.
@@ -89,19 +90,14 @@ Registrarme(){
       this.usuario.foto = urlImg;
       var registro=this;
       var usuario = this.usuario;
-      // console.log(urlImg);
+      
       if(this.esProfesional){
-          this.usuario.activo=false;
-          this.usuario.roll=1;         
-          this.usuarioServ.CrearJornadaEnBD(this.jornada).then(function(docRef) {
-
-          });
-        for (let index = 0; index < this.especialidades.length; index++) {
-          const especialidad = this.especialidades[index];
-            this.usuarioServ.CrearEspecialidadesEnBD(especialidad).then(function(docRef) {
-
-          });
-        }        
+         this.usuario.activo=false;
+         this.usuario.roll=1; 
+         this.CargarObjJornada();
+         this.CargarObjEspecialidades();
+         this.CrearJornada();
+         this.CrearEspecialidades();        
       }
       else{
         this.usuario.roll=0;
@@ -129,11 +125,27 @@ Registrarme(){
   ).subscribe(); 
  }
  prueba(){
-   this.cargarProfesional();
-   console.log(this.especialidades);
-   console.log(this.jornada);
+  //  this.cargarProfesional();
+   console.log(this.esProfesional);
+  //  console.log(this.especialidades);
+  //  console.log(this.jornada);
  }
+ private CrearJornada(){        
+  this.usuarioServ.CrearJornadaEnBD(this.jornada).then(function(docRef) {
+
+  });
+ }
+
+ private CrearEspecialidades(){
+  for (let index = 0; index < this.especialidades.length; index++) {
+    const especialidad = this.especialidades[index];
+      this.usuarioServ.CrearEspecialidadesEnBD(especialidad).then(function(docRef) {
+    });
+  }
+ }
+
  loadFoto(e){
+   this.fileName = e.target.files[0].name;
   this.foto = e.target.files[0];   //para obtener la imagen del archivo.
  }
  mostrarMensajeExito() {
@@ -143,7 +155,7 @@ mostrarMensajeError(mensaje){
   this.toastr.error("Ocurrio un error: "+mensaje);
 }
 
-cargarProfesional(){
+CargarObjJornada(){
   for (let index = 0; index < this.seleccionDiasDesemana.length; index++) {
     const dia = this.seleccionDiasDesemana[index];
     switch(dia){
@@ -170,15 +182,18 @@ cargarProfesional(){
       break;    
     } 
   }
+
+}
+CargarObjEspecialidades(){
 // console.log(this.listaEspecialidades);
-  for (let index = 0; index < this.listaEspecialidades.length; index++) {
-    const especialidad = this.listaEspecialidades[index];
-    var nuevaEspecialidad = new Especialidad();
-    nuevaEspecialidad.idProfesional= this.usuario.mail;
-    nuevaEspecialidad.especialidad = especialidad;
-    this.especialidades.push(nuevaEspecialidad);
-  }
-  // console.log(this.jornada); 
+for (let index = 0; index < this.listaEspecialidades.length; index++) {
+  const especialidad = this.listaEspecialidades[index];
+  var nuevaEspecialidad = new Especialidad();
+  nuevaEspecialidad.idProfesional= this.usuario.mail;
+  nuevaEspecialidad.especialidad = especialidad;
+  this.especialidades.push(nuevaEspecialidad);
+}
+// console.log(this.jornada); 
 }
 CargarListaHorarios(){
   this.listaHorarios= new Array<string>();

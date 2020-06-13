@@ -18,10 +18,15 @@
     margin-bottom: 25px;
   }
 .foto{
+  display: flex;
   margin-top: 35px;
   margin-bottom: 50px;
   border: 0.5px solid lightgrey;
   border-radius: 10px;
+}
+.foto p{
+  margin-top: 15px;
+  margin-left: 20px;
 }
 .checkprofesional{
   padding: 30px;
@@ -118,3 +123,4 @@
     color: white;
     background-color: #3b5998;
   }
+  

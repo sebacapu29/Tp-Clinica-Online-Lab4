@@ -50,15 +50,17 @@
                 <input type="password" [(ngModel)]="confimarcionClave"  class="form-control" name="confirmClave" placeholder="Confirmar Clave" required>
               </div>              
               <div class="foto">
-                <label for="">Adjuntar una foto</label>
-                <input type="file" (change)="loadFoto($event)">
-                <p class="help-block"></p>
+                <button type="button" (click)="fileInput.click()" class="btn btn-light">
+                  <span>Subir Foto</span>
+                  <input #fileInput type="file" (change)="loadFoto($event)" style="display:none;" />                  
+                </button>
+                <p>{{fileName}}</p>
               </div>   
               <hr class="my-4">
               <div class="contenido_profesional">  
                 <div class="checkprofesional">
                   <span>Es Profesional</span>
-                  <input type="checkbox" (change)="checkValue($event)" class="check">                        
+                  <input type="checkbox" (change)="checkValue($event)" [(ngModel)]="esProfesional" name="checkProfesional" class="check">                        
                 </div>  
                                                    
                                       <div class="input-group">                                                                
@@ -99,7 +101,8 @@
                             <hr class="my-4">        
                 </div>  
               <button class="btn btn-lg btn-secondary btn-block btnRegistro" (click)="Registrarme()">Enviar Solicitud</button>
-              
+              <!-- <button class="btn btn-lg btn-secondary btn-block btnRegistro" (click)="prueba()">Enviar Solicitud</button> -->
+
               <div class="spinner-border text-primary" role="status" *ngIf="registrando">
                 <span class="sr-only">Loading...</span>
               </div>
