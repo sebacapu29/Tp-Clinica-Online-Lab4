@@ -21,7 +21,6 @@ export class DataService {
 
   public getAll(entidad):Observable<any[]>{
 
-    
     return this.dataStore.collection(entidad).snapshotChanges().pipe(
       map( actions=> 
         actions.map(a=>{
@@ -56,22 +55,23 @@ export class DataService {
   //Busca el document reference de Firebase de la coleccion y actualiza el usuario
   public UpdateUsuario(usuario:Usuario){
     var docId = "";
-    return this.dataStore.collection("usuarios").snapshotChanges().subscribe((data)=> {
-      data.map((actions=> {
-        var usuariofb = <Usuario>actions.payload.doc.data();
-        
-        if(usuariofb.mail == usuario.mail){
-          // console.log("encontrado!!",actions.payload.doc.id);
-          this.docRefId = actions.payload.doc.id; 
-          // console.log(this.docRefId);
-          // console.log(actions.payload.doc.id);
-          var docRef = this.dataStore.collection("usuarios").doc(this.docRefId);
-          docRef.update({activo:true}).then(
-            (res)=>this.mostrarMensajeExito("Usuario Actualizado!")
-            ).catch((resp)=>  this.mostrarMensajeError(resp));  
-        }     
-      }));
-    });
+    this.getAll("usuarios").subscribe((response)=>{
+      // var usuariofb = response.payload.doc.data();
+      // console.log("usuarioFB -> ",response); 
+      for (const usuarioFB of response) {
+          if(usuarioFB.mail == usuario.mail){    
+            this.dataStore.collection("usuarios").doc(usuarioFB.id).update({activo:true}).then(()=>
+            this.mostrarMensajeExito("Usuario Actualizado!")
+            )      
+            break;
+          } 
+        }         
+    }).unsubscribe();
+  }
+  public UpdateUsuarioID(id:string){
+      // var usuariofb = response.payload.doc.data();
+      // console.log("usuarioFB -> ",response); 
+      this.dataStore.collection("usuarios").doc(id).update({id:id});                                       
   }
   mostrarMensajeError(mensaje){
     this.toastr.error("Ocurrio un error: "+mensaje);
@@ -127,7 +127,7 @@ export class DataService {
   });
   }
   mostrarMensajeExito(mensaje:string) {
-    console.log("pasa");
+    // console.log("pasa");
     this.toastr.success(mensaje);
   }
   public UpdateTurno(turno:Turno,estado:string){

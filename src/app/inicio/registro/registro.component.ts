@@ -109,6 +109,7 @@ Registrarme(){
             usuario.id = docRef.id;    
             // localStorage.setItem("usuario",docRef.id.toString());
             localStorage.setItem("usuarioLogueadoMail",registro.usuario.mail);
+            registro.usuarioServ.ActualizarUsuarioID(docRef.id);
             registro.mostrarMensajeExito();
             registro.registrando=false;
             registro.router.navigate(['']);

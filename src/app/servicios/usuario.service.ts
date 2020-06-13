@@ -21,7 +21,7 @@ export class UsuarioService {
     return this.dataServ.getAll("usuarios");
    }
    public AutorizarProfesional(usuario:Usuario){
-     return this.dataServ.UpdateUsuario(usuario);
+     return this.dataServ.UpdateUsuario(usuario);    
    }
    CrearJornadaEnBD(jornada:Jornada){
     return this.dataServ.PostJornada(jornada);
@@ -52,6 +52,9 @@ export class UsuarioService {
    }
    CrearUsuarioEnBD(usuario:Usuario){
      return this.dataServ.PostUsuario(usuario);
+   }
+   ActualizarUsuarioID(id:string){
+    return this.dataServ.UpdateUsuarioID(id);   
    }
    login(usuario:Usuario){
      const { mail , clave } = usuario;//destructuring

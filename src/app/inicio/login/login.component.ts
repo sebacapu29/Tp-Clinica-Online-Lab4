@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
           this.usuario.clave="abc123456";          
         break;
         case 'profesional-pendiente':
-          this.usuario.mail="usuario_prendiente@clinica.com";
+          this.usuario.mail="profesional_prendiente@clinica.com";
             this.usuario.clave="abc123456";          
           break;
         case 'paciente':
