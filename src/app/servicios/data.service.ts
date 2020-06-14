@@ -8,6 +8,7 @@ import { Turno } from '../clases/turno';
 import { Especialidad } from '../clases/especialidad';
 import { Jornada } from '../clases/jornada';
 import { ToastrService } from 'ngx-toastr';
+import { HistorialMedico } from '../clases/historial-medico';
 
 
 @Injectable({
@@ -156,13 +157,36 @@ export class DataService {
       }));
     });
   }
-  public UpdateTurnoByRefDoc(idDocRef:string,estado:string,observacion:string,fechaAct:string){
+  public UpdateHistorialMedico(historialMedico:HistorialMedico){
+    
+    var nuevaEstructura={};
+    var idRefDoc="";
+    // console.log(historialMedico);
+     return this.dataStore.collection("historial_medico").add({
+            fecha:historialMedico.fechaHistoria,
+            idPaciente: historialMedico.idPaciente,
+            profesional: historialMedico.profesional,
+            observaciones: historialMedico.observaciones,
+            idTurno:historialMedico.idTurno
+        }).then((resp)=>{
+          idRefDoc=resp.id;
+          this.dataStore.collection("historial_medico").doc(resp.id).update({id:resp.id});
+        }).finally(()=>{
+            var dto ={};
+            for (const dinamicos of historialMedico.datos) {
+              dto[dinamicos.propiedad] = dinamicos.valor
+              
+              this.dataStore.collection("historial_medico").doc(idRefDoc).update({dto});   
+            }
+        });
+  }
+  public UpdateTurnoByRefDoc(idDocRef:string,estado:string,observacion:string){
     var m = new Date();
     var dateString =  m.getUTCDate() +"/"+ (m.getUTCMonth()+1) +"/"+  m.getUTCFullYear();
     var timeString = m.getUTCHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
 
     var docRef = this.dataStore.collection("turnos").doc(idDocRef);
-          docRef.update({estado:estado,
+    return docRef.update({estado:estado,
                          fecha_actualizacion:dateString,
                          hora_actualizacion:timeString,
                         observaciones:observacion})

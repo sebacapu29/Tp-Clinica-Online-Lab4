@@ -1,0 +1,6 @@
+.principal{
+    position: relative;
+}
+.principal>*{
+    display: block;
+}

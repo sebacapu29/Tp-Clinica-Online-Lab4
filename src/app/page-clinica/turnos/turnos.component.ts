@@ -14,6 +14,7 @@ import { DiaSemanaPipe} from '../../pipes/dia-semana.pipe';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-turnos',
   templateUrl: './turnos.component.html',
@@ -52,7 +53,7 @@ export class TurnosComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   
   model: NgbDateStruct;
-  constructor(private usuarioServ:UsuarioService,private calendar: NgbCalendar, public formatter: NgbDateParserFormatter,private turnoServ:TurnoService) { 
+  constructor(private usuarioServ:UsuarioService,private calendar: NgbCalendar, public formatter: NgbDateParserFormatter,private turnoServ:TurnoService,private toastr:ToastrService) { 
     this.turno=new Turno();
     this.usuarioServ.obtenerPorEntidadYParametros<Profesional>("roll","1","usuarios").subscribe((response)=>{
       this.listaProfesionales = response;
@@ -62,7 +63,7 @@ export class TurnosComponent implements OnInit {
       
         this.usuarioServ.obtenerJornadas().subscribe((response)=>{
           this.listaJornadas = response;
-            
+
               this.usuarioServ.ObtenerTodasLasEspecialidades().subscribe((response)=>{        
               this.especialidades = response;
               var listaFiltrada = new Array<Profesional>();
@@ -97,7 +98,8 @@ export class TurnosComponent implements OnInit {
                 for (const keyJ in this.listaJornadas) {
                   if (this.listaJornadas.hasOwnProperty(keyJ)) {
                     const jornada = this.listaJornadas[keyJ];
-                    if(jornada.idJornada == profesional.especialidad.idJornada){
+                    // console.log(jornada.idj)
+                    if(jornada.idProfesional == profesional.mail){
                       listaFiltrada[keyP].jornada = jornada;
                       listaFiltrada[keyP].dias = this.GetFormatoDias(jornada);
                     }
@@ -387,13 +389,14 @@ onDiaSeleccionado(event){
     // console.log(this.turno);
    
     this.turnoServ.pedirTurno(this.turno).then((response=>{
-      alert("turno solicitado");
+      // alert("turno solicitado");
+      this.toastr.success("Turno Solicitado!","Turnos");
       // console.log(response.id);
       this.turnoServ.ActualizarIdTurno(response.id);
       this.registrando=false;
     })
   ).
-  catch(((err)=> {alert("error" + err); this.registrando=false;}));
+  catch(((err)=> {this.toastr.error(err,"Turnos");; this.registrando=false;}));
   }  
   isHovered(date: NgbDate) {
     return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);

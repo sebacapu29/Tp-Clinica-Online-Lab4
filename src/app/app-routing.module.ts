@@ -16,18 +16,22 @@ import { MenuNavComponent } from './page-clinica/menu-nav/menu-nav.component';
 import { LoginPrincipalComponent } from './inicio/login-principal/login-principal.component';
 import { PendienteRegistroComponent } from './page-clinica/pendiente-registro/pendiente-registro.component';
 import { ReportesComponent } from './page-clinica/reportes/reportes.component';
+import { EncuestaComponent } from './page-clinica/encuesta/encuesta.component';
+import { GraficosComponent } from './page-clinica/graficos/graficos.component';
 
 const routes: Routes = [
   {path:'',component:PrincipalComponent,canActivate:[CanActivateGuard]},
   {path:'Registro',component:RegistroComponent},
   {path:'Login',component:LoginPrincipalComponent}, 
-  {path:'Principal',component:PrincipalComponent,canActivate:[CanActivateGuard]},   
-  {path:'Pendientes',component:PendienteRegistroComponent,canActivate:[CanActivateGuard]},   
+  {path:'Principal',component:PrincipalComponent,canActivate:[CanActivateGuard], data:{animation:'isRight'}},   
+  {path:'Pendientes',component:PendienteRegistroComponent,canActivate:[CanActivateGuard], data:{animation:'isLeft'}},   
   {path:'Listados/:tipo',component:ListadosComponent,canActivate:[CanActivateGuard]},
   {path:'Reportes',component:ReportesComponent,canActivate:[CanActivateGuard]},
   {path:'Turnos',component:TurnosComponent,canActivate:[CanActivateGuard]},
   {path:'AtenderTurnos',component:AtencionTurnosComponent,canActivate:[CanActivateGuard]},
   {path:'Alta',component:AltaUsuariosComponent,canActivate:[CanActivateGuard]},
+  {path:'Graficos',component:GraficosComponent,canActivate:[CanActivateGuard]},
+  {path:'Encuesta',component:EncuestaComponent,canActivate:[CanActivateGuard]},
   {path:'**',component:PageErrorComponent}
 ];
 

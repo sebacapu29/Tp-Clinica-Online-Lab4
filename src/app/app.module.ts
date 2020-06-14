@@ -41,6 +41,11 @@ import { ModalDetalleTurnoComponent } from './page-clinica/modal-detalle-turno/m
 import { TruncateTextoLargoPipe } from './pipes/truncate-texto-largo.pipe';
 import { RegistroEncuestaComponent } from './page-clinica/registro-encuesta/registro-encuesta.component';
 import { ReportesComponent } from './page-clinica/reportes/reportes.component';
+import { EncuestaComponent } from './page-clinica/encuesta/encuesta.component';
+import { EncuestaPacienteComponent } from './page-clinica/encuesta-paciente/encuesta-paciente.component';
+import { EncuestaProfesionalComponent } from './page-clinica/encuesta-profesional/encuesta-profesional.component';
+import { HistorialMedicoComponent } from './page-clinica/historial-medico/historial-medico.component';
+import { GraficosComponent } from './page-clinica/graficos/graficos.component';
 // if you need forms support:
 // import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
@@ -71,7 +76,12 @@ import { ReportesComponent } from './page-clinica/reportes/reportes.component';
     ModalDetalleTurnoComponent,
     TruncateTextoLargoPipe,
     RegistroEncuestaComponent,
-    ReportesComponent
+    ReportesComponent,
+    EncuestaComponent,
+    EncuestaPacienteComponent,
+    EncuestaProfesionalComponent,
+    HistorialMedicoComponent,
+    GraficosComponent
   ],
   imports: [
     BrowserModule,

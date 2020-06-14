@@ -1,0 +1,15 @@
+
+<app-menu-nav></app-menu-nav>
+<div class="container encuesta">
+    <label>Por favor realice nuestra encuesta Sobre el sistema de Atencion</label><br>
+    <span>1. Puntaje (Siendo 1 el mas bajo y 5 el mas alto)</span><br>
+    <select class="form-control" [(ngModel)]="encuesta.puntaje" name="puntaje">
+      <option *ngFor="let puntaje of listaPuntaje">
+        {{puntaje}}
+      </option>
+    </select><br>
+    <span>2. Dejonos su comentario</span><br>
+    <textarea class="form-control" [(ngModel)]="encuesta.descripcion"  placeholder="Ingrese un comentario" rows="2"></textarea>
+  <div class="aceptar">
+  </div>
+</div>

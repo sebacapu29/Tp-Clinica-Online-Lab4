@@ -30,8 +30,8 @@ export class AtencionTurnosComponent implements OnInit {
     this.turnoServ.ObtenerTurnos().subscribe((resp)=>{      
     for (const key in <Array<Turno>>resp) {
         const turno = <Turno>resp[key];
-        console.log("turno.especialista-",JSON.stringify(turno.especialista));
-        console.log("mailProfesional-",JSON.stringify(mailProfesional));
+        // console.log("turno.especialista-",JSON.stringify(turno.especialista));
+        // console.log("mailProfesional-",JSON.stringify(mailProfesional));
 
         if(JSON.stringify(turno.especialista)== JSON.stringify(mailProfesional)){
           this.listaTurnosPacientes.push(turno);          

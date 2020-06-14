@@ -1,35 +1,38 @@
 <div class="card"  *ngIf="turnoSeleccionado">
-    <!-- <img class="card-img-top" alt="Card image cap"> -->
-    <div class="card-body">
-      <h5 class="card-title"> {{turnoSeleccionado.paciente}}</h5>
-      <p class="card-text"><strong>Fecha: {{turnoSeleccionado.fecha}}</strong></p>
+    <img class="card-img-top" [src]="imgFoto" alt="Card image cap">
+    <div class="card-body" #cardBody>
+      <h2 class="card-title"> Paciente: {{nombreCompleto}}</h2>
+      <p class="card-text"><strong>Fecha Solicitada: {{turnoSeleccionado.fecha}}</strong></p>
       <p class="card-text estado ">Estado: {{turnoSeleccionado.estado}}</p>
       <p class="card-text">Profesional: {{turnoSeleccionado.especialista}}</p>
       <p class="card-text">Especialidad: {{turnoSeleccionado.especialidad}}</p>
-      <p class="card-text">Centro: {{turnoSeleccionado.centro}}</p>
       
       <textarea class="form-control" [(ngModel)]="turnoSeleccionado.observaciones"  [disabled]="disabledAceptarRechazar" placeholder="Reseña" rows="2"></textarea>
-      <div class="aceptar">
+      <div style="margin-top: 20px;">        
+        <span class="spanAdicional">Datos Adicionales para la historia:</span><br>
+      </div>
+      <div id="extras" *ngFor="let nuevoItem of listaDinamicos" class="row">
+        <input type="text" class="form-control col-md-3" [(ngModel)]="nuevoItem.propiedad" >
+        <input type="text" class="form-control col-md-6" [(ngModel)]="nuevoItem.valor" >        
+      </div>
+      <div class="row aceptar">
 
-        <button class="btn btn-danger" (click)="onRechazarTurno()" [disabled]="disabledAceptarRechazar" >Rechazar</button>
-        <button class="btn btn-primary" (click)="onAceptarTurno()" [disabled]="disabledAceptarRechazar" style="margin-left: 20px;">Aceptar</button>
+        <button class="btn btn-danger col-md-3" *ngIf="!pulsaOpcion" (click)="onRechazarTurno()" [disabled]="disabledAceptarRechazar" >Rechazar</button>
+        <span class="col-md-3"></span>
+        <button class="btn btn-primary col-md-6" *ngIf="!pulsaOpcion" (click)="onAceptarTurno()" [disabled]="disabledAceptarRechazar" >Aceptar</button>        
       </div>
       <div class="operaciones">
-        <button class="btn btn-warning" [disabled]="disabledCancelar" (click)="onCancelarTurno()">Cancelar</button>
-        <button class="btn btn-success" [disabled]="disabledAtender" (click)="onAtenderTurno()" style="margin-left: 20px;">Atender</button>
+        <button class="btn btn-warning" *ngIf="pulsaOpcion" (click)="onCancelarTurno()">Cancelar</button>
+        <button class="btn btn-success" *ngIf="pulsaOpcion" (click)="onAtenderTurno()" style="margin-left: 20px;">Atender</button>
+        <button class="btn btn-success" *ngIf="pulsaOpcion" (click)="onAgregarDatos()" style="margin-left: 20px;">+ Datos</button>
+      </div> 
+      <div class="encuesta ">
+        <button class="btn btn-secondary col-md-12" (click)="IrAEncuesta()">Ir a Encuesta</button>
+    
+      </div>  
+      <div class="spinner-border text-primary" role="status" *ngIf="registrandoTurno">
+        <span class="sr-only">Loading...</span>
       </div>
-      <div class="encuesta">
-        <label>Por favor realice nuestra encuesta Sobre el sistema de Atencion</label><br>
-        <span>1. Puntaje (Siendo 1 el mas bajo y 5 el mas alto)</span><br>
-        <select class="form-control" [(ngModel)]="encuesta.puntaje" name="puntaje">
-          <option *ngFor="let puntaje of listaPuntaje">
-            {{puntaje}}
-          </option>
-        </select><br>
-        <span>2. Dejonos su comentario</span><br>
-        <textarea class="form-control" [(ngModel)]="encuesta.descripcion"  [disabled]="disabledAceptarRechazar" placeholder="Ingrese un comentario" rows="2"></textarea>
-      <div class="aceptar">
-      </div>
-    </div>
   </div>
+   
  

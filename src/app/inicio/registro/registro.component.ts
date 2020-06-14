@@ -157,6 +157,7 @@ mostrarMensajeError(mensaje){
 }
 
 CargarObjJornada(){
+  this.jornada.idProfesional = this.usuario.mail;
   for (let index = 0; index < this.seleccionDiasDesemana.length; index++) {
     const dia = this.seleccionDiasDesemana[index];
     switch(dia){

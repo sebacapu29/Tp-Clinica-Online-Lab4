@@ -5,9 +5,25 @@
        margin-top: 30px;
    }
    .aceptar{
-       margin-top: 20px;
+       margin-top: 30px;
+   }
+  
+   img{
        width: 100%;
+       height: 250px;
+   }
+   #extras input{
+       margin-left: 20px;
+   }
+   .spanAdicional{
+       text-align: center;
+       font-weight: bold;
+       margin-top: 20px;
+   }
+   #extras{
+       margin-top: 50px;
    }
    .encuesta{
-       margin-top: 30px;
+       margin-top: 20px;
+       width: 100%;
    }

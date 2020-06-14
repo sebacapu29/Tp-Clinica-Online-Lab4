@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { Turno } from '../clases/turno';
+import { HistorialMedico } from '../clases/historial-medico';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,11 @@ export class TurnoService {
   public AtenderTurno(turno:Turno,estado:string){
     return this.dataServ.UpdateTurno(turno,estado);
   }
+  public ActualizarHistorialMed(historialMedico:HistorialMedico){
+    return this.dataServ.UpdateHistorialMedico(historialMedico);
+  }
   public AtenderTurnoProfesional(turno:Turno,estado:string){
-    return this.dataServ.UpdateTurno(turno,estado);
+    return this.dataServ.UpdateTurnoByRefDoc(turno.idTurno,estado,turno.observaciones);
   }
   ObtenerTurnos(){
     return this.dataServ.getAll("turnos");
