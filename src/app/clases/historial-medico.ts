@@ -4,7 +4,7 @@ export class HistorialMedico {
     datos:Dinamicos[];
     observaciones:string;
     idPaciente:string;
-    fechaHistoria:string;
+    fecha:string;
     profesional:string;  
     idTurno:string;  
 }

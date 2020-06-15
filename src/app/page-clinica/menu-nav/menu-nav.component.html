@@ -3,8 +3,9 @@
       <button mat-button *ngIf="usuarioMenu.roll==0" (click)="solicitarTurno()">Solicitar Turno </button>
       <button mat-button  *ngIf="usuarioMenu.roll==0" (click)="listadoTurnos()">Consultar Turnos</button>
       <button mat-button *ngIf="usuarioMenu.roll==1" (click)="atenderTurnos()">Atender</button>
+      <button mat-button *ngIf="usuarioMenu.roll==1" (click)="busquedaDinamica()">Buscar Paciente</button>
       <button mat-button *ngIf="usuarioMenu.roll==2" (click)="listadoUsuarios()">Listado Usuarios</button>
-      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="IrAGraficos()">Graficos Reportes</button>
+      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="IrAGraficos()">Graficos Encuestas</button>
       <button mat-button *ngIf="usuarioMenu.roll==2" (click)="listarReportes()" >Listar Reportes</button>
       <button mat-button *ngIf="usuarioMenu.roll==2" (click)="pendientes()" >Pendiente Aprob.</button>
       <button mat-button *ngIf="esUsuaioLogueado"(click)="salir()"><strong>Log Out</strong></button>

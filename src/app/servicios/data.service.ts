@@ -9,6 +9,7 @@ import { Especialidad } from '../clases/especialidad';
 import { Jornada } from '../clases/jornada';
 import { ToastrService } from 'ngx-toastr';
 import { HistorialMedico } from '../clases/historial-medico';
+import { EncuestaProfesional } from '../clases/encuesta-profesional';
 
 
 @Injectable({
@@ -163,7 +164,7 @@ export class DataService {
     var idRefDoc="";
     // console.log(historialMedico);
      return this.dataStore.collection("historial_medico").add({
-            fecha:historialMedico.fechaHistoria,
+            fecha:historialMedico.fecha,
             idPaciente: historialMedico.idPaciente,
             profesional: historialMedico.profesional,
             observaciones: historialMedico.observaciones,
@@ -192,5 +193,13 @@ export class DataService {
                         observaciones:observacion})
             .then(()=>{this.mostrarMensajeExito("Registro Actualizado")})
             .catch((resp)=>  this.mostrarMensajeError(resp)); 
+  }
+  public InsertEncuestaProfesional(encuestaProfesional:EncuestaProfesional){
+    return this.dataStore.collection("encuestas_profesional").add({
+      puntaje: encuestaProfesional.puntaje,
+      fecha: encuestaProfesional.fecha,
+      idProfesional: encuestaProfesional.idProfesional,
+      tipo: encuestaProfesional.tipo,  
+  });
   }
   }

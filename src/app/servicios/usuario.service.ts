@@ -34,9 +34,6 @@ export class UsuarioService {
    }
    obtenerProfesionales(){
     return this.dataServ.getAll("usuarios");
-   }
-   obtenerUnProfesional(param,value){
-    //  return this.dataServ.getOneByProperty(param,value);
    }  
    obtenerPorEntidadYParametros<T>(param,value,entidad){
     return this.dataServ.getByProperty<T>(param,value,entidad);

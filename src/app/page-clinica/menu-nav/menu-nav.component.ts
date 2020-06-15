@@ -77,6 +77,9 @@ export class MenuNavComponent implements OnInit , OnDestroy {
   solicitarTurno(){
     this.router.navigate(['Turnos']);  
   }
+  busquedaDinamica(){
+    this.router.navigate(['BusquedaDin']);  
+  }
   IrAGraficos(){
     this.router.navigate(['Graficos']);  
   }

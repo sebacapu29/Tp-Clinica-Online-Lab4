@@ -380,6 +380,7 @@ onDiaSeleccionado(event){
     // var nuevoTurno = new Turno();
     var mailUsuario = localStorage.getItem("usuarioLogueadoMail");
     this.turno.especialista = this.objProfesionalSeleccionado.mail;
+    this.turno.idProfesional = this.objProfesionalSeleccionado.id;
     this.turno.estado= "Activo";
     this.turno.observaciones = "S/O";
     this.turno.paciente = mailUsuario;  

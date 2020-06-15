@@ -18,6 +18,7 @@ import { PendienteRegistroComponent } from './page-clinica/pendiente-registro/pe
 import { ReportesComponent } from './page-clinica/reportes/reportes.component';
 import { EncuestaComponent } from './page-clinica/encuesta/encuesta.component';
 import { GraficosComponent } from './page-clinica/graficos/graficos.component';
+import { BusquedaDinamicaComponent } from './page-clinica/busqueda-dinamica/busqueda-dinamica.component';
 
 const routes: Routes = [
   {path:'',component:PrincipalComponent,canActivate:[CanActivateGuard]},
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path:'AtenderTurnos',component:AtencionTurnosComponent,canActivate:[CanActivateGuard]},
   {path:'Alta',component:AltaUsuariosComponent,canActivate:[CanActivateGuard]},
   {path:'Graficos',component:GraficosComponent,canActivate:[CanActivateGuard]},
+  {path:'BusquedaDin',component:BusquedaDinamicaComponent,canActivate:[CanActivateGuard]},
   {path:'Encuesta',component:EncuestaComponent,canActivate:[CanActivateGuard]},
   {path:'**',component:PageErrorComponent}
 ];

@@ -8,7 +8,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrls: ['./app.component.css'],
   animations:[
     fader,
-    slider,
     //transformer,
     //stepper
   ]

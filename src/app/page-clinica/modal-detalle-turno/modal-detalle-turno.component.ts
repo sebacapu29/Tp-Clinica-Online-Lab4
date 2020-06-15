@@ -72,7 +72,7 @@ export class ModalDetalleTurnoComponent implements OnInit {
     var dateString =  m.getUTCDate() +"/"+ (m.getUTCMonth()+1) +"/"+  m.getUTCFullYear();
     this.historialMedico.idTurno= this.turnoSeleccionado.idTurno;  
     this.historialMedico.datos = this.listaDinamicos;
-      this.historialMedico.fechaHistoria = dateString;
+      this.historialMedico.fecha = dateString;
       this.historialMedico.idPaciente = this.pacienteDetalle.id;
       this.historialMedico.profesional = this.turnoSeleccionado.especialista;
       this.historialMedico.observaciones = this.turnoSeleccionado.observaciones;

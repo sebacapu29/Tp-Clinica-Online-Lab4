@@ -1,8 +1,14 @@
 
 <app-menu-nav></app-menu-nav>
-
+<mat-form-field>
+    <mat-label>Profesional</mat-label>
+    <mat-select  (selectionChange)="onProfesionalSeleccionado($event)" name="especialidades">
+        <mat-option [value]="profesional" *ngFor="let profesional of listaProfesionales">{{profesional.apellido}}</mat-option>     
+    </mat-select>
+</mat-form-field>
 <div class="row">
-    <canvas id="barCanvas" class="col-md-6" height="400vh" width="500vw" >
+    
+        <canvas id="barCanvas" class="col-md-6" height="400vh" width="500vw" >
         {{chart}}
     </canvas>
     <canvas id="pieCanvas" class="col-md-6" height="400vh" width="500vw" >

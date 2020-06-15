@@ -1,0 +1,54 @@
+<app-menu-nav></app-menu-nav>
+<div class="busqueda">
+
+<mat-form-field>
+    <mat-label>Buscar Paciente</mat-label>
+    <mat-select  (selectionChange)="onBuscarPacientePor($event)" name="pacienteBusqueda">
+        <mat-option value="nombre" >Nombre Paciente</mat-option>  
+        <mat-option value="nombre" >Nombre Medico</mat-option>    
+        <mat-option value="nombre" >Temperatura</mat-option> 
+        <mat-option value="nombre" >Especialidad</mat-option>    
+    </mat-select>
+       
+    
+</mat-form-field>
+<mat-form-field >
+    <mat-label>Valor Busqueda</mat-label>
+    <input matInput placeholder="Valor Propiedad"  [(ngModel)]="valorCombo" name="combo" >
+  </mat-form-field><br>
+    <mat-form-field >
+        <mat-label>Nombre Busqueda</mat-label>
+        <input matInput placeholder="Nombre Propiedad" [(ngModel)]="propidadDinamica" name="prop" >
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Valor Busqueda</mat-label>
+        <input matInput placeholder="Valor Propiedad" [(ngModel)]="valorDinamico" name="val">
+      </mat-form-field><br>
+      <button mat-raised-button color="primary" (click)="onBuscarPaciente()" >Buscar</button>
+    </div>
+<!-- Tabla -->
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="reporte">              
+   <!-- <ng-container matColumnDef="usuario">
+     <mat-header-cell *matHeaderCellDef> Paciente </mat-header-cell>
+     <mat-cell *matCellDef="let element"> {{element.usuario}} </mat-cell>
+   </ng-container> -->
+
+   <ng-container matColumnDef="{{disCol}}" *ngFor="let disCol of displayedColumns; let colIndex = index" >
+     <mat-header-cell *matHeaderCellDef> {{disCol}} </mat-header-cell>
+     <mat-cell *matCellDef="let element">{{element[disCol]}} </mat-cell>
+   </ng-container>
+
+   <!-- <ng-container matColumnDef="{{disCol}}" *ngFor="let disCol of displayedColumns; let colIndex = index" >
+       <mat-header-cell *matHeaderCellDef> Apellido </mat-header-cell>
+       <mat-cell *matCellDef="let element">{{element.apellido}} </mat-cell>
+   </ng-container> 
+
+   <ng-container matColumnDef="{{disCol}}" *ngFor="let disCol of displayedColumns; let colIndex = index" >
+    <mat-header-cell *matHeaderCellDef>{{disCol}}</mat-header-cell>
+    <mat-cell *matCellDef="let element "> {{element[disCol]}}
+    </mat-cell>
+ </ng-container>  -->
+
+   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+   <mat-row *matRowDef="let row; columns: displayedColumns;" ></mat-row>
+ </mat-table> 

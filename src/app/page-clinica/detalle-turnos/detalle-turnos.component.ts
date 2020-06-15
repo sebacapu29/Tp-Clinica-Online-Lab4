@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Turno } from 'src/app/clases/turno';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RegistroEncuestaComponent } from '../registro-encuesta/registro-encuesta.component';
 import { TurnoService } from 'src/app/servicios/turno.service';
+import { EncuestaPacienteComponent } from '../encuesta-paciente/encuesta-paciente.component';
 
 @Component({
   selector: 'app-detalle-turnos',
@@ -23,8 +23,8 @@ export class DetalleTurnosComponent implements OnInit {
     
   }
   onHabilitarEncuesta(){
-    const modalRef = this.modal.open(RegistroEncuestaComponent,{windowClass: 'modal-holder', centered: true});
-
+    const modalRef = this.modal.open(EncuestaPacienteComponent,{windowClass: 'modal-holder', centered: true});
+    modalRef.componentInstance.idProfesional = this.turnoSeleccionado.idProfesional; 
   }
   onCancelarTurno(){
     this.turnoServ.AtenderTurno(this.turnoSeleccionado,"Rechazado");

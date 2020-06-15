@@ -9,6 +9,13 @@ Sistema de turnos online
 - Base de datos con CloudFirestore.
 - Captcha google.
 - Prueba ingresando con usuarios predeterminados.
+- Utilizacion de Charts.js
+- Utilizacion de jsPDF
+- Conversion datos a CSV para downloadFile
+- Se utiliza pipe y directivas
+- Input y Outputs entre componentes
+- Route
+- Services
 
 # Ejecutar el Proyecto
 

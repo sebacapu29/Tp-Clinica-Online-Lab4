@@ -75,7 +75,7 @@ export class ListadosComponent implements OnInit {
         return turno;
       }     
     });
-    console.log(this.listTurnosPaciente);
+    // console.log(this.listTurnosPaciente);
   }
   ObtenerTodosLosTurnos(){
     this.turnoServ.ObtenerTurnos().subscribe(res=>{

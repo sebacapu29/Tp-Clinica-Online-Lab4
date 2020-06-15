@@ -22,6 +22,9 @@ export class TurnoService {
   ObtenerTurnos(){
     return this.dataServ.getAll("turnos");
   }
+  ObtenerHistoriaClinica(){
+    return this.dataServ.getAll("historial_medico");
+  }
   obtenerPorEntidadYParametros<T>(param,value,entidad){
     return this.dataServ.getByProperty<T>(param,value,entidad);
   }  
