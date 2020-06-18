@@ -46,6 +46,7 @@ import { EncuestaProfesionalComponent } from './page-clinica/encuesta-profesiona
 import { HistorialMedicoComponent } from './page-clinica/historial-medico/historial-medico.component';
 import { GraficosComponent } from './page-clinica/graficos/graficos.component';
 import { BusquedaDinamicaComponent } from './page-clinica/busqueda-dinamica/busqueda-dinamica.component';
+import { GraficosSemanalComponent } from './page-clinica/graficos-semanal/graficos-semanal.component';
 // if you need forms support:
 // import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
@@ -81,7 +82,8 @@ import { BusquedaDinamicaComponent } from './page-clinica/busqueda-dinamica/busq
     EncuestaProfesionalComponent,
     HistorialMedicoComponent,
     GraficosComponent,
-    BusquedaDinamicaComponent
+    BusquedaDinamicaComponent,
+    GraficosSemanalComponent
   ],
   imports: [
     BrowserModule,

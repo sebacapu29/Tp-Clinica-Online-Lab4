@@ -18,11 +18,6 @@
         <mat-cell *matCellDef="let element">{{element.hora}} </mat-cell>
     </ng-container> 
 
-    <ng-container matColumnDef="horaSalida">
-      <mat-header-cell *matHeaderCellDef> Hora Salida </mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.hora}} </mat-cell>
-  </ng-container> 
-
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" ></mat-row>
   </mat-table> 

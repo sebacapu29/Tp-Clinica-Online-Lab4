@@ -57,18 +57,21 @@ export class DataService {
   //Busca el document reference de Firebase de la coleccion y actualiza el usuario
   public UpdateUsuario(usuario:Usuario){
     var docId = "";
-    this.getAll("usuarios").subscribe((response)=>{
+     // console.log("usuarioFB -> ",response); 
+      // console.log("usuario -> ",usuario.id); 
+      return this.dataStore.collection("usuarios").doc(usuario.id).update({activo:true});
+    // this.getAll("usuarios").subscribe((response)=>{
       // var usuariofb = response.payload.doc.data();
+      
       // console.log("usuarioFB -> ",response); 
-      for (const usuarioFB of response) {
-          if(usuarioFB.mail == usuario.mail){    
-            this.dataStore.collection("usuarios").doc(usuarioFB.id).update({activo:true}).then(()=>
-            this.mostrarMensajeExito("Usuario Actualizado!")
-            )      
-            break;
-          } 
-        }         
-    }).unsubscribe();
+      // console.log("usuario -> ",usuario.id); 
+      // for (const usuarioFB of response) {
+      //     if(usuarioFB.id == usuario.id){    
+              
+      //       break;
+      //     } 
+      //   }         
+    // }).unsubscribe();
   }
   public UpdateUsuarioID(id:string){
       // var usuariofb = response.payload.doc.data();
@@ -95,6 +98,7 @@ export class DataService {
       paciente: turno.paciente,
       estado: turno.estado,
       especialista: turno.especialista,
+      idProfesional:turno.idProfesional,
       centro: "S/C",
       especialidad: turno.especialidad,
       observaciones: turno.observaciones
@@ -128,9 +132,9 @@ export class DataService {
       roll: usuario.roll.toString()
   });
   }
-  mostrarMensajeExito(mensaje:string) {
+  mostrarMensajeExito(titulo:string,mensaje:string) {
     // console.log("pasa");
-    this.toastr.success(mensaje);
+    this.toastr.success(mensaje,titulo);
   }
   public UpdateTurno(turno:Turno,estado:string){
     var docId = "";
@@ -152,7 +156,7 @@ export class DataService {
           docRef.update({estado:estado,
                          fecha:dateString,
                         observaciones:turno.observaciones})
-            .then(()=>{this.mostrarMensajeExito("Registro Actualizado")})
+            .then(()=>{this.mostrarMensajeExito("Turnos","Registro Actualizado")})
             .catch((resp)=>  this.mostrarMensajeError(resp)); 
         }     
       }));
@@ -183,20 +187,20 @@ export class DataService {
   }
   public UpdateTurnoByRefDoc(idDocRef:string,estado:string,observacion:string){
     var m = new Date();
-    var dateString =  m.getUTCDate() +"/"+ (m.getUTCMonth()+1) +"/"+  m.getUTCFullYear();
-    var timeString = m.getUTCHours() + ":" + m.getUTCMinutes() + ":" + m.getUTCSeconds();
+    var dateString =  m.getUTCDate()-1 +"/"+ (m.getUTCMonth()+1) +"/"+  m.getUTCFullYear();
+    var timeString = m.getHours() + ":" + m.getMinutes() + ":" + m.getSeconds();
 
     var docRef = this.dataStore.collection("turnos").doc(idDocRef);
     return docRef.update({estado:estado,
-                         fecha_actualizacion:dateString,
-                         hora_actualizacion:timeString,
+                         fecha_atencion:dateString,
+                         hora_atencion:timeString,
                         observaciones:observacion})
-            .then(()=>{this.mostrarMensajeExito("Registro Actualizado")})
+            .then(()=>{this.mostrarMensajeExito("Paciente Atendido","Turnos")})
             .catch((resp)=>  this.mostrarMensajeError(resp)); 
   }
   public InsertEncuestaProfesional(encuestaProfesional:EncuestaProfesional){
     return this.dataStore.collection("encuestas_profesional").add({
-      puntaje: encuestaProfesional.puntaje,
+      puntaje: <number>encuestaProfesional.puntaje,
       fecha: encuestaProfesional.fecha,
       idProfesional: encuestaProfesional.idProfesional,
       tipo: encuestaProfesional.tipo,  

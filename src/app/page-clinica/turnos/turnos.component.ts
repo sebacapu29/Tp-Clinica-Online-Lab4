@@ -87,6 +87,7 @@ export class TurnosComponent implements OnInit {
                        nuevoProfesional.fecha_nacimiento = profesional.fecha_nacimiento;
                        nuevoProfesional.sexo = profesional.sexo;
                        nuevoProfesional.especialidad = especialidad;
+                       nuevoProfesional.id = profesional.id;
                       listaFiltrada[indexLiFiltrada]= nuevoProfesional;
                       indexLiFiltrada++;
                     }
@@ -225,8 +226,10 @@ buscarProfesionalPorId(idProfesional){
   this.dataSource = new MatTableDataSource(listaFiltrada);
 }
 rowSelected(event, row:Profesional){
+  console.log(row);
   this.objProfesionalSeleccionado.apellido = row.apellido;
   this.objProfesionalSeleccionado.mail = row.mail;
+  this.objProfesionalSeleccionado.id = row.id;
   this.turno.especialidad = row.especialidad.especialidad;
   console.log(row.dias);
   this.seleccionJornada(row);  
@@ -377,6 +380,7 @@ onDiaSeleccionado(event){
   }
 
   SubmitTurno(){   
+    console.log(this.objProfesionalSeleccionado.id);
     // var nuevoTurno = new Turno();
     var mailUsuario = localStorage.getItem("usuarioLogueadoMail");
     this.turno.especialista = this.objProfesionalSeleccionado.mail;

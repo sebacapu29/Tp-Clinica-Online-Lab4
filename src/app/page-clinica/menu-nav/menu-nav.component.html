@@ -4,13 +4,20 @@
       <button mat-button  *ngIf="usuarioMenu.roll==0" (click)="listadoTurnos()">Consultar Turnos</button>
       <button mat-button *ngIf="usuarioMenu.roll==1" (click)="atenderTurnos()">Atender</button>
       <button mat-button *ngIf="usuarioMenu.roll==1" (click)="busquedaDinamica()">Buscar Paciente</button>
-      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="listadoUsuarios()">Listado Usuarios</button>
-      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="IrAGraficos()">Graficos Encuestas</button>
-      <button mat-button *ngIf="usuarioMenu.roll==2" (click)="listarReportes()" >Listar Reportes</button>
+      <!-- <button mat-button *ngIf="usuarioMenu.roll==2" (click)="listadoUsuarios()">Listado Usuarios</button> -->
+      <!-- <button mat-button *ngIf="usuarioMenu.roll==2" (click)="IrAGraficos()">Graficos Encuestas</button> -->
+      <button mat-button [matMenuTriggerFor]="menu" *ngIf="usuarioMenu.roll==2">Informes</button>
+      <mat-menu #menu="matMenu" class="item">
+        <button class="item" (click)="IrAGraficos()" mat-menu-item>Profesional</button>
+        <button  class="item" (click)="GraficoSemanal()" mat-menu-item>Semanal</button>
+        <button  class="item" (click)="listarReportes()" mat-menu-item>Ingresos</button>
+      </mat-menu>
       <button mat-button *ngIf="usuarioMenu.roll==2" (click)="pendientes()" >Pendiente Aprob.</button>
       <button mat-button *ngIf="esUsuaioLogueado"(click)="salir()"><strong>Log Out</strong></button>
+      <button mat-button *ngIf="esUsuaioLogueado" ><strong>Bienvenid@: {{nombreUsuario}}</strong></button>
   </div>
   <div class="menuPrincipal" *ngIf="usuarioMenu && !usuarioMenu.activo">
     <button mat-button>Su solicitud esta pendiente de Aprobacion</button>
     <button mat-button *ngIf="esUsuaioLogueado"(click)="salir()"><strong>Log Out</strong></button>
+    <button mat-button *ngIf="esUsuaioLogueado" ><strong>Bienvenid@: {{nombreUsuario}}</strong></button>
   </div>

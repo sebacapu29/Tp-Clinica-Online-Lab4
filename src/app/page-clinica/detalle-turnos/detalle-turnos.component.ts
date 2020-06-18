@@ -24,9 +24,11 @@ export class DetalleTurnosComponent implements OnInit {
   }
   onHabilitarEncuesta(){
     const modalRef = this.modal.open(EncuestaPacienteComponent,{windowClass: 'modal-holder', centered: true});
+    console.log(this.turnoSeleccionado);
     modalRef.componentInstance.idProfesional = this.turnoSeleccionado.idProfesional; 
   }
   onCancelarTurno(){
     this.turnoServ.AtenderTurno(this.turnoSeleccionado,"Rechazado");
   }
+ 
 }

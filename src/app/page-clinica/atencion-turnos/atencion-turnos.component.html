@@ -28,7 +28,15 @@
         <mat-header-cell *matHeaderCellDef> Especialidad </mat-header-cell>
         <mat-cell  *matCellDef="let element">{{element.especialidad }} </mat-cell>
       </ng-container>
+      <ng-container matColumnDef="fechaAtencion">
+        <mat-header-cell *matHeaderCellDef> Fecha At. </mat-header-cell>
+        <mat-cell  *matCellDef="let element">{{element.fecha_atencion }} </mat-cell>
+      </ng-container>
 
+      <ng-container matColumnDef="horaAtencion">
+        <mat-header-cell *matHeaderCellDef> Hora At. </mat-header-cell>
+        <mat-cell  *matCellDef="let element">{{element.hora_atencion }} </mat-cell>
+      </ng-container>
       <ng-container matColumnDef="observaciones">
         <mat-header-cell *matHeaderCellDef> Obs. </mat-header-cell>
         <mat-cell  *matCellDef="let element">{{element.observaciones}}</mat-cell>

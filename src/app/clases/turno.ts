@@ -9,4 +9,6 @@ export class Turno {
     especialidad:string;
     observaciones:string; 
     idProfesional:string;
+    fecha_atencion:string;
+    hora_atencion:string;
 }

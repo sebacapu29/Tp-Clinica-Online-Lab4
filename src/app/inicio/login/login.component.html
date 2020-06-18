@@ -28,13 +28,26 @@
                 <button class="btn btn-lg btn-default btn-block text-uppercase btndefault" (click)="deshabilitarCaptcha()" >Deshabilitar Captcha</button>
                 <button class="btn btn-lg btn-secondary btn-block text-uppercase" (click)="Registrarme()">Registrarme</button>
               </div>
-              <div class="invitadosPanel">
+              <!-- <div class="invitadosPanel">
                 <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('paciente')">Paciente 1</button>
                 <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('paciente2')">Paciente 2</button>
                 <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('profesional')">Profesional 1</button>
                 <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('profesional-pendiente')">Profesional Pend</button>
                 <button class="btn btn-warning btnInvitado" (click)="LoginInvitado('admin')">Admin</button>
-              </div>
+              </div> -->
+              <div class="invitadosPanel">                                                                
+                <!-- <mat-form-field> -->
+                  <label>Usuarios</label>
+                  <select name="especialidades" (change)="LoginInvitado($event)" class="form-control">
+                    <option value="paciente" >Paciente 1</option>
+                    <option value="paciente2" >Paciente 2</option>
+                    <option value="profesional" >Profesional 1</option>
+                    <option value="profesional2" >Profesional 2</option>
+                    <option value="profesional-pendiente" >Profesional Pend.</option>
+                    <option value="admin" >Admin</option>
+                  </select>
+                <!-- </mat-form-field>                     -->
+        </div>   
               <hr class="my-4">
               <!-- <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fa fa-google mr-2"></i>Ingresar con Google</button> -->
             </form>

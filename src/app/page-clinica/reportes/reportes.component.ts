@@ -11,7 +11,7 @@ import * as json2csv  from 'json2csv';
 })
 export class ReportesComponent implements OnInit {
 
-  displayedColumns: string[] = ['usuario', 'fecha', 'hora','horaSalida'];
+  displayedColumns: string[] = ['usuario', 'fecha', 'hora'];
   dataSource:MatTableDataSource<Login>;
   listaInfoLog:Array<Login>;
 

@@ -104,6 +104,7 @@ Registrarme(){
         this.usuario.activo=true;
       }
       localStorage.setItem('imgUsuarioRegistrado',urlImg);
+      localStorage.setItem('nombre',this.usuario.nombre);
       this.usuarioServ.CrearUsuarioEnBD(this.usuario).then(function(docRef) {
         // console.log("docref",docRef);
             usuario.id = docRef.id;    

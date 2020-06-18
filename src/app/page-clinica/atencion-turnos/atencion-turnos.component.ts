@@ -20,21 +20,30 @@ export class AtencionTurnosComponent implements OnInit {
   pageSize = 4;
   collectionSize:number;
   turnoParaDetalle:Turno;
-  displayedColumns: string[] = ['nombre', 'fecha', 'hora','estado','especialidad','observaciones'];
+  displayedColumns: string[] = ['nombre', 'fecha', 'hora','estado','especialidad','fechaAtencion','horaAtencion','observaciones'];
   dataSource:MatTableDataSource<Turno>;//= new MatTableDataSource(this.listaDeTurno);
   constructor(private usuarioServ:UsuarioService,private turnoServ:TurnoService,private modal:NgbModal) { 
     this.listaTurnosPacientes = new Array<Turno>();
     this.collectionSize = this.listaTurnosPacientes.length; 
     var mailProfesional = localStorage.getItem("usuarioLogueadoMail");
 
-    this.turnoServ.ObtenerTurnos().subscribe((resp)=>{      
+    this.turnoServ.ObtenerTurnos().subscribe((resp)=>{  
+      this.listaTurnosPacientes = new Array<Turno>();
     for (const key in <Array<Turno>>resp) {
         const turno = <Turno>resp[key];
         // console.log("turno.especialista-",JSON.stringify(turno.especialista));
         // console.log("mailProfesional-",JSON.stringify(mailProfesional));
 
         if(JSON.stringify(turno.especialista)== JSON.stringify(mailProfesional)){
-          this.listaTurnosPacientes.push(turno);          
+          this.usuarioServ.obtenerPorEntidadYParametros("mail",turno.paciente,"usuarios").subscribe((resUsuario)=>{
+            // console.log(turno.paciente);
+            // console.log(resUsuario);
+            if(resUsuario!=null){
+              turno.paciente = (<Usuario>resUsuario[0]).nombre +" " + (<Usuario>resUsuario[0]).apellido;
+            }
+            
+          })
+          this.listaTurnosPacientes.push(turno);
         }            
     }
       this.dataSource= new MatTableDataSource(this.listaTurnosPacientes);

@@ -19,6 +19,7 @@ export class BusquedaDinamicaComponent implements OnInit {
   valorDinamico:string;
   propidadDinamica:string;
   listaNuevaEstructura:Array<any>;
+  propiedadCombo:string;
 
   constructor(private turnoService:TurnoService, private usuarioService:UsuarioService) { 
     this.listaHistorialMedico = new Array<HistorialMedico>();
@@ -34,7 +35,7 @@ export class BusquedaDinamicaComponent implements OnInit {
   ngOnInit(): void {
   }
   onBuscarPacientePor(prop){
-
+    this.propiedadCombo = prop.value;
   }
   //Busca en el array de historia clinica
   onBuscarPaciente(){
@@ -42,6 +43,35 @@ export class BusquedaDinamicaComponent implements OnInit {
     this.listaNuevaEstructura = [];
     for (const historial of this.listaHistorialMedico) {
       if(historial["dto"][this.propidadDinamica] == this.valorDinamico){
+        // console.log(historial);
+        this.usuarioService.obtenerPorEntidadYParametros("id",historial.idPaciente,"usuarios").subscribe((resp)=>{
+          if(resp!=null){
+            this.CargarDataSource(<Usuario>resp[0],historial);
+          }
+        });        
+      }
+    }
+  }
+  onBusquedaPredeterminada(){
+    // if(this.propiedadCombo == "nombrePaciente"){
+    //   console.log(this.propiedadCombo)
+    //   this.onBuscarPacientePorDefecto("nombre",this.valorCombo);
+    // }
+    // else if(this.propiedadCombo == "nombreMedico"){
+    //   this.onBuscarPacientePorDefecto("nombre",this.valorCombo);
+    // }
+    // else if(this.propiedadCombo == "temperatura"){
+    //   this.onBuscarPacientePorDefecto("temperatura",this.valorCombo);
+    // }
+    // else if(this.propiedadCombo == "especialidad"){
+    //   this.onBuscarPacientePorDefecto("especialidad",this.valorCombo);
+    // }
+  }
+  onBuscarPacientePorDefecto(propiedad:string,valor:string){
+    this.dataSource = new MatTableDataSource();
+    this.listaNuevaEstructura = [];
+    for (const historial of this.listaHistorialMedico) {
+      if(historial[propiedad] == valor){
         // console.log(historial);
         this.usuarioService.obtenerPorEntidadYParametros("id",historial.idPaciente,"usuarios").subscribe((resp)=>{
           if(resp!=null){

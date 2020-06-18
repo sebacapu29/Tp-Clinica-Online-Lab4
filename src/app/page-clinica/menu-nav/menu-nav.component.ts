@@ -15,9 +15,9 @@ export class MenuNavComponent implements OnInit , OnDestroy {
   @Output() onOcultarBanner:EventEmitter<any> = new EventEmitter();
   esUsuaioLogueado:boolean;
   listUsuarios: Usuario[]=[];
-
+  nombreUsuario:string="";
   constructor(private usuarioServ:UsuarioService,private router:Router) {
-   
+   this.nombreUsuario = localStorage.getItem("nombre");
    
    }
   ngOnDestroy(): void {
@@ -82,6 +82,9 @@ export class MenuNavComponent implements OnInit , OnDestroy {
   }
   IrAGraficos(){
     this.router.navigate(['Graficos']);  
+  }
+  GraficoSemanal(){
+    this.router.navigate(['Graficos-Semanal']); 
   }
   salir(){
     this.usuarioServ.logOut();

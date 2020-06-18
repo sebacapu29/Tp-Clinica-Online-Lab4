@@ -47,11 +47,21 @@ export class LoginComponent implements OnInit {
     this.ingresando=true;
 
     this.usuarioServicio.login(this.usuario).then(res=>{
-      localStorage.setItem("usuarioLogueadoMail",this.usuario.mail);
-       this.onLoginUsuario.emit(this.usuario.mail);
-       this.usuarioServicio.RegistrarLogueo(this.usuario.mail);
-       this.activeModal.dismiss();
-       this.router.navigate(['']);      
+      var nombreUsuario="";
+      if(res!=null){
+        this.usuarioServicio.obtenerPorEntidadYParametros("mail",this.usuario.mail,"usuarios").subscribe((respU)=>{
+          if(respU!=null){
+            nombreUsuario=(<Usuario>respU[0]).nombre;
+            localStorage.setItem("usuarioLogueadoMail",this.usuario.mail);
+            localStorage.setItem("nombre",nombreUsuario);
+            this.onLoginUsuario.emit(this.usuario.mail);
+            this.usuarioServicio.RegistrarLogueo(this.usuario.mail);
+            this.activeModal.dismiss();
+            this.router.navigate(['']);   
+          }
+        })
+      }
+         
      })
      .catch(error=> {
        this.mostrarMensajeError(error);
@@ -76,8 +86,9 @@ export class LoginComponent implements OnInit {
     }
     this.usuario.mail=this.mailUsuario;
   }
-  LoginInvitado(tipoInivitado:string)
+  LoginInvitado(event)
   {
+    var tipoInivitado = event.target.value;
     switch(tipoInivitado){
       case 'profesional':
         this.usuario.mail="profesional@gmail.com";
@@ -87,10 +98,18 @@ export class LoginComponent implements OnInit {
           this.usuario.mail="profesional_prendiente@clinica.com";
             this.usuario.clave="abc123456";          
           break;
+          case 'profesional2':
+            this.usuario.mail="profesional3@clinica.com";
+              this.usuario.clave="abc123456";          
+            break;
         case 'paciente':
           this.usuario.mail="paciente_invitado@clinica.com";
           this.usuario.clave="abc123456";         
           break;
+          case 'paciente':
+            this.usuario.mail="paciente3@clinica.com";
+            this.usuario.clave="abc123456";         
+            break;
           case 'admin':
             this.usuario.mail="admin@clinica.com";
             this.usuario.clave="abc123456";           

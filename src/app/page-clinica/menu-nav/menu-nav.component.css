@@ -3,6 +3,12 @@ ul li{
     display: flex;
 }
 .menuPrincipal{
-    padding: 15px;
+    padding: 12px;
     background-color: #0066ff;
+}
+.item{
+    background-color: #0066ff;
+}
+.item:hover{
+    background-color: #0066ff; 
 }

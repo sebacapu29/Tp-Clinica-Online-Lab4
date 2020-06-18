@@ -5,5 +5,8 @@
       <p class="card-text estado ">Estado: {{profesionalSeleccionado.activo == false ? "Deshabilitado" : "Activo"}}</p> 
       <button class="btn btn-success" (click)="Autorizar()">Autorizar</button>  
     </div>
+    <div class="spinner-border text-primary" role="status" *ngIf="autorizando">
+      <span class="sr-only">Loading...</span>
+    </div>
   </div>
  

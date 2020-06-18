@@ -12,8 +12,8 @@
         <span class="spanAdicional">Datos Adicionales para la historia:</span><br>
       </div>
       <div id="extras" *ngFor="let nuevoItem of listaDinamicos" class="row">
-        <input type="text" class="form-control col-md-3" [(ngModel)]="nuevoItem.propiedad" >
-        <input type="text" class="form-control col-md-6" [(ngModel)]="nuevoItem.valor" >        
+        <input type="text" class="form-control col-md-3" [disabled]="!pulsaOpcion" [(ngModel)]="nuevoItem.propiedad" >
+        <input type="text" class="form-control col-md-6" [disabled]="!pulsaOpcion" [(ngModel)]="nuevoItem.valor" >        
       </div>
       <div class="row aceptar">
 

@@ -73,28 +73,47 @@ export class GraficosComponent implements OnInit {
   ConfigurarGraficoBarras(){
     const listPuntajes = [];
     const listaFechas=[];
+    var cantPuntaje=0;
+    var sumaPuntaje=0;
+    var promedio= 0.0;
     //Limpia el canvas para el proximo grafico a renderizar
-    var canvas = <HTMLCanvasElement> document.getElementById("barCanvas");
+    var canvas = <HTMLCanvasElement> document.getElementById("canvas");
     var context= canvas.getContext("2d");
     context.clearRect(0, 0, canvas.width, canvas.height);
     ///
 
     if(this.listaEncuestaProfesional.length==0){
-      this.listEncuetasMock.forEach((encuesta)=>{
-        listaFechas.push(encuesta.fecha);
-        listPuntajes.push(encuesta.puntaje);
-      });
+      // this.listEncuetasMock.forEach((encuesta)=>{
+      //   listaFechas.push(encuesta.fecha);
+      //   listPuntajes.push(encuesta.puntaje);
+      // });
     }
     else{
-      this.listaEncuestaProfesional.forEach((encuesta)=>{
-        listaFechas.push(encuesta.fecha);
-        listPuntajes.push(encuesta.puntaje);
-      });
-    }
+      console.log("D",this.listaEncuestaProfesional);
+      for (const encuesta of this.listaEncuestaProfesional) {
+        for (const encuestaBis of this.listaEncuestaProfesional) {
+          if(encuestaBis.fecha==encuesta.fecha){
+            cantPuntaje++;
+            sumaPuntaje+= encuestaBis.puntaje;
+          }
+        }
+        if(!listaFechas.includes(encuesta.fecha)){
+          // console.log(sumaPuntaje);
+          // console.log(cantPuntaje);
+          promedio = sumaPuntaje/cantPuntaje;
+          listaFechas.push(encuesta.fecha);
+          listPuntajes.push(promedio);
+         
+        }
+        cantPuntaje=0;
+        sumaPuntaje=0.0;
+      }
 
+    }
+    var tipo =    listaFechas.length==1? 'bar' : 'line';  
       // list.push(jsDate.toLocaleTimeString('es',options));
-      this.chart = new Chart('barCanvas',{
-        type:'bar',
+      this.chart = new Chart('canvas',{
+        type: tipo,
         data:{
           labels:listaFechas,
           datasets:[{
@@ -113,7 +132,7 @@ export class GraficosComponent implements OnInit {
           scales: {
               yAxes: [{
                   ticks: {
-                      beginAtZero: true
+                      beginAtZero: false
                   }
               }]
           },
