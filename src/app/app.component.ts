@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {fader,slider} from './animations/route-animations';
+import {slideInAnimation} from './animations/route-animations';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -7,7 +7,8 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations:[
-    fader,
+    // fader,
+    slideInAnimation
     //transformer,
     //stepper
   ]
@@ -18,6 +19,6 @@ export class AppComponent {
   constructor(){
   }
  prepareRoute(outlet:RouterOutlet){
-   return outlet && outlet.activatedRouteData['animation'];
+   return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
  }
 }

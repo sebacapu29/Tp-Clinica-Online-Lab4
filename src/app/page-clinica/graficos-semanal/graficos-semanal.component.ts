@@ -10,6 +10,7 @@ import { Turno } from 'src/app/clases/turno';
 import { TurnoService } from 'src/app/servicios/turno.service';
 import { subscribeOn } from 'rxjs/operators';
 import { Usuario } from 'src/app/clases/usuario';
+import { PdfHelper } from 'src/app/clases/utils/pdf-helper';
 @Component({
   selector: 'app-graficos-semanal',
   templateUrl: './graficos-semanal.component.html',
@@ -27,13 +28,14 @@ export class GraficosSemanalComponent implements OnInit {
   chart:Chart;
   chartPie:Chart;
   chartBar2:Chart;
+  pdfHelper:PdfHelper;
 
   constructor(private usuarioService:UsuarioService,
     private encuestaService:EncuestaService,
     private turnoService:TurnoService) { 
       this.listaCantidadTurnosProfesional = new Array<number>();
       this.listaNombresProfesional = new Array<string>();
-
+      this.pdfHelper = new PdfHelper();
     this.listaProfesionales = new Array<Profesional>();   
     //  this.listaEncuestaProfesional = new Array<EncuestaProfesional>();
     //  this.listaEncuestaAlSistema = new Array<EncuestaSistema>();
@@ -57,56 +59,56 @@ export class GraficosSemanalComponent implements OnInit {
     }
     CargarBarProfesionales(){
      
-      var nuevoArray= new Array<Profesional>();
+      // var nuevoArray= new Array<Profesional>();
 
-      var contadorProfesional=0;
-      // console.log(this.listaTurnos);
-       for (const turno of this.listaTurnos ) {
-         if(turno.hasOwnProperty("idProfesional")){
-          this.encuestaService.TraerEncuestaParametros("id",turno.idProfesional,"usuarios").subscribe((res)=>{
-            if(res!=null){
+      // var contadorProfesional=0;
+      // // console.log(this.listaTurnos);
+      //  for (const turno of this.listaTurnos ) {
+      //    if(turno.hasOwnProperty("idProfesional")){
+      //     this.encuestaService.TraerEncuestaParametros("id",turno.idProfesional,"usuarios").subscribe((res)=>{
+      //       if(res!=null){
               
-              var profesional = <Profesional>res[0];
-              if(!this.listaProfesionales.includes(profesional)){
-                // console.log(profesional);
-                this.listaProfesionales.push(profesional);
+      //         var profesional = <Profesional>res[0];
+      //         if(!this.listaProfesionales.includes(profesional)){
+      //           // console.log(profesional);
+      //           this.listaProfesionales.push(profesional);
                 
-              }             
-              // this.ConfigurarGraficoBarrasTurnos(respTurnos);
-            }
-          });
-         }
+      //         }             
+      //         // this.ConfigurarGraficoBarrasTurnos(respTurnos);
+      //       }
+      //     });
+      //    }
          
-        }
-        // console.log( this.listaProfesionales.toArray());
-        for (let i = 0; i < this.listaProfesionales.length; i++) {
-          const profesional = this.listaProfesionales[i];
-          // console.log(profesional);
-          if(!nuevoArray.includes(profesional)){
-            // contadorProfesional=1;
-            nuevoArray.push(profesional);
-            this.listaCantidadTurnosProfesional.push(contadorProfesional);
-          }
-        }
-        console.log(this.listaProfesionales);
-        if(this.listaProfesionales.length==0){
-          console.log(this.listaCantidadTurnosProfesional);
-          // this.listaCantidadTurnosProfesional.push(1);
-          // this.listaNombresProfesional.push(this.listaProfesionales"apellido"])
-        }
-        else{
-          for (const profesionalI of nuevoArray) {
-            for (const profesionalJ of nuevoArray) {
-              if(profesionalI.id ===profesionalJ.id){
-                contadorProfesional++;
-              }  
-            }
-            this.listaNombresProfesional.push(profesionalI.apellido);            
-            this.listaCantidadTurnosProfesional.push(contadorProfesional);
-            contadorProfesional=0;
-          }
-        }
-        this.CrearGraficoBarrasProfesionalTurnos();
+      //   }
+      //   // console.log( this.listaProfesionales.toArray());
+      //   for (let i = 0; i < this.listaProfesionales.length; i++) {
+      //     const profesional = this.listaProfesionales[i];
+      //     // console.log(profesional);
+      //     if(!nuevoArray.includes(profesional)){
+      //       // contadorProfesional=1;
+      //       nuevoArray.push(profesional);
+      //       this.listaCantidadTurnosProfesional.push(contadorProfesional);
+      //     }
+      //   }
+      //   console.log(this.listaProfesionales);
+      //   if(this.listaProfesionales.length==0){
+      //     console.log(this.listaCantidadTurnosProfesional);
+      //     // this.listaCantidadTurnosProfesional.push(1);
+      //     // this.listaNombresProfesional.push(this.listaProfesionales"apellido"])
+      //   }
+      //   else{
+      //     for (const profesionalI of nuevoArray) {
+      //       for (const profesionalJ of nuevoArray) {
+      //         if(profesionalI.id ===profesionalJ.id){
+      //           contadorProfesional++;
+      //         }  
+      //       }
+      //       this.listaNombresProfesional.push(profesionalI.apellido);            
+      //       this.listaCantidadTurnosProfesional.push(contadorProfesional);
+      //       contadorProfesional=0;
+      //     }
+      //   }
+      //   this.CrearGraficoBarrasProfesionalTurnos();
     }
   ngOnInit(): void {
     
@@ -239,39 +241,39 @@ CrearGraficoBarrasProfesionalTurnos(){
   });
 }
 onExportPDF(){
-
+  this.pdfHelper.EscribirPDF("Grafico-Semanal","barCanvasSemanal");
 }
-  ConfigurarGraficoTorta(){
+  // ConfigurarGraficoTorta(){
 
-    const listPuntajes = [];
-    const listaFechas=[];
+  //   const listPuntajes = [];
+  //   const listaFechas=[];
 
-    this.listEncuetasMock.forEach((encuesta)=>{
-      listaFechas.push(encuesta.fecha);
-      listPuntajes.push(encuesta.puntaje);
-    });
+  //   this.listEncuetasMock.forEach((encuesta)=>{
+  //     listaFechas.push(encuesta.fecha);
+  //     listPuntajes.push(encuesta.puntaje);
+  //   });
 
     
-      // list.push(jsDate.toLocaleTimeString('es',options));
-      this.chartPie = new Chart('pieCanvasSemanal',{
-        type:'pie',
-        data:{
-          labels:listaFechas,
-          datasets:[{
-            label:"Encuesta 2020",
-            data:listPuntajes,
-            backgroundColor:[
-              'rgb(0, 0, 255)',
-              'rgb(255, 102, 0)',
-              'rgb(51, 204, 51)',
-            ],
-            fill:false
-            },               
-          ]
-        },
-        options: {        
-          responsive:false
-      }
-      });
-  }
+  //     // list.push(jsDate.toLocaleTimeString('es',options));
+  //     this.chartPie = new Chart('pieCanvasSemanal',{
+  //       type:'pie',
+  //       data:{
+  //         labels:listaFechas,
+  //         datasets:[{
+  //           label:"Encuesta 2020",
+  //           data:listPuntajes,
+  //           backgroundColor:[
+  //             'rgb(0, 0, 255)',
+  //             'rgb(255, 102, 0)',
+  //             'rgb(51, 204, 51)',
+  //           ],
+  //           fill:false
+  //           },               
+  //         ]
+  //       },
+  //       options: {        
+  //         responsive:false
+  //     }
+  //     });
+  // }
 }

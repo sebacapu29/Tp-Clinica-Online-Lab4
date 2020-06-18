@@ -7,14 +7,14 @@
         {{chart}}
     </canvas>
  
-    <canvas id="pieCanvasSemanal" class="col-md-6" height="400vh" width="500vw" >
+    <!-- <canvas id="pieCanvasSemanal" class="col-md-6" height="400vh" width="500vw" >
         {{chartPie}}
-    </canvas>
+    </canvas> -->
 </div> 
 
-<div class="row">
+<!-- <div class="row">
     <canvas id="barCanvasMedTurnos" class="col-md-6" height="400vh" width="500vw" >
         {{chartBar2}}
     </canvas>
-</div>
-<button mat-raised-button color="primary" (click)="onExportPDF()" >Descargar PDF</button>
+</div> -->
+<button mat-raised-button color="primary" class="botonPDF" (click)="onExportPDF()" >Descargar PDF</button>
