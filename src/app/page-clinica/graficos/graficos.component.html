@@ -7,11 +7,15 @@
     </mat-select>
 </mat-form-field>
 <div class="row">
-    
-        <canvas id="canvas" class="col-md-6" height="400vh" width="500vw" >
-        {{chart}}
-    </canvas>
-    <canvas id="pieCanvas" class="col-md-6" height="400vh" width="500vw" >
-        {{chartPie}}
-    </canvas>
+    <div id="containerCanvas1" class="col-md-6">
+        <canvas id="canvas" >
+            {{chart}}
+        </canvas>
+    </div>  
+    <div id="containerCanvas1" class="col-md-6">
+
+        <canvas id="pieCanvas"  height="400vh" width="500vw" >
+            {{chartPie}}
+        </canvas>
+    </div>    
 </div> 

@@ -121,7 +121,21 @@ export class GraficosSemanalComponent implements OnInit {
   ConfigurarGraficoBarrasTurnos(listaTurnos:Turno[]){
     const listPuntajes = [];
     const listaFechas=[];
-    //Limpia el canvas para el proximo grafico a renderizar
+
+
+      //Limpia el canvas para el proximo grafico a renderizar
+      var canvasElement = document.getElementById("barCanvasSemanal");
+      canvasElement.remove();
+      var nuevoCanvas = document.createElement("canvas");
+      nuevoCanvas.setAttribute("id","barCanvasSemanal");
+      nuevoCanvas.className ="col-md-8";
+      nuevoCanvas.style.width ="500vw";
+      nuevoCanvas.style.height="50vh";
+      var canvasContainer = document.getElementById("containerCanvas1");
+      canvasContainer.appendChild(nuevoCanvas);
+      /////
+
+    //
     var canvas = <HTMLCanvasElement> document.getElementById("barCanvasSemanal");
     var context= canvas.getContext("2d");
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -132,14 +146,14 @@ export class GraficosSemanalComponent implements OnInit {
     var contadorTurnos=0;
 
     var listaDiasFiltrada= new Array<Date>();
-
+    console.log(this.listaTurnos);
     if(listaTurnos.length>0){
 
       for (const turno of listaTurnos) {
         // console.log(t);
         listaDias.push(turno.fecha);
       }
-      console.log(listaDias);
+      // console.log(listaDias);
 
       for (const diaI of listaDias) {
         for (const diaJ of listaDias) {
@@ -150,6 +164,7 @@ export class GraficosSemanalComponent implements OnInit {
         cantidadTurnosEnDia.push(contadorTurnos);
         contadorTurnos=0;
       }
+      
       // console.log(cantidadTurnosEnDia);
       // console.log(listaDias);
       // list.push(jsDate.toLocaleTimeString('es',options));

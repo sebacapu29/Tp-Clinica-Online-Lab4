@@ -76,7 +76,20 @@ export class GraficosComponent implements OnInit {
     var cantPuntaje=0;
     var sumaPuntaje=0;
     var promedio= 0.0;
+
     //Limpia el canvas para el proximo grafico a renderizar
+    var canvasElement = document.getElementById("canvas");
+    canvasElement.remove();
+    var nuevoCanvas = document.createElement("canvas");
+    nuevoCanvas.setAttribute("id","canvas");
+    nuevoCanvas.className ="col-md-6";
+    nuevoCanvas.style.width ="500vw";
+    nuevoCanvas.style.height="80vh";
+    var canvasContainer = document.getElementById("containerCanvas1");
+    canvasContainer.appendChild(nuevoCanvas);
+    /////
+
+    //
     var canvas = <HTMLCanvasElement> document.getElementById("canvas");
     var context= canvas.getContext("2d");
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -89,7 +102,7 @@ export class GraficosComponent implements OnInit {
       // });
     }
     else{
-      console.log("D",this.listaEncuestaProfesional);
+      // console.log("D",this.listaEncuestaProfesional);
       for (const encuesta of this.listaEncuestaProfesional) {
         for (const encuestaBis of this.listaEncuestaProfesional) {
           if(encuestaBis.fecha==encuesta.fecha){
