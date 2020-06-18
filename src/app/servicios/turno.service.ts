@@ -11,7 +11,7 @@ export class TurnoService {
   constructor(private dataServ:DataService) { }
 
   public AtenderTurno(turno:Turno,estado:string){
-    return this.dataServ.UpdateTurno(turno,estado);
+    return this.dataServ.UpdateTurnoByRefDoc(turno.idTurno,estado,turno.observaciones);
   }
   public ActualizarHistorialMed(historialMedico:HistorialMedico){
     return this.dataServ.UpdateHistorialMedico(historialMedico);
