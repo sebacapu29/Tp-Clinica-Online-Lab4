@@ -20,14 +20,21 @@ export class BusquedaDinamicaComponent implements OnInit {
   propidadDinamica:string;
   listaNuevaEstructura:Array<any>;
   propiedadCombo:string;
+  listaUsuarios:Usuario[];
 
   constructor(private turnoService:TurnoService, private usuarioService:UsuarioService) { 
     this.listaHistorialMedico = new Array<HistorialMedico>();
     this.listaNuevaEstructura = new Array<any>();
+    this.listaUsuarios=new Array<Usuario>();
 
     this.turnoService.ObtenerHistoriaClinica().subscribe((response)=>{
       if(response!=null){
         this.listaHistorialMedico = <Array<HistorialMedico>>response;
+      }
+    });
+    this.usuarioService.obtenerUsuarios().subscribe((resUsuario)=>{
+      if(resUsuario!=null){
+        this.listaUsuarios=resUsuario;
       }
     })
   }
@@ -52,17 +59,22 @@ export class BusquedaDinamicaComponent implements OnInit {
       }
     }
   }
+  LimpiarDT(){
+    this.dataSource = new MatTableDataSource();
+    this.listaNuevaEstructura = [];
+  }
   onBusquedaPredeterminada(){
-    // if(this.propiedadCombo == "nombrePaciente"){
-    //   console.log(this.propiedadCombo)
-    //   this.onBuscarPacientePorDefecto("nombre",this.valorCombo);
-    // }
-    // else if(this.propiedadCombo == "nombreMedico"){
-    //   this.onBuscarPacientePorDefecto("nombre",this.valorCombo);
-    // }
-    // else if(this.propiedadCombo == "temperatura"){
-    //   this.onBuscarPacientePorDefecto("temperatura",this.valorCombo);
-    // }
+    if(this.propiedadCombo == "nombrePaciente"){
+
+      // this.onBuscarPacientePorDefecto("nombre",JSON.stringify(this.valorCombo));
+      this.BuscarPacientePorDefecto2("nombre",this.valorCombo);
+    }
+    else if(this.propiedadCombo == "nombreMedico"){
+      this.BuscarPacientePorDefecto2("nombre",this.valorCombo);
+    }
+    else if(this.propiedadCombo == "temperatura"){
+      this.onBuscarPacientePorDefecto3("temperatura",this.valorCombo);
+    }
     // else if(this.propiedadCombo == "especialidad"){
     //   this.onBuscarPacientePorDefecto("especialidad",this.valorCombo);
     // }
@@ -70,7 +82,10 @@ export class BusquedaDinamicaComponent implements OnInit {
   onBuscarPacientePorDefecto(propiedad:string,valor:string){
     this.dataSource = new MatTableDataSource();
     this.listaNuevaEstructura = [];
+
     for (const historial of this.listaHistorialMedico) {
+      
+      // console.log(this.listaHistorialMedico);
       if(historial[propiedad] == valor){
         // console.log(historial);
         this.usuarioService.obtenerPorEntidadYParametros("id",historial.idPaciente,"usuarios").subscribe((resp)=>{
@@ -79,6 +94,43 @@ export class BusquedaDinamicaComponent implements OnInit {
           }
         });        
       }
+    }
+  }
+  onBuscarPacientePorDefecto3(propiedad:string,valor:string){
+    this.dataSource = new MatTableDataSource();
+    this.listaNuevaEstructura = [];
+
+    for (const historial of this.listaHistorialMedico) {
+      
+      // console.log(this.listaHistorialMedico);
+      if(historial["dto"][propiedad] == valor){
+        // console.log(historial);
+        this.usuarioService.obtenerPorEntidadYParametros("id",historial.idPaciente,"usuarios").subscribe((resp)=>{
+          if(resp!=null){
+            this.CargarDataSource(<Usuario>resp[0],historial);
+          }
+        });        
+      }
+    }
+  }
+  BuscarPacientePorDefecto2(propiedad:string,valor:string){
+    // this.listaNuevaEstructura = [];
+
+    for (const usuario of this.listaUsuarios) {
+      
+      for (const historial of this.listaHistorialMedico) {
+         // console.log(this.listaHistorialMedico);
+      if(usuario[propiedad] == valor){
+        // console.log(historial);
+        // this.usuarioService.obtenerPorEntidadYParametros("id",usuario.id,"usuarios").subscribe((resp)=>{
+        //   if(resp!=null){
+            
+        //   }
+        // }); 
+        this.CargarDataSource(usuario,historial);       
+      }
+      }
+     
     }
   }
   CargarDataSource(usuario:Usuario,historialMedico:HistorialMedico){

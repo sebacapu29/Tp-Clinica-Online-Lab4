@@ -17,7 +17,9 @@
     <input matInput placeholder="Valor Propiedad"  [(ngModel)]="valorCombo" name="combo" >
   </mat-form-field>
   <button mat-raised-button color="primary" (click)="onBusquedaPredeterminada()" >Busqueda Predet.</button>
-<br>
+  <button mat-raised-button color="warn" (click)="LimpiarDT()" >Limpiar Tabla</button>
+
+  <br>
     <mat-form-field >
         <mat-label>Nombre Busqueda</mat-label>
         <input matInput placeholder="Nombre Propiedad" [(ngModel)]="propidadDinamica" name="prop" >

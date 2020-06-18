@@ -43,8 +43,8 @@ export class ModalDetalleTurnoComponent implements OnInit {
     || this.turnoSeleccionado.estado.toLocaleLowerCase()=="atendido"){
       this.disabledAceptarRechazar=true;
     }
-    // console.log(this.turnoSeleccionado.paciente);
-    this.usuarioService.obtenerPorEntidadYParametros<Usuario>("mail",this.turnoSeleccionado.paciente,"usuarios").subscribe((resp)=>{
+    console.log(this.turnoSeleccionado);
+    this.usuarioService.obtenerPorEntidadYParametros<Usuario>("id",this.turnoSeleccionado.idPaciente,"usuarios").subscribe((resp)=>{
       // console.log(resp);
       if(resp!=null){
         this.imgFoto = resp[0].foto;

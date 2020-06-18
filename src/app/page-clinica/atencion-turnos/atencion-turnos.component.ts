@@ -40,6 +40,7 @@ export class AtencionTurnosComponent implements OnInit {
             // console.log(resUsuario);
             if(resUsuario!=null){
               turno.paciente = (<Usuario>resUsuario[0]).nombre +" " + (<Usuario>resUsuario[0]).apellido;
+              turno.idPaciente = (<Usuario>resUsuario[0]).id;
             }
             
           })

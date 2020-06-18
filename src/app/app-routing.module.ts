@@ -30,12 +30,12 @@ const routes: Routes = [
   {path:'Listados/:tipo',component:ListadosComponent,canActivate:[CanActivateGuard],data: {animation: 'pendientes'}},
   {path:'Reportes',component:ReportesComponent,canActivate:[CanActivateGuard],data: {animation: 'deslizado2'}},
   {path:'Turnos',component:TurnosComponent,canActivate:[CanActivateGuard],data: {animation: 'pendientes'}},
-  {path:'AtenderTurnos',component:AtencionTurnosComponent,canActivate:[CanActivateGuard]},
+  {path:'AtenderTurnos',component:AtencionTurnosComponent,canActivate:[CanActivateGuard],data: {animation: 'pendientes'}},
   {path:'Alta',component:AltaUsuariosComponent,canActivate:[CanActivateGuard],data: {animation: 'pendientes'}},
   {path:'Graficos',component:GraficosComponent,canActivate:[CanActivateGuard],data: {animation: 'deslizado2'}},
   {path:'Graficos-Semanal',component:GraficosSemanalComponent,canActivate:[CanActivateGuard],data: {animation: 'deslizado1'}},
-  {path:'BusquedaDin',component:BusquedaDinamicaComponent,canActivate:[CanActivateGuard]},
-  {path:'Encuesta',component:EncuestaComponent,canActivate:[CanActivateGuard]},
+  {path:'BusquedaDin',component:BusquedaDinamicaComponent,canActivate:[CanActivateGuard],data: {animation: 'deslizado1'}},
+  {path:'Encuesta',component:EncuestaComponent,canActivate:[CanActivateGuard],data: {animation: 'pendientes'}},
   {path:'**',component:PageErrorComponent}
 ];
 
